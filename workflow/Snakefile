@@ -1,0 +1,7 @@
+configfile: 'config.yaml'
+
+rule read_orhology:
+    input:
+        'data/orthology_anophelinae.tsv'
+    output:
+        'results/'
