@@ -4,6 +4,7 @@ rule compute_UNI:
     input:
         config["features"]["UNI"]["infiles"]["orthology_table"]
     output:
-        'results/UNI.tsv'
+        UNI_orthogroups = 'results/UNI.tsv',
+        UNI_genes = 'results/UNI_genes.tsv'
     script:
         'compute_UNI.py'

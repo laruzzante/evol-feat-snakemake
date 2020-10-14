@@ -1,3 +1,5 @@
+n_species: 19
+
 features:
   UNI:
     infiles:
