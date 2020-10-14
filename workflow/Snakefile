@@ -1,7 +1,9 @@
 configfile: 'config.yaml'
 
-rule read_orhology:
+rule compute_UNI:
     input:
-        'data/orthology_anophelinae.tsv'
+        config["features"]["UNI"]["infiles"]["orthology_table"]
     output:
-        'results/'
+        'results/UNI.tsv'
+    script:
+        'compute_UNI.py'

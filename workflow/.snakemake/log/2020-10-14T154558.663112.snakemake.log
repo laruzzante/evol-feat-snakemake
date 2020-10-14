@@ -1,0 +1,4 @@
+Building DAG of jobs...
+MissingInputException in line 3 of /home/lruzzant/evol-feat-snakemake/workflow/Snakefile:
+Missing input files for rule compute_UNI:
+orthology_table
