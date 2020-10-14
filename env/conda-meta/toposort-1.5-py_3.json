@@ -1,0 +1,107 @@
+{
+  "build": "py_3",
+  "build_number": 3,
+  "channel": "https://conda.anaconda.org/conda-forge/noarch",
+  "constrains": [],
+  "depends": [
+    "python"
+  ],
+  "extracted_package_dir": "/home/lruzzant/miniconda3/pkgs/toposort-1.5-py_3",
+  "features": "",
+  "files": [
+    "lib/python3.7/site-packages/toposort-1.5.dist-info/INSTALLER",
+    "lib/python3.7/site-packages/toposort-1.5.dist-info/LICENSE.txt",
+    "lib/python3.7/site-packages/toposort-1.5.dist-info/METADATA",
+    "lib/python3.7/site-packages/toposort-1.5.dist-info/NOTICE",
+    "lib/python3.7/site-packages/toposort-1.5.dist-info/RECORD",
+    "lib/python3.7/site-packages/toposort-1.5.dist-info/WHEEL",
+    "lib/python3.7/site-packages/toposort-1.5.dist-info/top_level.txt",
+    "lib/python3.7/site-packages/toposort.py",
+    "lib/python3.7/site-packages/__pycache__/toposort.cpython-37.pyc"
+  ],
+  "fn": "toposort-1.5-py_3.tar.bz2",
+  "license": "Apache-2.0",
+  "license_family": "APACHE",
+  "link": {
+    "source": "/home/lruzzant/miniconda3/pkgs/toposort-1.5-py_3",
+    "type": 1
+  },
+  "md5": "1902d083d45715da5451508d7b0a3c22",
+  "name": "toposort",
+  "noarch": "python",
+  "package_tarball_full_path": "/home/lruzzant/miniconda3/pkgs/toposort-1.5-py_3.tar.bz2",
+  "package_type": "noarch_python",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "site-packages/toposort-1.5.dist-info/INSTALLER",
+        "path_type": "hardlink",
+        "sha256": "ceebae7b8927a3227e5303cf5e0f1f7b34bb542ad7250ac03fbcde36ec2f1508",
+        "sha256_in_prefix": "ceebae7b8927a3227e5303cf5e0f1f7b34bb542ad7250ac03fbcde36ec2f1508",
+        "size_in_bytes": 4
+      },
+      {
+        "_path": "site-packages/toposort-1.5.dist-info/LICENSE.txt",
+        "path_type": "hardlink",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+        "sha256_in_prefix": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+        "size_in_bytes": 11358
+      },
+      {
+        "_path": "site-packages/toposort-1.5.dist-info/METADATA",
+        "path_type": "hardlink",
+        "sha256": "33597f1c81e3576d3b4efb0606ef94759ca47f5646c429a7b90c889ec346a906",
+        "sha256_in_prefix": "33597f1c81e3576d3b4efb0606ef94759ca47f5646c429a7b90c889ec346a906",
+        "size_in_bytes": 5697
+      },
+      {
+        "_path": "site-packages/toposort-1.5.dist-info/NOTICE",
+        "path_type": "hardlink",
+        "sha256": "c69dd4051358659cc3a81c25080f4963763100af4655b665e5d654ac9771e3d6",
+        "sha256_in_prefix": "c69dd4051358659cc3a81c25080f4963763100af4655b665e5d654ac9771e3d6",
+        "size_in_bytes": 561
+      },
+      {
+        "_path": "site-packages/toposort-1.5.dist-info/RECORD",
+        "path_type": "hardlink",
+        "sha256": "354550858a9fcebc0b084f7cea2c2c425873781e5be38b64bc7cd48db0da23ed",
+        "sha256_in_prefix": "354550858a9fcebc0b084f7cea2c2c425873781e5be38b64bc7cd48db0da23ed",
+        "size_in_bytes": 649
+      },
+      {
+        "_path": "site-packages/toposort-1.5.dist-info/WHEEL",
+        "path_type": "hardlink",
+        "sha256": "87f6959f9381d8811152331b8b6a6e72647fcf3589b64df4dd85ef861eb4349f",
+        "sha256_in_prefix": "87f6959f9381d8811152331b8b6a6e72647fcf3589b64df4dd85ef861eb4349f",
+        "size_in_bytes": 110
+      },
+      {
+        "_path": "site-packages/toposort-1.5.dist-info/top_level.txt",
+        "path_type": "hardlink",
+        "sha256": "9a4458678425753b5cd309b9cd558d987a19dc17354979e4f843604ed129b575",
+        "sha256_in_prefix": "9a4458678425753b5cd309b9cd558d987a19dc17354979e4f843604ed129b575",
+        "size_in_bytes": 9
+      },
+      {
+        "_path": "site-packages/toposort.py",
+        "path_type": "hardlink",
+        "sha256": "862190b333b80efe984be32f40fb4c74c691500fea2ff6fb0056353c02bf0e8d",
+        "sha256_in_prefix": "862190b333b80efe984be32f40fb4c74c691500fea2ff6fb0056353c02bf0e8d",
+        "size_in_bytes": 3467
+      },
+      {
+        "_path": "lib/python3.7/site-packages/__pycache__/toposort.cpython-37.pyc",
+        "path_type": "pyc_file"
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "2b2664b13af9f96a3c97c58c45b76bc3fa8ecbe7c3d78b71df71129543873e2f",
+  "size": 12185,
+  "subdir": "noarch",
+  "timestamp": 1562249000729,
+  "track_features": "",
+  "url": "https://conda.anaconda.org/conda-forge/noarch/toposort-1.5-py_3.tar.bz2",
+  "version": "1.5"
+}

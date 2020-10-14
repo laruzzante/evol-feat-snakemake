@@ -1,0 +1,4 @@
+[Thumbnailer Entry]
+TryExec=/home/lruzzant/evol-feat-snakemake/env/bin/gdk-pixbuf-thumbnailer
+Exec=/home/lruzzant/evol-feat-snakemake/env/bin/gdk-pixbuf-thumbnailer -s %s %u %o
+MimeType=image/svg+xml;image/svg+xml-compressed;

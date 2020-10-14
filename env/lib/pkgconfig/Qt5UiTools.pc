@@ -1,0 +1,14 @@
+prefix=/home/lruzzant/evol-feat-snakemake/env
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include/qt
+
+
+Name: Qt5 UiTools
+Description: Qt UiTools module
+Version: 5.12.9
+Libs: -L${libdir} -lQt5UiTools 
+Libs.private: -L/home/lruzzant/evol-feat-snakemake/env/lib -L/home/lruzzant/evol-feat-snakemake/env/x86_64-conda-linux-gnu/sysroot/usr/lib64 /home/lruzzant/evol-feat-snakemake/env/lib/libQt5Widgets.so /home/lruzzant/evol-feat-snakemake/env/lib/libQt5Gui.so /home/lruzzant/evol-feat-snakemake/env/lib/libQt5Core.so -lpthread /home/lruzzant/evol-feat-snakemake/env/lib/libQt5Widgets.so /home/lruzzant/evol-feat-snakemake/env/lib/libQt5Gui.so /home/lruzzant/evol-feat-snakemake/env/lib/libQt5Core.so /home/lruzzant/evol-feat-snakemake/env/bin/../x86_64-conda-linux-gnu/sysroot/usr/lib64/libGL.so   
+Cflags: -DQT_UITOOLS_LIB -I${includedir}/QtUiTools -I${includedir}
+Requires: Qt5Core Qt5Gui Qt5Widgets
+

@@ -1,0 +1,11 @@
+prefix=/home/lruzzant/evol-feat-snakemake/env
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: harfbuzz-icu
+Description: HarfBuzz text shaping library ICU integration
+Version: 2.7.2
+Requires: harfbuzz =  2.7.2
+Requires.private: icu-uc
+Libs: -L${libdir} -lharfbuzz-icu
+Cflags: -I${includedir}/harfbuzz

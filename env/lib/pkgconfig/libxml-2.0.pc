@@ -1,0 +1,13 @@
+prefix=/home/lruzzant/evol-feat-snakemake/env
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+modules=1
+
+Name: libXML
+Version: 2.9.10
+Description: libXML library version2.
+Requires:
+Libs: -L${libdir} -lxml2
+Libs.private: -L/home/lruzzant/evol-feat-snakemake/env/lib -licui18n -licuuc -licudata -lpthread -L/home/lruzzant/evol-feat-snakemake/env/lib -lz -L/home/lruzzant/evol-feat-snakemake/env/lib -llzma -L/home/lruzzant/evol-feat-snakemake/env/lib -liconv -lm  
+Cflags: -I${includedir}/libxml2 -I/home/lruzzant/evol-feat-snakemake/env/include 

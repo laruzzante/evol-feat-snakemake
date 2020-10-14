@@ -1,0 +1,94 @@
+{
+  "build": "py37h8f50634_0",
+  "build_number": 0,
+  "channel": "https://conda.anaconda.org/conda-forge/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=7.3.0",
+    "python >=3.7,<3.8.0a0",
+    "python_abi 3.7.* *_cp37m"
+  ],
+  "extracted_package_dir": "/home/lruzzant/miniconda3/pkgs/datrie-0.8.2-py37h8f50634_0",
+  "features": "",
+  "files": [
+    "lib/python3.7/site-packages/datrie-0.8.2.dist-info/COPYING",
+    "lib/python3.7/site-packages/datrie-0.8.2.dist-info/INSTALLER",
+    "lib/python3.7/site-packages/datrie-0.8.2.dist-info/METADATA",
+    "lib/python3.7/site-packages/datrie-0.8.2.dist-info/RECORD",
+    "lib/python3.7/site-packages/datrie-0.8.2.dist-info/WHEEL",
+    "lib/python3.7/site-packages/datrie-0.8.2.dist-info/top_level.txt",
+    "lib/python3.7/site-packages/datrie.cpython-37m-x86_64-linux-gnu.so"
+  ],
+  "fn": "datrie-0.8.2-py37h8f50634_0.tar.bz2",
+  "license": "LGPLv2",
+  "license_family": "LGPL",
+  "link": {
+    "source": "/home/lruzzant/miniconda3/pkgs/datrie-0.8.2-py37h8f50634_0",
+    "type": 1
+  },
+  "md5": "dc23c8f5940b8df35c8be4b5c44f7257",
+  "name": "datrie",
+  "package_tarball_full_path": "/home/lruzzant/miniconda3/pkgs/datrie-0.8.2-py37h8f50634_0.tar.bz2",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "lib/python3.7/site-packages/datrie-0.8.2.dist-info/COPYING",
+        "path_type": "hardlink",
+        "sha256": "fad175986818e974b7e9f104de3566c8a174b4298c2ea71f98681dfc269f4032",
+        "sha256_in_prefix": "fad175986818e974b7e9f104de3566c8a174b4298c2ea71f98681dfc269f4032",
+        "size_in_bytes": 26524
+      },
+      {
+        "_path": "lib/python3.7/site-packages/datrie-0.8.2.dist-info/INSTALLER",
+        "path_type": "hardlink",
+        "sha256": "d0edee15f91b406f3f99726e44eb990be6e34fd0345b52b910c568e0eef6a2a8",
+        "sha256_in_prefix": "d0edee15f91b406f3f99726e44eb990be6e34fd0345b52b910c568e0eef6a2a8",
+        "size_in_bytes": 5
+      },
+      {
+        "_path": "lib/python3.7/site-packages/datrie-0.8.2.dist-info/METADATA",
+        "path_type": "hardlink",
+        "sha256": "9e24937d6578a9e0e9f433b5ecca8a5aa9c858493049ac73b117e718722a5631",
+        "sha256_in_prefix": "9e24937d6578a9e0e9f433b5ecca8a5aa9c858493049ac73b117e718722a5631",
+        "size_in_bytes": 14929
+      },
+      {
+        "_path": "lib/python3.7/site-packages/datrie-0.8.2.dist-info/RECORD",
+        "path_type": "hardlink",
+        "sha256": "585f569f9ec199f5fb419b3ed080d171e0c7367c316711eab949769685a7d55b",
+        "sha256_in_prefix": "585f569f9ec199f5fb419b3ed080d171e0c7367c316711eab949769685a7d55b",
+        "size_in_bytes": 573
+      },
+      {
+        "_path": "lib/python3.7/site-packages/datrie-0.8.2.dist-info/WHEEL",
+        "path_type": "hardlink",
+        "sha256": "f5c1b1c10ded4d3ec602c74708f1aa2e2eb50d71a92565642eb7a7dcc42e0f49",
+        "sha256_in_prefix": "f5c1b1c10ded4d3ec602c74708f1aa2e2eb50d71a92565642eb7a7dcc42e0f49",
+        "size_in_bytes": 104
+      },
+      {
+        "_path": "lib/python3.7/site-packages/datrie-0.8.2.dist-info/top_level.txt",
+        "path_type": "hardlink",
+        "sha256": "350f62b15d82f3db0804c34e2031de59a77f77d32a75e50405a4f151822214d6",
+        "sha256_in_prefix": "350f62b15d82f3db0804c34e2031de59a77f77d32a75e50405a4f151822214d6",
+        "size_in_bytes": 7
+      },
+      {
+        "_path": "lib/python3.7/site-packages/datrie.cpython-37m-x86_64-linux-gnu.so",
+        "path_type": "hardlink",
+        "sha256": "f2a02fbd16288b49707b7cf39023f2286c6f859f43842fbeca000d166e6586e7",
+        "sha256_in_prefix": "f2a02fbd16288b49707b7cf39023f2286c6f859f43842fbeca000d166e6586e7",
+        "size_in_bytes": 404096
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "803992e503d9b8722f7c98314b9c2449ef0a5844821703b3c739b7051f46a7fd",
+  "size": 159986,
+  "subdir": "linux-64",
+  "timestamp": 1585295455475,
+  "track_features": "",
+  "url": "https://conda.anaconda.org/conda-forge/linux-64/datrie-0.8.2-py37h8f50634_0.tar.bz2",
+  "version": "0.8.2"
+}

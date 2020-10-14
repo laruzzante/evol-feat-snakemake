@@ -1,0 +1,101 @@
+{
+  "build": "py_3",
+  "build_number": 3,
+  "channel": "https://conda.anaconda.org/conda-forge/noarch",
+  "constrains": [
+    "ptable >=9999"
+  ],
+  "depends": [
+    "python"
+  ],
+  "extracted_package_dir": "/home/lruzzant/miniconda3/pkgs/prettytable-0.7.2-py_3",
+  "features": "",
+  "files": [
+    "lib/python3.7/site-packages/prettytable-0.7.2.dist-info/COPYING",
+    "lib/python3.7/site-packages/prettytable-0.7.2.dist-info/INSTALLER",
+    "lib/python3.7/site-packages/prettytable-0.7.2.dist-info/METADATA",
+    "lib/python3.7/site-packages/prettytable-0.7.2.dist-info/RECORD",
+    "lib/python3.7/site-packages/prettytable-0.7.2.dist-info/WHEEL",
+    "lib/python3.7/site-packages/prettytable-0.7.2.dist-info/top_level.txt",
+    "lib/python3.7/site-packages/prettytable.py",
+    "lib/python3.7/site-packages/__pycache__/prettytable.cpython-37.pyc"
+  ],
+  "fn": "prettytable-0.7.2-py_3.tar.bz2",
+  "license": "BSD 3-Clause",
+  "license_family": "BSD",
+  "link": {
+    "source": "/home/lruzzant/miniconda3/pkgs/prettytable-0.7.2-py_3",
+    "type": 1
+  },
+  "md5": "b1e29376b71a43eb931bf7b01022d817",
+  "name": "prettytable",
+  "noarch": "python",
+  "package_tarball_full_path": "/home/lruzzant/miniconda3/pkgs/prettytable-0.7.2-py_3.tar.bz2",
+  "package_type": "noarch_python",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "site-packages/prettytable-0.7.2.dist-info/COPYING",
+        "path_type": "hardlink",
+        "sha256": "57a33810a67fb178d3d291818b083d06d87cd5cebeeffda0ec1af9a4bfb4976e",
+        "sha256_in_prefix": "57a33810a67fb178d3d291818b083d06d87cd5cebeeffda0ec1af9a4bfb4976e",
+        "size_in_bytes": 1613
+      },
+      {
+        "_path": "site-packages/prettytable-0.7.2.dist-info/INSTALLER",
+        "path_type": "hardlink",
+        "sha256": "ceebae7b8927a3227e5303cf5e0f1f7b34bb542ad7250ac03fbcde36ec2f1508",
+        "sha256_in_prefix": "ceebae7b8927a3227e5303cf5e0f1f7b34bb542ad7250ac03fbcde36ec2f1508",
+        "size_in_bytes": 4
+      },
+      {
+        "_path": "site-packages/prettytable-0.7.2.dist-info/METADATA",
+        "path_type": "hardlink",
+        "sha256": "f7af0e29332242c94013fe23cbce6f6928ffe2795d0ea285db22e1b600cce538",
+        "sha256_in_prefix": "f7af0e29332242c94013fe23cbce6f6928ffe2795d0ea285db22e1b600cce538",
+        "size_in_bytes": 700
+      },
+      {
+        "_path": "site-packages/prettytable-0.7.2.dist-info/RECORD",
+        "path_type": "hardlink",
+        "sha256": "0f46e18b02ac423103b8a249bf6726a2ddf4fcc5a9468aac8893671ab14f4e75",
+        "sha256_in_prefix": "0f46e18b02ac423103b8a249bf6726a2ddf4fcc5a9468aac8893671ab14f4e75",
+        "size_in_bytes": 594
+      },
+      {
+        "_path": "site-packages/prettytable-0.7.2.dist-info/WHEEL",
+        "path_type": "hardlink",
+        "sha256": "e52a4c9ea634a1c869ce3cb33e98d61027b294b1d4fd1182e8311948ffb78711",
+        "sha256_in_prefix": "e52a4c9ea634a1c869ce3cb33e98d61027b294b1d4fd1182e8311948ffb78711",
+        "size_in_bytes": 93
+      },
+      {
+        "_path": "site-packages/prettytable-0.7.2.dist-info/top_level.txt",
+        "path_type": "hardlink",
+        "sha256": "528a09acd9ba89ab39e0b4e395a757b5d6e30b536df6c81dff5b7fdb85170534",
+        "sha256_in_prefix": "528a09acd9ba89ab39e0b4e395a757b5d6e30b536df6c81dff5b7fdb85170534",
+        "size_in_bytes": 12
+      },
+      {
+        "_path": "site-packages/prettytable.py",
+        "path_type": "hardlink",
+        "sha256": "7db30219256548be448ad71156bff6888773ac8f34018d4ec3b7d92849486231",
+        "sha256_in_prefix": "7db30219256548be448ad71156bff6888773ac8f34018d4ec3b7d92849486231",
+        "size_in_bytes": 54204
+      },
+      {
+        "_path": "lib/python3.7/site-packages/__pycache__/prettytable.cpython-37.pyc",
+        "path_type": "pyc_file"
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "b8bcc2c43470a64e3a1e5508ec33ec1b30b572af2306a7cf786cae656a27fa2c",
+  "size": 14939,
+  "subdir": "noarch",
+  "timestamp": 1544545070104,
+  "track_features": "",
+  "url": "https://conda.anaconda.org/conda-forge/noarch/prettytable-0.7.2-py_3.tar.bz2",
+  "version": "0.7.2"
+}

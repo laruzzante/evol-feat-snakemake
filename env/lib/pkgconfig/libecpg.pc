@@ -1,0 +1,9 @@
+Name: libecpg
+Description: PostgreSQL libecpg library
+Url: http://www.postgresql.org/
+Version: 12.3
+Requires: 
+Requires.private: libpq libpgtypes
+Cflags: -I/home/lruzzant/evol-feat-snakemake/env/include
+Libs: -L/home/lruzzant/evol-feat-snakemake/env/lib -lecpg
+Libs.private: -L/home/lruzzant/evol-feat-snakemake/env/lib -lm

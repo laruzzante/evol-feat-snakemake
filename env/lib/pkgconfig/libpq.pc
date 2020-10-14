@@ -1,0 +1,9 @@
+Name: libpq
+Description: PostgreSQL libpq library
+Url: http://www.postgresql.org/
+Version: 12.3
+Requires: 
+Requires.private: 
+Cflags: -I/home/lruzzant/evol-feat-snakemake/env/include
+Libs: -L/home/lruzzant/evol-feat-snakemake/env/lib -lpq
+Libs.private: -L/home/lruzzant/evol-feat-snakemake/env/lib -lssl -lcrypto -lgssapi_krb5 -lcrypt -lm

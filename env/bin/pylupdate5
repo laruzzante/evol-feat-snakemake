@@ -1,0 +1,2 @@
+#!/bin/sh
+exec /home/lruzzant/evol-feat-snakemake/env/bin/python -m PyQt5.pylupdate_main ${1+"$@"}
