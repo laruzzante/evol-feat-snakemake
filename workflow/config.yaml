@@ -1,24 +1,25 @@
 features:
   UNI:
-    infile: data/orthology_anophelinae.tsv
+    infiles:
+      orthology_table: data/orthology_anophelinae.tsv
     gene_metric: false
   DUP:
-    infile: data/orthology_anophelinae.tsv
+    infiles:
+      orthology_table: data/orthology_anophelinae.tsv
     gene_metric: false
   CNV:
-    infile: data/orthology_anophelinae.tsv
+    infiles:
+      orthology_table: data/orthology_anophelinae.tsv
     gene_metric: false
   ACN:
-    infile: data/orthology_anophelinae.tsv
+    infiles:
+      orthology_table: data/orthology_anophelinae.tsv
     gene_metric: false
   AGE:
-    infile: data/species_tree.tsv
+    infiles:
+      orthology_table: data/orthology_anophelinae.tsv
+      species_tree: data/species_tree.tsv
     gene_metric: false
   SYN:
     infile: data/GFFs.tsv
     gene_metric: false
-
-
-# Feature name
-# If user added feature: Feature file
-# Gene metric or OG metric (in order to aggregate to OG if gene metric)
