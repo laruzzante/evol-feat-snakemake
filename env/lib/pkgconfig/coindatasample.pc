@@ -1,9 +1,0 @@
-prefix=/home/lruzzant/evol-feat-snakemake/env
-datadir=${prefix}/share/coin/Data/Sample
-
-Name: Sample
-Description: Sample models
-URL: https://projects.coin-or.org/svn/Data/Sample
-Version: 1.2.12
-Libs:
-Cflags:
