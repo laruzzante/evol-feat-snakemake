@@ -1,6 +1,5 @@
 # Compute orthogroup universality (relative species-span)
 
-#from collections import defaultdict
 import pandas as pd
 import pickle
 
@@ -13,7 +12,6 @@ output_file_genes = open(snakemake.output["genes"], 'wb')
 df = pd.read_csv(open(snakemake.input[0]), sep='\t') # I don't use the input_file variable name here because if given a string, pandas.read_csv() will automatically close th file, which is instead needed to be open for later
 n_species_computed = len(set(df['species']))
 n_species_from_config = float(snakemake.config["n_species"])
-
 if n_species_computed != n_species_from_config:
     print('WARNING: number of species specified in config.yaml file different \
 from number of species found in <', snakemake.input[0] , '>.')
@@ -21,7 +19,6 @@ from number of species found in <', snakemake.input[0] , '>.')
 # Create dictionaries of orthogroups and gene features
 orthogroups = {}
 genes = {}
-
 for line in input_file:
     line = line.strip()
     if 'orthogroup' in line or 'gene' in line or 'species' in line:
