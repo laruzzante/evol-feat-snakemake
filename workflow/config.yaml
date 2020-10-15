@@ -1,27 +1,22 @@
 n_species: 19
 
+input_files:
+  # Main input for orthology features: UNI, CNV, ACN, DUP
+  orthology_table: data/orthology_anophelinae.tsv
+
 features:
   UNI:
-    infiles:
-      orthology_table: data/orthology_anophelinae.tsv
-    gene_metric: false
+    gene_feature: false
   DUP:
-    infiles:
-      orthology_table: data/orthology_anophelinae.tsv
-    gene_metric: false
+    gene_feature: false
   CNV:
-    infiles:
-      orthology_table: data/orthology_anophelinae.tsv
-    gene_metric: false
+    gene_feature: false
   ACN:
-    infiles:
-      orthology_table: data/orthology_anophelinae.tsv
-    gene_metric: false
+    gene_feature: false
   AGE:
-    infiles:
-      orthology_table: data/orthology_anophelinae.tsv
+    input:
       species_tree: data/species_tree.tsv
-    gene_metric: false
+    gene_feature: false
   SYN:
-    infile: data/GFFs.tsv
-    gene_metric: false
+    input: data/GFFs.tsv
+    gene_feature: false

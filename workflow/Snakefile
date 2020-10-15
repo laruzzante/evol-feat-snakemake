@@ -1,10 +1,28 @@
 configfile: 'config.yaml'
 
+rule create_orthology_dictionaries:
+    input:
+        config["input_files"]["orthology_table"]
+    output:
+        orthogroups = 'results/orthogroups.pickle',
+        genes = 'results/genes.pickle'
+    script:
+        'create_orthology_dictionaries.py'
+
 rule compute_UNI:
     input:
-        config["features"]["UNI"]["infiles"]["orthology_table"]
+        rules.create_orthology_dictionaries.output['orthogroups']
     output:
-        UNI_orthogroups = 'results/UNI.tsv',
-        UNI_genes = 'results/UNI_genes.tsv'
+        UNI_orthogroups = 'results/orthogroup_features/UNI_orthogroups.tsv',
+        UNI_genes = 'results/gene_features/UNI_genes.tsv'
     script:
         'compute_UNI.py'
+
+# rule compute_SYN:
+#     input:
+#         rules.create_orthology_dictionaries.output['orthogroups']
+#         'data/{species}.gff'
+#     output:
+#         'results/{species}.tsv'
+#     script:
+#         'compute_UNI.py'
