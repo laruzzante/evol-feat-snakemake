@@ -1,0 +1,19 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	create_orthology_dictionaries
+	1
+
+[Thu Oct 15 19:09:39 2020]
+rule create_orthology_dictionaries:
+    input: data/orthology_anophelinae.tsv
+    output: results/orthogroups.pickle, results/genes.pickle
+    jobid: 0
+
+[Thu Oct 15 19:09:41 2020]
+Finished job 0.
+1 of 1 steps (100%) done
+Complete log: /home/lruzzant/evol-feat-snakemake/workflow/.snakemake/log/2020-10-15T190939.698054.snakemake.log

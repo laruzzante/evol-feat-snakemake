@@ -1,0 +1,46 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	compute_UNI
+	1	create_orthology_dictionaries
+	3
+
+[Fri Oct 16 17:32:00 2020]
+rule create_orthology_dictionaries:
+    input: data/orthology_anophelinae.tsv
+    output: results/orthogroups.pickle, results/genes.pickle
+    jobid: 2
+
+[Fri Oct 16 17:32:01 2020]
+Finished job 2.
+1 of 3 steps (33%) done
+
+[Fri Oct 16 17:32:02 2020]
+rule compute_UNI:
+    input: results/orthogroups.pickle
+    output: results/orthogroup_features/UNI_orthogroups.tsv, results/gene_features/UNI_genes.tsv
+    jobid: 1
+
+[Fri Oct 16 17:32:02 2020]
+Error in rule compute_UNI:
+    jobid: 1
+    output: results/orthogroup_features/UNI_orthogroups.tsv, results/gene_features/UNI_genes.tsv
+
+RuleException:
+CalledProcessError in line 24 of /home/lruzzant/evol-feat-snakemake/workflow/Snakefile:
+Command 'set -euo pipefail;  /home/lruzzant/miniconda3/envs/evol-feat/bin/python3.7 /home/lruzzant/evol-feat-snakemake/workflow/.snakemake/scripts/tmpm8j0svc5.compute_UNI.py' returned non-zero exit status 1.
+  File "/home/lruzzant/miniconda3/envs/evol-feat/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 2229, in run_wrapper
+  File "/home/lruzzant/evol-feat-snakemake/workflow/Snakefile", line 24, in __rule_compute_UNI
+  File "/home/lruzzant/miniconda3/envs/evol-feat/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 551, in _callback
+  File "/home/lruzzant/miniconda3/envs/evol-feat/lib/python3.7/concurrent/futures/thread.py", line 57, in run
+  File "/home/lruzzant/miniconda3/envs/evol-feat/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 537, in cached_or_run
+  File "/home/lruzzant/miniconda3/envs/evol-feat/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 2241, in run_wrapper
+Removing output files of failed job compute_UNI since they might be corrupted:
+results/orthogroup_features/UNI_orthogroups.tsv, results/gene_features/UNI_genes.tsv
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /home/lruzzant/evol-feat-snakemake/workflow/.snakemake/log/2020-10-16T173200.582637.snakemake.log

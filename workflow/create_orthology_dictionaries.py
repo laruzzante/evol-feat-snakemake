@@ -1,12 +1,12 @@
-# Compute orthogroup universality (relative species-span)
+# Create dictionaries of gene-orthogroup-species relationships from orthology table
 
 import pandas as pd
 import pickle
 
 # Retrieve information from Snakemake
 input_file = open(snakemake.input[0])
-output_file_orthogroups = open(snakemake.output["orthogroups"], 'wb')
-output_file_genes = open(snakemake.output["genes"], 'wb')
+output_file_orthogroups = open(snakemake.output.orthogroups, 'wb') # 'wb' to write binary object instead of strings
+output_file_genes = open(snakemake.output.genes, 'wb')
 
 # Check consitency between number of species in config file and present in input orthology table
 df = pd.read_csv(open(snakemake.input[0]), sep='\t') # I don't use the input_file variable name here because if given a string, pandas.read_csv() will automatically close th file, which is instead needed to be open for later

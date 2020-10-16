@@ -6,17 +6,17 @@ input_files:
 
 features:
   UNI:
-    gene_feature: false
+    is_gene_level_feature: false
   DUP:
-    gene_feature: false
+    is_gene_level_feature: false
   CNV:
-    gene_feature: false
+    is_gene_level_feature: false
   ACN:
-    gene_feature: false
+    is_gene_level_feature: false
   AGE:
     input:
       species_tree: data/species_tree.tsv
-    gene_feature: false
+    is_gene_level_feature: false
   SYN:
     input: data/GFFs.tsv
-    gene_feature: false
+    is_gene_level_feature: false

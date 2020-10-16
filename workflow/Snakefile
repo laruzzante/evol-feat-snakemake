@@ -1,5 +1,10 @@
 configfile: 'config.yaml'
 
+rule all:
+    input:
+        'results/orthogroup_features/UNI_orthogroups.tsv',
+        'results/gene_features/UNI_genes.tsv'
+
 rule create_orthology_dictionaries:
     input:
         config["input_files"]["orthology_table"]
@@ -11,7 +16,7 @@ rule create_orthology_dictionaries:
 
 rule compute_UNI:
     input:
-        rules.create_orthology_dictionaries.output['orthogroups']
+        rules.create_orthology_dictionaries.output.orthogroups
     output:
         UNI_orthogroups = 'results/orthogroup_features/UNI_orthogroups.tsv',
         UNI_genes = 'results/gene_features/UNI_genes.tsv'
