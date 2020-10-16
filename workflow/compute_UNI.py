@@ -15,5 +15,6 @@ for orthogroup in sorted(orthogroups.keys()):
     for gene in orthogroups[orthogroup]["genes"]:
         output_file_genes.write(gene + '\t' + str(UNI) + '\n')
 
+# Closing files
 output_file_orthogroups.close()
 output_file_genes.close()
