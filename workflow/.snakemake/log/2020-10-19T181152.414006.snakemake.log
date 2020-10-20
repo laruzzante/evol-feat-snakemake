@@ -1,0 +1,5 @@
+Building DAG of jobs...
+MissingInputException in line 35 of /home/lruzzant/evol-feat-snakemake/workflow/Snakefile:
+Missing input files for rule merge_features:
+results/evol_feat_orthogroups/{}_orthogroups.tsv
+results/evol_feat_genes/{}_genes.tsv

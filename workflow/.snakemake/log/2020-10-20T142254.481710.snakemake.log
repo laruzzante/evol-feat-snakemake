@@ -1,0 +1,2 @@
+SyntaxError in line 36 of /home/lruzzant/evol-feat-snakemake/workflow/Snakefile:
+EOF in multi-line statement (Snakefile, line 36)

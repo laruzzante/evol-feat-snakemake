@@ -1,9 +1,11 @@
 configfile: 'config.yaml'
 
+features = ["UNI", "DUP"]
+
 rule all:
     input:
-        'results/orthogroup_features/UNI_orthogroups.tsv',
-        'results/gene_features/UNI_genes.tsv'
+        evol_feat_orthogroups = 'results/evolutionary_features_by_orthogroups.tsv',
+        evol_feat_genes = 'results/evolutionary_features_by_genes.tsv'
 
 rule create_orthology_dictionaries:
     input:
@@ -14,14 +16,33 @@ rule create_orthology_dictionaries:
     script:
         'create_orthology_dictionaries.py'
 
-rule compute_UNI:
+rule compute_universality:
     input:
         rules.create_orthology_dictionaries.output.orthogroups
     output:
-        UNI_orthogroups = 'results/orthogroup_features/UNI_orthogroups.tsv',
-        UNI_genes = 'results/gene_features/UNI_genes.tsv'
+        UNI_orthogroups = 'results/evol_feat_orthogroups/UNI_orthogroups.tsv',
+        UNI_genes = 'results/evol_feat_genes/UNI_genes.tsv'
     script:
-        'compute_UNI.py'
+        'compute_universality.py'
+
+rule compute_duplicability:
+    input:
+        rules.create_orthology_dictionaries.output.orthogroups
+    output:
+        DUP_orthogroups = 'results/evol_feat_orthogroups/DUP_orthogroups.tsv',
+        DUP_genes = 'results/evol_feat_genes/DUP_genes.tsv'
+    script:
+        'compute_duplicability.py'
+
+rule merge_features:
+    input:
+        evol_feat_orthogroups = expand('results/evol_feat_orthogroups/{feature}_orthogroups.tsv', feature=features),
+        evol_feat_genes = expand('results/evol_feat_genes/{feature}_genes.tsv', feature=features)
+    output:
+        evol_feat_orthogroups = 'results/evolutionary_features_by_orthogroups.tsv',
+        evol_feat_genes = 'results/evolutionary_features_by_genes.tsv'
+    script:
+        'merge_features.py'
 
 # rule compute_SYN:
 #     input:

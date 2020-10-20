@@ -1,0 +1,61 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	compute_duplicability
+	1	compute_universality
+	1	create_orthology_dictionaries
+	1	merge_features
+	5
+
+[Tue Oct 20 15:46:10 2020]
+rule create_orthology_dictionaries:
+    input: data/orthology_anophelinae.tsv
+    output: results/orthogroups.pickle, results/genes.pickle
+    jobid: 4
+
+[Tue Oct 20 15:46:12 2020]
+Finished job 4.
+1 of 5 steps (20%) done
+
+[Tue Oct 20 15:46:12 2020]
+rule compute_duplicability:
+    input: results/orthogroups.pickle
+    output: results/evol_feat_orthogroups/DUP_orthogroups.tsv, results/evol_feat_genes/DUP_genes.tsv
+    jobid: 3
+
+[Tue Oct 20 15:46:12 2020]
+rule compute_universality:
+    input: results/orthogroups.pickle
+    output: results/evol_feat_orthogroups/UNI_orthogroups.tsv, results/evol_feat_genes/UNI_genes.tsv
+    jobid: 2
+
+[Tue Oct 20 15:46:12 2020]
+Finished job 2.
+2 of 5 steps (40%) done
+[Tue Oct 20 15:46:12 2020]
+Finished job 3.
+3 of 5 steps (60%) done
+
+[Tue Oct 20 15:46:12 2020]
+rule merge_features:
+    input: results/evol_feat_orthogroups/UNI_orthogroups.tsv, results/evol_feat_orthogroups/DUP_orthogroups.tsv, results/evol_feat_genes/UNI_genes.tsv, results/evol_feat_genes/DUP_genes.tsv
+    output: results/evolutionary_features_by_orthogroups.tsv, results/evolutionary_features_by_genes.tsv
+    jobid: 1
+
+[Tue Oct 20 15:46:13 2020]
+Finished job 1.
+4 of 5 steps (80%) done
+
+[Tue Oct 20 15:46:13 2020]
+localrule all:
+    input: results/evolutionary_features_by_orthogroups.tsv, results/evolutionary_features_by_genes.tsv
+    jobid: 0
+
+[Tue Oct 20 15:46:13 2020]
+Finished job 0.
+5 of 5 steps (100%) done
+Complete log: /home/lruzzant/evol-feat-snakemake/workflow/.snakemake/log/2020-10-20T154610.885827.snakemake.log
