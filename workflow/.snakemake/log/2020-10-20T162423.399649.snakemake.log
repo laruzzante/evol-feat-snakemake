@@ -1,0 +1,66 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	compute_average_copy_number
+	1	compute_duplicability
+	1	compute_universality
+	1	create_orthology_dictionaries
+	1	merge_features
+	6
+
+[Tue Oct 20 16:24:23 2020]
+rule create_orthology_dictionaries:
+    input: data/orthology_anophelinae.tsv
+    output: results/orthogroups.pickle, results/genes.pickle
+    jobid: 5
+
+[Tue Oct 20 16:24:24 2020]
+Finished job 5.
+1 of 6 steps (17%) done
+
+[Tue Oct 20 16:24:24 2020]
+rule compute_duplicability:
+    input: results/orthogroups.pickle
+    output: results/evol_feat_orthogroups/DUP_orthogroups.tsv, results/evol_feat_genes/DUP_genes.tsv
+    jobid: 3
+
+[Tue Oct 20 16:24:24 2020]
+rule compute_average_copy_number:
+    input: results/orthogroups.pickle
+    output: results/evol_feat_orthogroups/ACN_orthogroups.tsv, results/evol_feat_genes/ACN_genes.tsv
+    jobid: 4
+
+
+[Tue Oct 20 16:24:24 2020]
+rule compute_universality:
+    input: results/orthogroups.pickle
+    output: results/evol_feat_orthogroups/UNI_orthogroups.tsv, results/evol_feat_genes/UNI_genes.tsv
+    jobid: 2
+
+[Tue Oct 20 16:24:25 2020]
+Error in rule compute_average_copy_number:
+    jobid: 4
+    output: results/evol_feat_orthogroups/ACN_orthogroups.tsv, results/evol_feat_genes/ACN_genes.tsv
+
+RuleException:
+CalledProcessError in line 44 of /home/lruzzant/evol-feat-snakemake/workflow/Snakefile:
+Command 'set -euo pipefail;  /home/lruzzant/miniconda3/envs/evol-feat/bin/python3.7 /home/lruzzant/evol-feat-snakemake/workflow/.snakemake/scripts/tmpcns4mbpt.compute_average_copy_number.py' returned non-zero exit status 1.
+  File "/home/lruzzant/miniconda3/envs/evol-feat/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 2229, in run_wrapper
+  File "/home/lruzzant/evol-feat-snakemake/workflow/Snakefile", line 44, in __rule_compute_average_copy_number
+  File "/home/lruzzant/miniconda3/envs/evol-feat/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 551, in _callback
+  File "/home/lruzzant/miniconda3/envs/evol-feat/lib/python3.7/concurrent/futures/thread.py", line 57, in run
+  File "/home/lruzzant/miniconda3/envs/evol-feat/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 537, in cached_or_run
+  File "/home/lruzzant/miniconda3/envs/evol-feat/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 2241, in run_wrapper
+[Tue Oct 20 16:24:25 2020]
+Finished job 2.
+2 of 6 steps (33%) done
+[Tue Oct 20 16:24:25 2020]
+Finished job 3.
+3 of 6 steps (50%) done
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /home/lruzzant/evol-feat-snakemake/workflow/.snakemake/log/2020-10-20T162423.399649.snakemake.log

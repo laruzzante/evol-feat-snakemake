@@ -9,14 +9,14 @@ features:
     is_gene_level_feature: false
   DUP:
     is_gene_level_feature: false
-  CNV:
-    is_gene_level_feature: false
   ACN:
     is_gene_level_feature: false
-  AGE:
-    input:
-      species_tree: data/species_tree.tsv
+  CNV:
     is_gene_level_feature: false
-  SYN:
-    input: data/GFFs.tsv
-    is_gene_level_feature: false
+  # AGE:
+  #   input:
+  #     species_tree: data/species_tree.tsv
+  #   is_gene_level_feature: false
+  # SYN:
+  #   input: data/GFFs.tsv
+  #   is_gene_level_feature: false
