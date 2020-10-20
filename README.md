@@ -2,8 +2,10 @@
 Snakemake implementation of the evol-feat pipeline.
 
 ## Installation and usage
-Clone or manually download the git repository:
+* Clone or manually download the git repository:
+```bash
 git clone git@gitlab.com:evogenlab/evol-feat-snakemake.git
+```
 
 Go into the evol-feat-directory:
 cd evol-feat-snakemake
