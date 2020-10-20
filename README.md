@@ -27,7 +27,7 @@ conda activate evol-feat
 cd workflow
 ```
 
-* Run snakemake to execute the workflow (either specify number of preferred cores or stick to 1):
+* Run snakemake to execute the workflow (either specify the number of preferred cores or stick to 1):
 ```bash
 snakemake --cores 1
 ```
