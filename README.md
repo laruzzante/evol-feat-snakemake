@@ -45,5 +45,4 @@ duplicability: proportion of species with gene duplicates
 * ### ACN
 average copy-number: average of per species gene copy-number
 * ### CNV
-<<<<<<< HEAD
 copy-number variation: per species standard deviation of gene copies, divided by average copy-number
