@@ -45,7 +45,8 @@ rule compute_average_copy_number:
 
 rule compute_copy_number_variation:
     input:
-        rules.create_orthology_dictionaries.output.orthogroups
+        rules.create_orthology_dictionaries.output.orthogroups,
+        ACN_orthogroups = rules.compute_average_copy_number.output.ACN_orthogroups
     output:
         CNV_orthogroups = 'results/evol_feat_orthogroups/CNV_orthogroups.tsv',
         CNV_genes = 'results/evol_feat_genes/CNV_genes.tsv'
