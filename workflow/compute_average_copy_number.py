@@ -1,4 +1,4 @@
-# Compute orthogroup average copy-number (per species average of gene copies)
+# Compute orthogroup average copy-number (average of per species gene copy-number)
 
 import pickle
 
