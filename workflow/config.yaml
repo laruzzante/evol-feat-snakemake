@@ -13,10 +13,10 @@ features:
     is_gene_level_feature: false
   CNV:
     is_gene_level_feature: false
-  # AGE:
-  #   input:
-  #     species_tree: data/species_tree.tsv
-  #   is_gene_level_feature: false
+  AGE:
+    input:
+      species_tree: data/species_tree.tsv
+    is_gene_level_feature: false
   # SYN:
   #   input: data/GFFs.tsv
   #   is_gene_level_feature: false
