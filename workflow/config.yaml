@@ -3,6 +3,7 @@ n_species: 19
 input_files:
   # Main input for orthology features: UNI, CNV, ACN, DUP
   orthology_table: data/anophelinae_orthology.tsv
+  ultrametric_species_tree: data/anophelinae_ultrametric_tree.pep
 
 features:
   UNI:
@@ -14,8 +15,6 @@ features:
   CNV:
     is_gene_level_feature: false
   AGE:
-    input:
-      ultrametric_species_tree: data/anophelinae_ultrametric_tree.pep
     is_gene_level_feature: false
   # SYN:
   #   input: data/GFFs.tsv

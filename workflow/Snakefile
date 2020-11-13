@@ -7,6 +7,9 @@ rule all:
         evol_feat_orthogroups = 'results/evolutionary_features_by_orthogroups.tsv',
         evol_feat_genes = 'results/evolutionary_features_by_genes.tsv'
 
+
+# Rules for input data processing
+
 rule create_orthology_dictionaries:
     input:
         config["input_files"]["orthology_table"]
@@ -15,6 +18,17 @@ rule create_orthology_dictionaries:
         genes = 'results/genes.pickle'
     script:
         'create_orthology_dictionaries.py'
+
+rule create_mrca_branchlengths_table:
+    input:
+        config["input_files"]["ultrametric_species_tree"]
+    output:
+        mrca_branchlengths = 'results/mrca_branchlengths.tsv'
+    script:
+        'create_mrca_branchlengths_table.R'
+
+
+# Rules for features computation
 
 rule compute_universality:
     input:
@@ -53,6 +67,16 @@ rule compute_copy_number_variation:
     script:
         'compute_copy_number_variation.py'
 
+rule compute_age:
+    input:
+        rules.create_orthology_dictionaries.output.orthogroups,
+        mrca_branchlengths = rules.create_mrca_branchlengths_table.output.mrca_branchlengths
+    output:
+        AGE_orthogroups = 'results/evol_feat_orthogroups/AGE_orthogroups.tsv',
+        AGE_genes = 'results/evol_feat_genes/AGE_genes.tsv'
+    script:
+        'compute_age.py'
+
 rule merge_features:
     input:
         evol_feat_orthogroups = expand('results/evol_feat_orthogroups/{feature}_orthogroups.tsv', feature=features),
@@ -62,6 +86,9 @@ rule merge_features:
         evol_feat_genes = 'results/evolutionary_features_by_genes.tsv'
     script:
         'merge_features.py'
+
+
+
 
 # rule compute_SYN:
 #     input:

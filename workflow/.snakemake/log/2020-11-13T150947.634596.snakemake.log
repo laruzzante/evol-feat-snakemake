@@ -1,0 +1,3 @@
+AttributeError in line 14 of /mnt/c/Users/livio/evol-feat-snakemake/workflow/Snakefile:
+'Rules' object has no attribute 'create_orthology_dictionaries'
+  File "/mnt/c/Users/livio/evol-feat-snakemake/workflow/Snakefile", line 14, in <module>
