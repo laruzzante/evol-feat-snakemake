@@ -1,22 +1,35 @@
-n_species: 19
+# n_species: 19
 
-input_files:
+#input_files:
   # Main input for orthology features: UNI, CNV, ACN, DUP
-  orthology_table: data/orthology_anophelinae.tsv
+orthology_table: input/apoidea_orthology.txt
 
-features:
-  UNI:
-    is_gene_level_feature: false
-  DUP:
-    is_gene_level_feature: false
-  ACN:
-    is_gene_level_feature: false
-  CNV:
-    is_gene_level_feature: false
-  # AGE:
-  #   input:
-  #     species_tree: data/species_tree.tsv
-  #   is_gene_level_feature: false
-  # SYN:
-  #   input: data/GFFs.tsv
-  #   is_gene_level_feature: false
+# user orhtogroup features: several user determined features merged into a single file
+# Columns: orthogroup \t gene \t feat1 \t feat2 ...
+user_orthogroup_features_file: input/apoidea_og_feats.tsv
+
+# user gene features: several user determined features merged into a single file
+# Columns: gene \t species \t orthogroup \t feat1 \t feat2 ...
+user_gene_features_files: # YET TO IMPLEMENT
+
+# Specie tree file
+species_tree: input/trees_Apoidea_RO_ultrametric.pep
+
+default_orthogroup_features:
+  - UNI
+  - DUP
+  - ACN
+  - CNV
+  - AGE
+
+default_gene_features:
+
+# Additional features:
+additional_orthogroup_features:
+  # - OG_SYN # IF gff file present
+
+additional_gene_features:
+  # - GENE_SYN # IF gff file present
+
+# Aggregate GFF file:
+gff_file: # YET TO IMPLEMENT
