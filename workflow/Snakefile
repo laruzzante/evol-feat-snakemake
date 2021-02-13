@@ -5,10 +5,37 @@ configfile: 'config.yaml'
 
 def get_input():
 
-    input_list = {}
 
-    if config['orthology_table']:
-        input_list['orthology_table'] = config['orthology_table']
+# Rules for input data processing
+
+rule create_orthology_dictionaries:
+    input:
+        config["input_files"]["orthology_table"]
+    output:
+        orthogroups = 'results/orthogroups.pickle',
+        genes = 'results/genes.pickle'
+    script:
+        'create_orthology_dictionaries.py'
+
+rule create_mrca_branchlengths_table:
+    input:
+        config["input_files"]["ultrametric_species_tree"]
+    output:
+        mrca_branchlengths = 'results/mrca_branchlengths.tsv'
+    script:
+        'create_mrca_branchlengths_table.R'
+
+
+# Rules for features computation
+
+rule compute_universality:
+    input:
+        rules.create_orthology_dictionaries.output.orthogroups
+    output:
+        UNI_orthogroups = 'results/evol_feat_orthogroups/UNI_orthogroups.tsv',
+        UNI_genes = 'results/evol_feat_genes/UNI_genes.tsv'
+    script:
+        'compute_universality.py'
 
     if config['user_orthogroup_features_file']:
         input_list['user_og_features_file'] = config['user_orthogroup_features_file'])
@@ -89,6 +116,16 @@ rule create_orthology_dictionaries:
 include: 'rules/compute_features.smk'
 
 
+rule compute_age:
+    input:
+        rules.create_orthology_dictionaries.output.orthogroups,
+        mrca_branchlengths = rules.create_mrca_branchlengths_table.output.mrca_branchlengths
+    output:
+        AGE_orthogroups = 'results/evol_feat_orthogroups/AGE_orthogroups.tsv',
+        AGE_genes = 'results/evol_feat_genes/AGE_genes.tsv'
+    script:
+        'compute_age.py'
+
 rule merge_features:
     input:
         orthogroup_features = expand('output/orthogroup_features/{feature}_orthogroups.tsv', feature=FEATURES),
@@ -100,4 +137,16 @@ rule merge_features:
         evol_feat_orthogroups = 'output/merged_orthogroup_features.tsv',
         evol_feat_genes = 'output/merged_gene_features.tsv'
     script:
-        'scripts/merge_features.py'
+merge_features.py'
+
+
+
+
+# rule compute_SYN:
+#     input:
+#         rules.create_orthology_dictionaries.output['orthogroups']
+#         'data/{species}.gff'
+#     output:
+#         'results/{species}.tsv'
+#     script:
+#         'compute_UNI.py'

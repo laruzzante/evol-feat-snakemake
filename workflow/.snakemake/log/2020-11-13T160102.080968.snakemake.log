@@ -1,0 +1,36 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	compute_age
+	1	merge_features
+	3
+
+[Fri Nov 13 16:01:02 2020]
+rule compute_age:
+    input: results/orthogroups.pickle, results/mrca_branchlengths.tsv
+    output: results/evol_feat_orthogroups/AGE_orthogroups.tsv, results/evol_feat_genes/AGE_genes.tsv
+    jobid: 6
+
+[Fri Nov 13 16:01:03 2020]
+Error in rule compute_age:
+    jobid: 6
+    output: results/evol_feat_orthogroups/AGE_orthogroups.tsv, results/evol_feat_genes/AGE_genes.tsv
+
+RuleException:
+CalledProcessError in line 78 of /mnt/c/Users/livio/evol-feat-snakemake/workflow/Snakefile:
+Command 'set -euo pipefail;  /home/lruzzant/miniconda3/envs/evol-feat/bin/python3.7 /mnt/c/Users/livio/evol-feat-snakemake/workflow/.snakemake/scripts/tmpxxo6oyhb.compute_age.py' returned non-zero exit status 1.
+  File "/home/lruzzant/miniconda3/envs/evol-feat/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 2229, in run_wrapper
+  File "/mnt/c/Users/livio/evol-feat-snakemake/workflow/Snakefile", line 78, in __rule_compute_age
+  File "/home/lruzzant/miniconda3/envs/evol-feat/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 551, in _callback
+  File "/home/lruzzant/miniconda3/envs/evol-feat/lib/python3.7/concurrent/futures/thread.py", line 57, in run
+  File "/home/lruzzant/miniconda3/envs/evol-feat/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 537, in cached_or_run
+  File "/home/lruzzant/miniconda3/envs/evol-feat/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 2241, in run_wrapper
+Removing output files of failed job compute_age since they might be corrupted:
+results/evol_feat_orthogroups/AGE_orthogroups.tsv, results/evol_feat_genes/AGE_genes.tsv
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /mnt/c/Users/livio/evol-feat-snakemake/workflow/.snakemake/log/2020-11-13T160102.080968.snakemake.log
