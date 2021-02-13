@@ -13,16 +13,31 @@ user_orthogroup_features_file: input/apoidea_og_feats.tsv
 user_gene_features_files: # YET TO IMPLEMENT
 
 # Specie tree file
-species_tree: input/trees_Apoidea_RO_ultrametric.pep
+ultrametric_species_tree: input/trees_Apoidea_RO_ultrametric.pep
 
-default_orthogroup_features:
+included_orthogroup_features:
   - UNI
   - DUP
   - ACN
   - CNV
   - AGE
 
-default_gene_features:
+included_gene_features:
+
+
+default_orthogroup_features:
+  set_1: # needs orthology table
+    - UNI
+    - DUP
+    - ACN
+
+  set_2: # needs ACN feature
+    - CNV
+
+  set_3: # needs orthology table and
+    - AGE
+
+
 
 # Additional features:
 additional_orthogroup_features:

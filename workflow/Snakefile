@@ -16,32 +16,32 @@ def get_input():
         input_list['user_og_features'] = USER_GENE_FEATURES
 
     if config['default_orthogroup_features']:
-        DEFAULT_OG_FEATURES = config['default_orthogroup_features']
-        OG_FEATURES_TO_COMPUTE = [feature for feature in DEFAULT_OG_FEATURES if feature not in USER_OG_FEATURES]
+        INCLUDED_OG_FEATURES = config['included_orthogroup_features']
+        OG_FEATURES_TO_COMPUTE = [feature for feature in INCLUDED_OG_FEATURES if feature not in USER_OG_FEATURES]
         print(f'Will compute following features: {OG_FEATURES_TO_COMPUTE}')
-        OG_FEATURES_TO_NOT_COMPUTE = [feature for feature in DEFAULT_OG_FEATURES if feature in USER_OG_FEATURES]
+        OG_FEATURES_TO_NOT_COMPUTE = [feature for feature in INCLUDED_OG_FEATURES if feature in USER_OG_FEATURES]
         if OG_FEATURES_TO_NOT_COMPUTE:
-            print(f'Warning: deafault orthogroup features already provided by user, will not compute follwing: {OG_FEATURES_TO_NOT_COMPUTE}')
-        input_list['default_og_features'] = OG_FEATURES_TO_COMPUTE
+            print(f'Warning: included orthogroup features already provided by user, will not compute following: {OG_FEATURES_TO_NOT_COMPUTE}')
+        input_list['og_features_to_compute'] = OG_FEATURES_TO_COMPUTE
     else:
         print(f'Warning: no DEFAULT ORTHOGROUP FEATURES to compute specified in the CONFIG file.')
 
     if config['default_gene_features']:
-        DEFAULT_GENE_FEATURES = config['default_gene_features']
-        GENE_FEATURES_TO_COMPUTE = [feature for feature in DEFAULT_GENE_FEATURES if feature not in USER_GENE_FEATURES]
+        INCLUDED_GENE_FEATURES = config['included_gene_features']
+        GENE_FEATURES_TO_COMPUTE = [feature for feature in INCLUDED_GENE_FEATURES if feature not in USER_GENE_FEATURES]
     print(f'Will compute following features: {GENE_FEATURES_TO_COMPUTE}')
-    GENE_FEATURES_TO_NOT_COMPUTE = [feature for feature in DEFAULT_GENE_FEATURES if feature in USER_GENE_FEATURES]
+    GENE_FEATURES_TO_NOT_COMPUTE = [feature for feature in INCLUDED_GENE_FEATURES if feature in USER_GENE_FEATURES]
     if GENE_FEATURES_TO_NOT_COMPUTE:
-        print(f'Warning: deafault gene features already provided by user, will not compute following: {GENE_FEATURES_TO_NOT_COMPUTE}')
-    input_list['default_gene_features'] = GENE_FEATURES_TO_COMPUTE
+        print(f'Warning: included gene features already provided by user, will not compute following: {GENE_FEATURES_TO_NOT_COMPUTE}')
+    input_list['gene_features_to_compute'] = GENE_FEATURES_TO_COMPUTE
     else:
         print(f'Warning: no DEFAULT GENE FEATURES to compute specified in the CONFIG file.')
 
     if config['orthology_table']:
         input_list['orthology_table'] = config['orthology_table']
 
-    if config['species_tree']:
-        input_list['species_tree'] = config['species_tree']
+    if config['ultrametric_species_tree']:
+        input_list['ultrametric_species_tree'] = config['ultrametric_species_tree']
 
     if config['gff_file']:
         input_list['gff_file'] = config['gff_file']
@@ -52,11 +52,13 @@ def get_input():
 input_list = get_input()
 
 def check_input_files(input_list):
-        
+    SET_1 = config['default_ortogroup_features']['set1']
+    if any(input_list['og_features_to_compute']) == any(SET_1) and ### ortholog is in not input list
+        ## WARNING: add orthology table to compute etc etc
 
 
 rule compute_og_features:
-    input: input_list['default_og_features']
+    input: input_list['og_features_to_compute']
     output:
         expand('output/computed_orthogroup_features/{feature}.tsv', feature={input})
 
