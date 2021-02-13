@@ -5,38 +5,6 @@ configfile: 'config.yaml'
 
 def get_input():
 
-
-# Rules for input data processing
-
-rule create_orthology_dictionaries:
-    input:
-        config["input_files"]["orthology_table"]
-    output:
-        orthogroups = 'results/orthogroups.pickle',
-        genes = 'results/genes.pickle'
-    script:
-        'create_orthology_dictionaries.py'
-
-rule create_mrca_branchlengths_table:
-    input:
-        config["input_files"]["ultrametric_species_tree"]
-    output:
-        mrca_branchlengths = 'results/mrca_branchlengths.tsv'
-    script:
-        'create_mrca_branchlengths_table.R'
-
-
-# Rules for features computation
-
-rule compute_universality:
-    input:
-        rules.create_orthology_dictionaries.output.orthogroups
-    output:
-        UNI_orthogroups = 'results/evol_feat_orthogroups/UNI_orthogroups.tsv',
-        UNI_genes = 'results/evol_feat_genes/UNI_genes.tsv'
-    script:
-        'compute_universality.py'
-
     if config['user_orthogroup_features_file']:
         input_list['user_og_features_file'] = config['user_orthogroup_features_file'])
         USER_OG_FEATURES = config['user_orthogroup_features_file'].readline()[:-1].split('\t')
@@ -69,6 +37,9 @@ rule compute_universality:
     else:
         print(f'Warning: no DEFAULT GENE FEATURES to compute specified in the CONFIG file.')
 
+    if config['orthology_table']:
+        input_list['orthology_table'] = config['orthology_table']
+
     if config['species_tree']:
         input_list['species_tree'] = config['species_tree']
 
@@ -79,6 +50,10 @@ rule compute_universality:
 
 
 input_list = get_input()
+
+def check_input_files(input_list):
+        
+
 
 rule compute_og_features:
     input: input_list['default_og_features']
@@ -113,7 +88,24 @@ rule create_orthology_dictionaries:
         'scripts/create_orthology_dictionaries.py'
 
 
-include: 'rules/compute_features.smk'
+# Rules for input data processing
+
+rule create_orthology_dictionaries:
+    input:
+        config["input_files"]["orthology_table"]
+    output:
+        orthogroups = 'results/orthogroups.pickle',
+        genes = 'results/genes.pickle'
+    script:
+        'create_orthology_dictionaries.py'
+
+rule create_mrca_branchlengths_table:
+    input:
+        config["input_files"]["ultrametric_species_tree"]
+    output:
+        mrca_branchlengths = 'results/mrca_branchlengths.tsv'
+    script:
+        'create_mrca_branchlengths_table.R'
 
 
 rule compute_age:
@@ -137,7 +129,7 @@ rule merge_features:
         evol_feat_orthogroups = 'output/merged_orthogroup_features.tsv',
         evol_feat_genes = 'output/merged_gene_features.tsv'
     script:
-merge_features.py'
+        'merge_features.py'
 
 
 
