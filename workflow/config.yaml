@@ -16,6 +16,8 @@ user_gene_features_files: # YET TO IMPLEMENT
 # Specie tree file
 ultrametric_species_tree: input/Anophelinae_ultrametric_time_tree.pep
 
+# Metrics from the default_orthogroup_features that will be included in the computation process
+# Comment one to remove it.
 included_orthogroup_features:
   - UNI
   - DUP
