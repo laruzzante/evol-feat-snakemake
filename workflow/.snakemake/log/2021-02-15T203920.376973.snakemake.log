@@ -1,0 +1,4 @@
+KeyError in line 27 of /mnt/c/Users/livio/evol-feat-snakemake/workflow/rules/utils.smk:
+'included_orthogroup_features'
+  File "/mnt/c/Users/livio/evol-feat-snakemake/workflow/Snakefile", line 5, in <module>
+  File "/mnt/c/Users/livio/evol-feat-snakemake/workflow/rules/utils.smk", line 27, in get_input

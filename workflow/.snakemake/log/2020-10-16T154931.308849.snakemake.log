@@ -1,3 +1,0 @@
-AttributeError in line 5 of /home/lruzzant/evol-feat-snakemake/workflow/Snakefile:
-'Rules' object has no attribute 'compute_UNI'
-  File "/home/lruzzant/evol-feat-snakemake/workflow/Snakefile", line 5, in <module>

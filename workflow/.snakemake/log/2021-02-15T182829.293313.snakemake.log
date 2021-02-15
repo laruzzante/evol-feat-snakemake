@@ -1,0 +1,4 @@
+KeyError in line 52 of /mnt/c/Users/livio/evol-feat-snakemake/workflow/rules/compute_features.smk:
+'input_files'
+  File "/mnt/c/Users/livio/evol-feat-snakemake/workflow/Snakefile", line 12, in <module>
+  File "/mnt/c/Users/livio/evol-feat-snakemake/workflow/rules/compute_features.smk", line 52, in <module>

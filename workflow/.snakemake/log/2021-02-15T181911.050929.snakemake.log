@@ -1,0 +1,42 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	merge_features
+	1	split_user_orthogroup_features
+	3
+
+[Mon Feb 15 18:19:11 2021]
+checkpoint split_user_orthogroup_features:
+    input: input/TEST_apoidea_og_feats.tsv
+    output: output/user_orthogroup_features/
+    jobid: 2
+Downstream jobs will be updated after completion.
+
+Updating job 1 (merge_features).
+[Mon Feb 15 18:19:14 2021]
+Finished job 2.
+1 of 3 steps (33%) done
+
+[Mon Feb 15 18:19:14 2021]
+rule merge_features:
+    input: output/user_orthogroup_features/ACN.tsv, output/user_orthogroup_features/AGE.tsv, output/user_orthogroup_features/CAF.tsv, output/user_orthogroup_features/CNV.tsv, output/user_orthogroup_features/CON.tsv, output/user_orthogroup_features/DUP.tsv, output/user_orthogroup_features/EVR.tsv, output/user_orthogroup_features/EXP.tsv, output/user_orthogroup_features/LCA.tsv, output/user_orthogroup_features/STA.tsv, output/user_orthogroup_features/UNI.tsv
+    output: output/merged_orthogroup_features.tsv
+    jobid: 3
+
+[Mon Feb 15 18:19:16 2021]
+Finished job 3.
+2 of 3 steps (67%) done
+
+[Mon Feb 15 18:19:17 2021]
+localrule all:
+    input: output/merged_orthogroup_features.tsv
+    jobid: 0
+
+[Mon Feb 15 18:19:17 2021]
+Finished job 0.
+3 of 3 steps (100%) done
+Complete log: /mnt/c/Users/livio/evol-feat-snakemake/workflow/.snakemake/log/2021-02-15T181911.050929.snakemake.log

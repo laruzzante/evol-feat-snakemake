@@ -2,18 +2,19 @@
 
 #input_files:
   # Main input for orthology features: UNI, CNV, ACN, DUP
-orthology_table: input/apoidea_orthology.txt
+orthology_table: input/Anophelinae_OGs.txt
 
 # user orhtogroup features: several user determined features merged into a single file
 # Columns: orthogroup \t gene \t feat1 \t feat2 ...
-user_orthogroup_features_file: input/apoidea_og_feats.tsv
+user_orthogroup_features_files:
+  - input/user_features.txt
 
 # user gene features: several user determined features merged into a single file
 # Columns: gene \t species \t orthogroup \t feat1 \t feat2 ...
 user_gene_features_files: # YET TO IMPLEMENT
 
 # Specie tree file
-ultrametric_species_tree: input/trees_Apoidea_RO_ultrametric.pep
+ultrametric_species_tree: input/Anophelinae_ultrametric_time_tree.pep
 
 included_orthogroup_features:
   - UNI
@@ -21,21 +22,29 @@ included_orthogroup_features:
   - ACN
   - CNV
   - AGE
-
-included_gene_features:
-
-
+#
+# included_gene_features:
+#
+#
 default_orthogroup_features:
-  set_1: # needs orthology table
-    - UNI
-    - DUP
-    - ACN
+  - UNI
+  - DUP
+  - ACN
+  - CNV
+  - AGE
 
-  set_2: # needs ACN feature
-    - CNV
 
-  set_3: # needs orthology table and
-    - AGE
+# default_orthogroup_features:
+#   set_1: # needs orthology table
+#     - UNI
+#     - DUP
+#     - ACN
+#
+#   set_2: # needs ACN feature
+#     - CNV
+#
+#   set_3: # needs orthology table and
+#     - AGE
 
 
 

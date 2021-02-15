@@ -1,146 +1,18 @@
 configfile: 'config.yaml'
 
-# FEATURES = config["features"]
-# USER_GENE_FEATURES = config['user_gene_features_file'].readline()[:-1].split('\t')
-
-def get_input():
-
-    if config['user_orthogroup_features_file']:
-        input_list['user_og_features_file'] = config['user_orthogroup_features_file'])
-        USER_OG_FEATURES = config['user_orthogroup_features_file'].readline()[:-1].split('\t')
-        input_list['user_og_features'] = USER_OG_FEATURES
-
-    if config['user_gene_features_file_file']:
-        input_list['user_gene_features'] = config['user_gene_features_file'])
-        USER_GENE_FEATURES = config['user_gene_features_file'].readline()[:-3].split('\t')
-        input_list['user_og_features'] = USER_GENE_FEATURES
-
-    if config['default_orthogroup_features']:
-        INCLUDED_OG_FEATURES = config['included_orthogroup_features']
-        OG_FEATURES_TO_COMPUTE = [feature for feature in INCLUDED_OG_FEATURES if feature not in USER_OG_FEATURES]
-        print(f'Will compute following features: {OG_FEATURES_TO_COMPUTE}')
-        OG_FEATURES_TO_NOT_COMPUTE = [feature for feature in INCLUDED_OG_FEATURES if feature in USER_OG_FEATURES]
-        if OG_FEATURES_TO_NOT_COMPUTE:
-            print(f'Warning: included orthogroup features already provided by user, will not compute following: {OG_FEATURES_TO_NOT_COMPUTE}')
-        input_list['og_features_to_compute'] = OG_FEATURES_TO_COMPUTE
-    else:
-        print(f'Warning: no DEFAULT ORTHOGROUP FEATURES to compute specified in the CONFIG file.')
-
-    if config['default_gene_features']:
-        INCLUDED_GENE_FEATURES = config['included_gene_features']
-        GENE_FEATURES_TO_COMPUTE = [feature for feature in INCLUDED_GENE_FEATURES if feature not in USER_GENE_FEATURES]
-    print(f'Will compute following features: {GENE_FEATURES_TO_COMPUTE}')
-    GENE_FEATURES_TO_NOT_COMPUTE = [feature for feature in INCLUDED_GENE_FEATURES if feature in USER_GENE_FEATURES]
-    if GENE_FEATURES_TO_NOT_COMPUTE:
-        print(f'Warning: included gene features already provided by user, will not compute following: {GENE_FEATURES_TO_NOT_COMPUTE}')
-    input_list['gene_features_to_compute'] = GENE_FEATURES_TO_COMPUTE
-    else:
-        print(f'Warning: no DEFAULT GENE FEATURES to compute specified in the CONFIG file.')
-
-    if config['orthology_table']:
-        input_list['orthology_table'] = config['orthology_table']
-
-    if config['ultrametric_species_tree']:
-        input_list['ultrametric_species_tree'] = config['ultrametric_species_tree']
-
-    if config['gff_file']:
-        input_list['gff_file'] = config['gff_file']
-
-    return input_list
-
+include: 'rules/utils.smk'
 
 input_list = get_input()
+# missing_input_files = get_missing_input_file_list(input_list)
 
-def check_input_files(input_list):
-    SET_1 = config['default_ortogroup_features']['set1']
-    if any(input_list['og_features_to_compute']) == any(SET_1) and ### ortholog is in not input list
-        ## WARNING: add orthology table to compute etc etc
+USER_OG_FEATURES = input_list['user_orthogroup_features']
+OG_FEATURES_TO_COMPUTE = input_list['orthogroup_features_to_compute']
 
-
-rule compute_og_features:
-    input: input_list['og_features_to_compute']
-    output:
-        expand('output/computed_orthogroup_features/{feature}.tsv', feature={input})
-
-
-
-# rule all:
-#     input:
-#         get_input
-
-#####################################
-rule split_user_og_features:
-    input: config['user_orthogroup_features_file']
-    output: expand('output/user_og_features/{feature}.tsv', feature=USER_OG_FEATURES)
-    script: 'scripts/split_user_og_features.py'
+include: 'rules/user_features.smk'
+include: 'rules/compute_features.smk'
+include: 'rules/merge_orthogroup_features.smk'
 
 
 rule all:
     input:
-        evol_feat_orthogroups = 'output/merged_orthogroup_features.tsv',
-        evol_feat_genes = 'output/merged_gene_features.tsv'
-
-rule create_orthology_dictionaries:
-    input:
-        config['orthology_table']
-    output:
-        orthogroups = 'output/orthogroups.pickle',
-        genes = 'output/genes.pickle'
-    script:
-        'scripts/create_orthology_dictionaries.py'
-
-
-# Rules for input data processing
-
-rule create_orthology_dictionaries:
-    input:
-        config["input_files"]["orthology_table"]
-    output:
-        orthogroups = 'results/orthogroups.pickle',
-        genes = 'results/genes.pickle'
-    script:
-        'create_orthology_dictionaries.py'
-
-rule create_mrca_branchlengths_table:
-    input:
-        config["input_files"]["ultrametric_species_tree"]
-    output:
-        mrca_branchlengths = 'results/mrca_branchlengths.tsv'
-    script:
-        'create_mrca_branchlengths_table.R'
-
-
-rule compute_age:
-    input:
-        rules.create_orthology_dictionaries.output.orthogroups,
-        mrca_branchlengths = rules.create_mrca_branchlengths_table.output.mrca_branchlengths
-    output:
-        AGE_orthogroups = 'results/evol_feat_orthogroups/AGE_orthogroups.tsv',
-        AGE_genes = 'results/evol_feat_genes/AGE_genes.tsv'
-    script:
-        'compute_age.py'
-
-rule merge_features:
-    input:
-        orthogroup_features = expand('output/orthogroup_features/{feature}_orthogroups.tsv', feature=FEATURES),
-        gene_features = expand('output/gene_features/{feature}_genes.tsv', feature=FEATURES)
-        user_og_features =
-
-        user_gene_features =
-    output:
-        evol_feat_orthogroups = 'output/merged_orthogroup_features.tsv',
-        evol_feat_genes = 'output/merged_gene_features.tsv'
-    script:
-        'merge_features.py'
-
-
-
-
-# rule compute_SYN:
-#     input:
-#         rules.create_orthology_dictionaries.output['orthogroups']
-#         'data/{species}.gff'
-#     output:
-#         'results/{species}.tsv'
-#     script:
-#         'compute_UNI.py'
+        rules.merge_orthogroup_features.output

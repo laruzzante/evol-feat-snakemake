@@ -1,0 +1,3 @@
+NameError in line 4 of /mnt/c/Users/livio/evol-feat-snakemake/workflow/Snakefile:
+name 'get_input' is not defined
+  File "/mnt/c/Users/livio/evol-feat-snakemake/workflow/Snakefile", line 4, in <module>

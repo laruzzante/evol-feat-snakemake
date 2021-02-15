@@ -1,0 +1,4 @@
+Building DAG of jobs...
+MissingInputException in line 1 of /mnt/c/Users/livio/evol-feat-snakemake/workflow/rules/compute_features.smk:
+Missing input files for rule process_orthology_table:
+input/apoidea_orthology.txt

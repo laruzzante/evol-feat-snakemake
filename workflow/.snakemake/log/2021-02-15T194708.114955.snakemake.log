@@ -1,0 +1,3 @@
+WorkflowError in line 12 of /mnt/c/Users/livio/evol-feat-snakemake/workflow/Snakefile:
+Failed to open /mnt/c/Users/livio/evol-feat-snakemake/workflow/rules/compute_features.smk.
+  File "/mnt/c/Users/livio/evol-feat-snakemake/workflow/Snakefile", line 12, in <module>

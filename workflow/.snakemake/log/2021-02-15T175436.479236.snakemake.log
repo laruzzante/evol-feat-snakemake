@@ -1,0 +1,31 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	merge_features
+	1	split_user_orthogroup_features
+	3
+
+[Mon Feb 15 17:54:36 2021]
+checkpoint split_user_orthogroup_features:
+    input: input/apoidea_og_feats.tsv
+    output: output/user_orthogroup_features/
+    jobid: 2
+Downstream jobs will be updated after completion.
+
+Updating job 1 (merge_features).
+InputFunctionException in line 14 of /mnt/c/Users/livio/evol-feat-snakemake/workflow/rules/merge_features.smk:
+Error:
+  NameError: name 'feature' is not defined
+Wildcards:
+
+Traceback:
+  File "/mnt/c/Users/livio/evol-feat-snakemake/workflow/rules/merge_features.smk", line 9, in get_user_orthogroup_feature_files
+Removing output files of failed job split_user_orthogroup_features since they might be corrupted:
+output/user_orthogroup_features/
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /mnt/c/Users/livio/evol-feat-snakemake/workflow/.snakemake/log/2021-02-15T175436.479236.snakemake.log

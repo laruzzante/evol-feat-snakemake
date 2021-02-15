@@ -1,0 +1,75 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	compute_average_copy_number
+	1	compute_universality
+	1	merge_orthogroup_features
+	1	process_orthology_table
+	1	split_user_orthogroup_features
+	6
+
+[Mon Feb 15 20:56:01 2021]
+rule process_orthology_table:
+    input: input/Anophelinae_OGs.txt
+    output: output/orthogroups.pickle, output/genes.pickle, output/orthology_info.txt
+    jobid: 5
+
+[Mon Feb 15 20:56:02 2021]
+Finished job 5.
+1 of 6 steps (17%) done
+
+[Mon Feb 15 20:56:02 2021]
+checkpoint split_user_orthogroup_features:
+    input: input/user_features.txt
+    output: output/user_orthogroup_features/
+    jobid: 2
+Downstream jobs will be updated after completion.
+
+Updating job 1 (merge_orthogroup_features).
+[Mon Feb 15 20:56:03 2021]
+Finished job 2.
+2 of 6 steps (33%) done
+
+[Mon Feb 15 20:56:03 2021]
+rule compute_universality:
+    input: output/orthogroups.pickle, output/orthology_info.txt
+    output: output/computed_orthogroup_features/UNI.tsv
+    jobid: 3
+
+[Mon Feb 15 20:56:03 2021]
+Finished job 3.
+3 of 6 steps (50%) done
+
+[Mon Feb 15 20:56:03 2021]
+rule compute_average_copy_number:
+    input: output/orthogroups.pickle
+    output: output/computed_orthogroup_features/ACN.tsv
+    jobid: 4
+
+[Mon Feb 15 20:56:04 2021]
+Finished job 4.
+4 of 6 steps (67%) done
+
+[Mon Feb 15 20:56:04 2021]
+rule merge_orthogroup_features:
+    input: output/user_orthogroup_features/AAL.tsv, output/user_orthogroup_features/AEN.tsv, output/user_orthogroup_features/AGE.tsv, output/user_orthogroup_features/CAF.tsv, output/user_orthogroup_features/CNV.tsv, output/user_orthogroup_features/CON.tsv, output/user_orthogroup_features/DUP.tsv, output/user_orthogroup_features/EVR.tsv, output/user_orthogroup_features/EXP.tsv, output/user_orthogroup_features/LCA.tsv, output/user_orthogroup_features/PDN.tsv, output/user_orthogroup_features/PDS.tsv, output/user_orthogroup_features/SEL.tsv, output/user_orthogroup_features/STA.tsv, output/user_orthogroup_features/SYN.tsv, output/computed_orthogroup_features/UNI.tsv, output/computed_orthogroup_features/ACN.tsv
+    output: output/merged_orthogroup_features.tsv
+    jobid: 6
+
+[Mon Feb 15 20:56:05 2021]
+Finished job 6.
+5 of 6 steps (83%) done
+
+[Mon Feb 15 20:56:05 2021]
+localrule all:
+    input: output/merged_orthogroup_features.tsv
+    jobid: 0
+
+[Mon Feb 15 20:56:05 2021]
+Finished job 0.
+6 of 6 steps (100%) done
+Complete log: /mnt/c/Users/livio/evol-feat-snakemake/workflow/.snakemake/log/2021-02-15T205601.126597.snakemake.log

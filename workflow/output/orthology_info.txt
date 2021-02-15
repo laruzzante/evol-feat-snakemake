@@ -1,0 +1,2 @@
+n_species	n_orthogroups	n_genes
+19	17825	225690

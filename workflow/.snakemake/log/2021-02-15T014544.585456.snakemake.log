@@ -1,0 +1,32 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	split_user_og_features
+	1
+
+[Mon Feb 15 01:45:44 2021]
+rule split_user_og_features:
+    input: input/user_orthogroup_features/apoidea_og_feats.tsv
+    output: output/orthogroup_features/['ACN', 'AGE', 'CAF', 'CNV', 'CON', 'DUP', 'EVR', 'EXP', 'LCA', 'STA', 'UNI'].tsv
+    jobid: 0
+
+[Mon Feb 15 01:45:45 2021]
+Error in rule split_user_og_features:
+    jobid: 0
+    output: output/orthogroup_features/['ACN', 'AGE', 'CAF', 'CNV', 'CON', 'DUP', 'EVR', 'EXP', 'LCA', 'STA', 'UNI'].tsv
+
+RuleException:
+CalledProcessError in line 18 of /mnt/c/Users/livio/evol-feat-snakemake/workflow/Snakefile:
+Command 'set -euo pipefail;  /home/lruzzant/miniconda3/envs/evol-feat/bin/python3.7 /mnt/c/Users/livio/evol-feat-snakemake/workflow/.snakemake/scripts/tmpa9xlvx8w.split_user_og_features.py' returned non-zero exit status 1.
+  File "/home/lruzzant/miniconda3/envs/evol-feat/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 2229, in run_wrapper
+  File "/mnt/c/Users/livio/evol-feat-snakemake/workflow/Snakefile", line 18, in __rule_split_user_og_features
+  File "/home/lruzzant/miniconda3/envs/evol-feat/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 551, in _callback
+  File "/home/lruzzant/miniconda3/envs/evol-feat/lib/python3.7/concurrent/futures/thread.py", line 57, in run
+  File "/home/lruzzant/miniconda3/envs/evol-feat/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 537, in cached_or_run
+  File "/home/lruzzant/miniconda3/envs/evol-feat/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 2241, in run_wrapper
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /mnt/c/Users/livio/evol-feat-snakemake/workflow/.snakemake/log/2021-02-15T014544.585456.snakemake.log

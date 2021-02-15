@@ -1,0 +1,8 @@
+Building DAG of jobs...
+InputFunctionException in line 13 of /mnt/c/Users/livio/evol-feat-snakemake/workflow/rules/merge_features.smk:
+Error:
+  AttributeError: 'Checkpoints' object has no attribute 'split_user_orthogroup'
+Wildcards:
+
+Traceback:
+  File "/mnt/c/Users/livio/evol-feat-snakemake/workflow/rules/merge_features.smk", line 6, in get_user_orthogroup_feature_files

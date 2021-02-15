@@ -1,0 +1,24 @@
+Building DAG of jobs...
+candidate job split_user_og_features
+    wildcards: 
+selected job split_user_og_features
+    wildcards: 
+file None:
+    Producer found, hence exceptions are ignored.
+
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	split_user_og_features
+	1
+
+[Mon Feb 15 13:10:16 2021]
+rule split_user_og_features:
+    jobid: 0
+
+[Mon Feb 15 13:10:16 2021]
+Finished job 0.
+1 of 1 steps (100%) done
+Complete log: /mnt/c/Users/livio/evol-feat-snakemake/workflow/.snakemake/log/2021-02-15T131015.952266.snakemake.log

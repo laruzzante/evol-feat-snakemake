@@ -1,0 +1,4 @@
+AttributeError in line 23 of /mnt/c/Users/livio/evol-feat-snakemake/workflow/rules/compute_features.smk:
+'Namedlist' object has no attribute 'ACN_orthogroups'
+  File "/mnt/c/Users/livio/evol-feat-snakemake/workflow/Snakefile", line 12, in <module>
+  File "/mnt/c/Users/livio/evol-feat-snakemake/workflow/rules/compute_features.smk", line 23, in <module>
