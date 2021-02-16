@@ -1,4 +1,0 @@
-FileNotFoundError in line 14 of /mnt/c/Users/livio/evol-feat-snakemake/workflow/rules/utils.smk:
-[Errno 2] No such file or directory: 'input/TEST_apoidea_og_feats.tsv'
-  File "/mnt/c/Users/livio/evol-feat-snakemake/workflow/Snakefile", line 5, in <module>
-  File "/mnt/c/Users/livio/evol-feat-snakemake/workflow/rules/utils.smk", line 14, in get_input

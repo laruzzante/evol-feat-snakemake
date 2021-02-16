@@ -1,6 +1,0 @@
-Building DAG of jobs...
-candidate job split_user_og_features
-    wildcards: 
-MissingInputException in line 39 of /mnt/c/Users/livio/evol-feat-snakemake/workflow/Snakefile:
-Missing input files for rule split_user_og_features:
-input/apoidea_og_feats.tsv

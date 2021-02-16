@@ -1,5 +1,0 @@
-Building DAG of jobs...
-MissingInputException in line 14 of /mnt/c/Users/livio/evol-feat-snakemake/workflow/rules/merge_orthogroup_features.smk:
-Missing input files for rule merge_features:
-output/computed_orthogroup_features/AGE.tsv
-output/computed_orthogroup_features/UNI.tsv

@@ -1,4 +1,0 @@
-Building DAG of jobs...
-WildcardError in line 12 of /mnt/c/Users/livio/evol-feat-snakemake/workflow/Snakefile:
-Wildcards in input files cannot be determined from output files:
-'user_input_file'

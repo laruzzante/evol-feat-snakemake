@@ -1,3 +1,0 @@
-NameError in line 99 of /mnt/c/Users/livio/evol-feat-snakemake/workflow/Snakefile:
-name 'OG_FEATURES_TO_COMPUTE' is not defined
-  File "/mnt/c/Users/livio/evol-feat-snakemake/workflow/Snakefile", line 99, in <module>
