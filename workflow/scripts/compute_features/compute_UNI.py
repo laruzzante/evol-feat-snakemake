@@ -3,8 +3,8 @@
 import pickle
 
 # Retrieve information from Snakemake
-info =  open(snakemake.input.info)
 orthogroups = pickle.load(open(snakemake.input[0], 'rb'))
+info =  open(snakemake.input.info)
 output_file_orthogroups = open(snakemake.output[0], 'w')
 # output_file_genes = open(snakemake.output["UNI_genes"], 'w')
 

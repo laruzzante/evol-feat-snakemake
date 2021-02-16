@@ -5,8 +5,8 @@ from collections import defaultdict
 
 # Retrieve information from Snakemake
 orthogroups = pickle.load(open(snakemake.input[0], 'rb'))
-output_file_orthogroups = open(snakemake.output["AGE_orthogroups"], 'w')
-output_file_genes = open(snakemake.output["AGE_genes"], 'w')
+mrca_branchlengths = open(snakemake.input.mrca_branchlengths)
+output_file_orthogroups = open(snakemake.output[0], 'w')
 
 
 def getAGE_from_specieslist(species_list, AGE_LCAbranchlengths_dict):
@@ -33,8 +33,7 @@ def getAGE_from_specieslist(species_list, AGE_LCAbranchlengths_dict):
     return AGE_max
 
 
-with open(snakemake.input["mrca_branchlengths"], 'r') as f:
-    lines = f.readlines()
+lines = mrca_branchlengths.readlines()
 
 AGE_LCAbranchlengths_dict = defaultdict(defaultdict)
 
@@ -48,13 +47,13 @@ for line in lines[1:]:
 
 # Process output files
 output_file_orthogroups.write('orthogroup' + '\t' 'AGE' + '\n')
-output_file_genes.write('gene' + '\t' 'AGE' + '\n')
+# output_file_genes.write('gene' + '\t' 'AGE' + '\n')
 for orthogroup in sorted(orthogroups.keys()):
     species_list = orthogroups[orthogroup]["species"]
     AGE = getAGE_from_specieslist(species_list, AGE_LCAbranchlengths_dict)
     output_file_orthogroups.write(orthogroup + '\t' + str(AGE) + '\n')
-    for gene in sorted(orthogroups[orthogroup]["genes"]):
-        output_file_genes.write(gene + '\t' + str(AGE) + '\n')
+    # for gene in sorted(orthogroups[orthogroup]["genes"]):
+    #     output_file_genes.write(gene + '\t' + str(AGE) + '\n')
 
         # Counter idea, but computation is fast anyways, so optimization not so useful:
         # i += 1
@@ -68,5 +67,5 @@ for orthogroup in sorted(orthogroups.keys()):
         #     print('\t... 100%')
 
 # Close files
+mrca_branchlengths.close()
 output_file_orthogroups.close()
-output_file_genes.close()

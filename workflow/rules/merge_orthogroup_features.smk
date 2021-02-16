@@ -5,10 +5,10 @@ def get_user_orthogroup_feature_files(wildcards):
     '''
     user_orthogroup_features_dir = checkpoints.split_user_orthogroup_features.get().output[0] # get() here forces the checkpoint to rerun the DAG. E.g. without get(), I would only get a string of the output name.
     # user_orthogroup_feature_dir = checkpoints.split_user_orthogroup_features. # get() here forces the checkpoint to rerun the DAG. E.g. without get(), I would only get a string of the output name.
-    print(user_orthogroup_features_dir)
+    # print(user_orthogroup_features_dir)
     input_list = expand(os.path.join(user_orthogroup_features_dir, '{feature}.tsv'),
                         feature=glob_wildcards(os.path.join(user_orthogroup_features_dir, '{feature}.tsv')).feature)
-    print(input_list)
+    # print(input_list)
     return input_list
 
 rule merge_orthogroup_features:

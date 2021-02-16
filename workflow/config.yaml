@@ -7,7 +7,7 @@ orthology_table: input/Anophelinae_OGs.txt
 # user orhtogroup features: several user determined features merged into a single file
 # Columns: orthogroup \t gene \t feat1 \t feat2 ...
 user_orthogroup_features_files:
-  - input/user_features.txt
+  - input/TEST_user_features.txt
 
 # user gene features: several user determined features merged into a single file
 # Columns: gene \t species \t orthogroup \t feat1 \t feat2 ...

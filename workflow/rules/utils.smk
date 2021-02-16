@@ -26,13 +26,13 @@ def get_input():
     if config['default_orthogroup_features']:
         INCLUDED_ORTHOGROUP_FEATURES = config['included_orthogroup_features']
         ORTHOGROUP_FEATURES_TO_COMPUTE = [feature for feature in INCLUDED_ORTHOGROUP_FEATURES if feature not in USER_ORTHOGROUP_FEATURES]
-        print(f'Will compute following features: {ORTHOGROUP_FEATURES_TO_COMPUTE}')
+        # print(f'Will compute following features: {ORTHOGROUP_FEATURES_TO_COMPUTE}')
         ORTHOGROUP_FEATURES_TO_NOT_COMPUTE = [feature for feature in INCLUDED_ORTHOGROUP_FEATURES if feature in USER_ORTHOGROUP_FEATURES]
-        if ORTHOGROUP_FEATURES_TO_NOT_COMPUTE:
-            print(f'Warning: included orthogroup features already provided by user, will not compute following: {ORTHOGROUP_FEATURES_TO_NOT_COMPUTE}')
+        # if ORTHOGROUP_FEATURES_TO_NOT_COMPUTE:
+            # print(f'Warning: included orthogroup features already provided by user, will not compute following: {ORTHOGROUP_FEATURES_TO_NOT_COMPUTE}')
         input_list['orthogroup_features_to_compute'] = ORTHOGROUP_FEATURES_TO_COMPUTE
-    else:
-        print(f'Warning: no DEFAULT ORTHOGROUP FEATURES to compute specified in the CONFIG file.')
+    # else:
+        # print(f'Warning: no DEFAULT ORTHOGROUP FEATURES to compute specified in the CONFIG file.')
 
     # if config['default_gene_features']:
     #     INCLUDED_GENE_FEATURES = config['included_gene_features']

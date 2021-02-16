@@ -29,5 +29,5 @@ get_nodelengths_table <- function(tree){
 tree <- read.tree(snakemake@input[[1]])
 table <- get_nodelengths_table(tree)
 
-write.table(table, file=snakemake@output$mrca_branchlengths,
+write.table(table, file=snakemake@output[[1]],
             sep='\t', quote=FALSE, row.name=FALSE)
