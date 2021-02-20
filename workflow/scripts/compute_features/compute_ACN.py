@@ -10,9 +10,9 @@ output_file_orthogroups = open(snakemake.output[0], 'w')
 output_file_orthogroups.write('orthogroup' + '\t' 'ACN' + '\n')
 
 for orthogroup in sorted(orthogroups.keys()):
-    unique_species = sorted(set(orthogroups[orthogroup]["species"]))
+    unique_species = sorted(set(orthogroups[orthogroup]['species']))
     n_unique_species = len(unique_species)
-    n_genes = len(set(orthogroups[orthogroup]["genes"]))
+    n_genes = len(set(orthogroups[orthogroup]['genes']))
     ACN = n_genes / n_unique_species
     output_file_orthogroups.write(orthogroup + '\t' + str(ACN) + '\n')
 

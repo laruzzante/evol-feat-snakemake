@@ -8,6 +8,10 @@ def get_input():
     input_list['all_orthogroup_features'] = []
     input_list['all_gene_features'] = []
     input_list['user_orthogroup_features_files'] = []
+    input_list['user_gene_features_files'] = []
+    input_list['orthology_table'] = ''
+    input_list['ultrametric_species_tree'] = ''
+    input_list['gff_file'] = ''
 
     if config['user_orthogroup_features_files']:
         for input_file in config['user_orthogroup_features_files']:
@@ -24,32 +28,35 @@ def get_input():
             input_list['user_gene_features'].append(USER_GENE_FEATURES)
 
     if config['default_orthogroup_features']:
-        INCLUDED_ORTHOGROUP_FEATURES = config['included_orthogroup_features']
-        ORTHOGROUP_FEATURES_TO_COMPUTE = [feature for feature in INCLUDED_ORTHOGROUP_FEATURES if feature not in USER_ORTHOGROUP_FEATURES]
+        SELECTED_ORTHOGROUP_FEATURES = config['selected_orthogroup_features']
+        ORTHOGROUP_FEATURES_TO_COMPUTE = [feature for feature in SELECTED_ORTHOGROUP_FEATURES if feature not in USER_ORTHOGROUP_FEATURES]
         # print(f'Will compute following features: {ORTHOGROUP_FEATURES_TO_COMPUTE}')
-        ORTHOGROUP_FEATURES_TO_NOT_COMPUTE = [feature for feature in INCLUDED_ORTHOGROUP_FEATURES if feature in USER_ORTHOGROUP_FEATURES]
+        ORTHOGROUP_FEATURES_TO_NOT_COMPUTE = [feature for feature in SELECTED_ORTHOGROUP_FEATURES if feature in USER_ORTHOGROUP_FEATURES]
         # if ORTHOGROUP_FEATURES_TO_NOT_COMPUTE:
-            # print(f'Warning: included orthogroup features already provided by user, will not compute following: {ORTHOGROUP_FEATURES_TO_NOT_COMPUTE}')
+            # print(f'Warning: selected orthogroup features already provided by user, will not compute following: {ORTHOGROUP_FEATURES_TO_NOT_COMPUTE}')
         input_list['orthogroup_features_to_compute'] = ORTHOGROUP_FEATURES_TO_COMPUTE
     # else:
         # print(f'Warning: no DEFAULT ORTHOGROUP FEATURES to compute specified in the CONFIG file.')
 
-    # if config['default_gene_features']:
-    #     INCLUDED_GENE_FEATURES = config['included_gene_features']
-    #     GENE_FEATURES_TO_COMPUTE = [feature for feature in INCLUDED_GENE_FEATURES if feature not in USER_GENE_FEATURES]
-    #     print(f'Will compute following features: {GENE_FEATURES_TO_COMPUTE}')
-    #     GENE_FEATURES_TO_NOT_COMPUTE = [feature for feature in INCLUDED_GENE_FEATURES if feature in USER_GENE_FEATURES]
-    #     if GENE_FEATURES_TO_NOT_COMPUTE:
-    #         print(f'Warning: included gene features already provided by user, will not compute following: {GENE_FEATURES_TO_NOT_COMPUTE}')
-    #     input_list['gene_features_to_compute'] = GENE_FEATURES_TO_COMPUTE
+    if config['default_gene_features']:
+        SELECTED_GENE_FEATURES = config['selected_gene_features']
+        GENE_FEATURES_TO_COMPUTE = [feature for feature in SELECTED_GENE_FEATURES if feature not in USER_GENE_FEATURES]
+        # print(f'Will compute following features: {GENE_FEATURES_TO_COMPUTE}')
+        GENE_FEATURES_TO_NOT_COMPUTE = [feature for feature in SELECTED_GENE_FEATURES if feature in USER_GENE_FEATURES]
+        # if GENE_FEATURES_TO_NOT_COMPUTE:
+            # print(f'Warning: selected gene features already provided by user, will not compute following: {GENE_FEATURES_TO_NOT_COMPUTE}')
+        input_list['gene_features_to_compute'] = GENE_FEATURES_TO_COMPUTE
     # else:
     #     print(f'Warning: no DEFAULT GENE FEATURES to compute specified in the CONFIG file.')
 
     input_list['all_orthogroup_features'] = input_list['user_orthogroup_features'] + input_list['orthogroup_features_to_compute']
     input_list['all_gene_features'] = input_list['user_gene_features'] + input_list['gene_features_to_compute']
 
-    if config['orthology_table']:
-        input_list['orthology_table'] = config['orthology_table']
+    if config['OrthoDB_orthology_table']:
+        input_list['orthology_table'] = config['OrthoDB_orthology_table']
+    ## ADD IF CONDITIONS FOR OTHER ORTHOLOGY TABLE DATABASES, e.g.:
+    # if config['OMA_orthology_table']:
+    #   input_list['orthology_table'] = config['OMA_orthology_table']
 
     if config['ultrametric_species_tree']:
         input_list['ultrametric_species_tree'] = config['ultrametric_species_tree']

@@ -6,13 +6,17 @@ input_list = get_input()
 # missing_input_files = get_missing_input_file_list(input_list)
 
 USER_OG_FEATURES = input_list['user_orthogroup_features']
+USER_GENE_FEATURES = input_list['user_gene_features']
 OG_FEATURES_TO_COMPUTE = input_list['orthogroup_features_to_compute']
+GENE_FEATURES_TO_COMPUTE = input_list['orthogroup_features_to_compute']
 
+include: 'rules/preprocess_input.smk'
 include: 'rules/user_features.smk'
 include: 'rules/compute_features.smk'
 include: 'rules/merge_orthogroup_features.smk'
-
+include: 'rules/merge_gene_features.smk'
 
 rule all:
     input:
-        rules.merge_orthogroup_features.output
+        rules.merge_orthogroup_features.output,
+        rules.merge_gene_features.output

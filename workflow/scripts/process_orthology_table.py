@@ -50,10 +50,24 @@ with open(input_file) as f:
 
 # Check integrity of orthology table
 for gene in genes.keys():
+    # Checking for association of gene id to more than 1 orthogroup
     if len(genes[gene]["orthogroup"]) > 1:
-        print('WARNING: gene', gene, 'mapped to more than 1 orthogroup.')
+        # Check for multiple association of gene to same orthogroup
+        if len(genes[gene]["orthogroup"]) != len(set(genes[gene]["orthogroup"])):
+            # Removing duplicated orthogroup id
+            genes[gene]["orthogroup"] = set(genes[gene]["orthogroup"])
+        # If after removing duplicates, the gene is still associated to multiple orthogroups, print Warning
+        if len(genes[gene]["orthogroup"]) > 1:
+            print('WARNING: gene id <', gene, '> associated to', len(genes[gene]["orthogroup"]),'orthogroups:', genes[gene]["orthogroup"])
+    # Checking for association of gene id to more than 1 species
     if len(genes[gene]["species"]) > 1:
-        print('WARNING: gene', gene, 'associated to more than 1 species.')
+        # Check for multiple association of gene to same species
+        if len(genes[gene]["species"]) != len(set(genes[gene]["species"])):
+            # Removing duplicated species id
+            genes[gene]["species"] = set(genes[gene]["species"])
+        # If after removing duplicates, the gene is still associated to multiple species, print Warning
+        if len(genes[gene]["species"]) > 1:
+            print('WARNING: gene id <', gene, '> associated to', len(genes[gene]["species"]), 'species:', genes[gene]["species"])
 
 # Process output files
 pickle.dump(orthogroups, output_file_orthogroups, protocol=pickle.HIGHEST_PROTOCOL)
