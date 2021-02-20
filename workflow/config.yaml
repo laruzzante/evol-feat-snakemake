@@ -35,10 +35,10 @@ selected_orthogroup_features:
   - ACN
   - CNV
   - AGE
-#
-# included_gene_features:
-#
-#
+
+selected_gene_features:
+
+
 default_orthogroup_features:
   - UNI
   - DUP

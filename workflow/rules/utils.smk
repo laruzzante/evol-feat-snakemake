@@ -23,7 +23,7 @@ def get_input():
     if config['user_gene_features_files']:
         for input_file in config['user_gene_features_files']:
             with open(input_file) as infile:
-                USER_GENE_FEATURES = infile.readline()[:-1].split('\t')[3:]
+                USER_GENE_FEATURES = infile.readline()[:-1].split('\t')[1:]
             input_list['user_gene_features_files'].append(input_file)
             input_list['user_gene_features'].append(USER_GENE_FEATURES)
 
