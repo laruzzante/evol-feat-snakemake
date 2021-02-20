@@ -12,6 +12,7 @@ def get_input():
     input_list['orthology_table'] = ''
     input_list['ultrametric_species_tree'] = ''
     input_list['gff_file'] = ''
+    input_list['focus_species_list'] = []
 
     if config['user_orthogroup_features_files']:
         for input_file in config['user_orthogroup_features_files']:
@@ -63,6 +64,9 @@ def get_input():
 
     if config['gff_file']:
         input_list['gff_file'] = config['gff_file']
+
+    if config['focus_species_list']:
+        input_list['focus_species_list'] = config['focus_species_list']
 
     return input_list
 

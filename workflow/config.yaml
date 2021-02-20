@@ -7,13 +7,24 @@
 OrthoDB_orthology_table: input/hymenoptera/Hymenoptera_OGs.txt
 OMA_orthology_table: # example, yet to include formatting script for OMA table
 
-# user orhtogroup features: several user determined features merged into a single file
+# Add species codes to generate specific evolutionary features files
+focus_species_list:
+  - 7460
+
+focus_gene_list_files:
+  - input/
+  #- 148810 # PROBLEM: because of some Bash handling opening of files, this only works for 1 species at a time.
+
+# user orhtogroup features: any file of user-defined orthogroup feaures
 # Columns: orthogroup \t feat1 \t feat2 ...
 user_orthogroup_features_files:
   - input/hymenoptera/Hymenoptera_OGs_EvolMetrics.tsv
 
-# user gene features: several user determined features merged into a single file
+# user gene features: any file of user-defined gene features
 # Columns: gene \t feat1 \t feat2 ...
+# IF NOT ALREADY THE CASE: format 'gene' column so that it includes the species code,
+# separated by ':'. E.g.:
+# species_code:geneid
 user_gene_features_files:
   - input/hymenoptera/hymenoptera_gene_features.txt
 
@@ -28,16 +39,13 @@ cafe_report:
 gff_file: # YET TO IMPLEMENT
 
 # Metrics from the default_orthogroup_features that will be included in the computation process
-# Comment one to remove it.
+# Comment the ones you wish to not compute.
 selected_orthogroup_features:
   - UNI
   - DUP
   - ACN
   - CNV
   - AGE
-
-selected_gene_features:
-
 
 default_orthogroup_features:
   - UNI
@@ -46,9 +54,11 @@ default_orthogroup_features:
   - CNV
   - AGE
 
-default_gene_features:
+selected_gene_features:
   # - SYN
 
+default_gene_features:
+  # - SYN
 
 
 # default_orthogroup_features:
