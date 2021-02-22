@@ -1,6 +1,6 @@
 rule format_OrthoDB_table:
     input:
-        config['OrthoDB_orthology_table']
+        input_list['orthology_table']
     output:
         'output/formatted_orthology_table.tsv'
     script:

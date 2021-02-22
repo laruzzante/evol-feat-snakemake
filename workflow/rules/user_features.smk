@@ -1,6 +1,6 @@
 checkpoint split_user_orthogroup_features:
     input:
-        config['user_orthogroup_features_files']
+        input_list['user_orthogroup_features_files']
     output:
         directory('output/user_orthogroup_features/')
     script:
@@ -9,7 +9,7 @@ checkpoint split_user_orthogroup_features:
 
 checkpoint split_user_gene_features:
     input:
-        config['user_gene_features_files']
+        input_list['user_gene_features_files']
     output:
         directory('output/user_gene_features/')
     script:

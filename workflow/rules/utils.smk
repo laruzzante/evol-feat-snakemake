@@ -13,6 +13,9 @@ def get_input():
     input_list['ultrametric_species_tree'] = ''
     input_list['gff_file'] = ''
     input_list['focus_species_list'] = []
+    input_list['focus_gene_list_files'] = []
+    USER_ORTHOGROUP_FEATURES = []
+    USER_GENE_FEATURES = []
 
     if config['user_orthogroup_features_files']:
         for input_file in config['user_orthogroup_features_files']:
@@ -67,6 +70,9 @@ def get_input():
 
     if config['focus_species_list']:
         input_list['focus_species_list'] = config['focus_species_list']
+
+    if config['focus_gene_list_files']:
+        input_list['focus_gene_list_files'] = config['focus_gene_list_files']
 
     return input_list
 
