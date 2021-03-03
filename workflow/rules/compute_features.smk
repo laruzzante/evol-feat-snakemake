@@ -50,5 +50,7 @@ rule compute_age:
         mrca_branchlengths = rules.create_mrca_branchlengths_table.output[0]
     output:
         'output/computed_orthogroup_features/AGE.tsv'
+    conda:
+        'envs/phylogeny.yaml'
     script:
         '../scripts/compute_features/compute_AGE.py'

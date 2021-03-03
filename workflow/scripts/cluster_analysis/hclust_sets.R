@@ -25,9 +25,9 @@ mat <- format_metrics_matrix(df, aggregator_function = aggregator_function)
 
 # bootstraps_metrics <- pvclust(df, method.dist = method.dist, method.hclust = method.hclust, nboot = 100, parallel = T, iseed = 1234)
 
-install.packages("gplots", repos="https://cran.rstudio.com")
+# install.packages("gplots", repos="https://cran.rstudio.com")
 library(gplots)
-install.packages("RColorBrewer", repos="https://cran.rstudio.com")
+# install.packages("RColorBrewer", repos="https://cran.rstudio.com")
 library(RColorBrewer)
 
 # hclust(df)
