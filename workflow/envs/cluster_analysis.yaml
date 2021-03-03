@@ -1,0 +1,9 @@
+name: cluster_analysis
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.7.3
+  - r-base=3.6.3
+  - r-gplots=3.0.1
+  - r-rcolorbrewer=1.1
