@@ -14,6 +14,7 @@ def get_input():
     input_list['gff_file'] = ''
     input_list['focus_species_list'] = []
     input_list['focus_gene_list_files'] = []
+    input_list['gene_sets'] = []
     USER_ORTHOGROUP_FEATURES = []
     USER_GENE_FEATURES = []
 
@@ -73,6 +74,9 @@ def get_input():
 
     if config['focus_gene_list_files']:
         input_list['focus_gene_list_files'] = config['focus_gene_list_files']
+
+    if config['gene_sets']:
+        input_list['gene_sets'] = config['gene_sets']
 
     return input_list
 

@@ -37,7 +37,7 @@ rule compute_duplicability:
 
 rule create_mrca_branchlengths_table:
     input:
-        config["ultrametric_species_tree"]
+        input_list["ultrametric_species_tree"]
     output:
         'output/mrca_branchlengths.tsv'
     script:

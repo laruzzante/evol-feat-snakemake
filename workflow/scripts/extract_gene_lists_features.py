@@ -1,5 +1,8 @@
 import  pandas as pd
 
+## Ristrutturare, prendere un file excel con column headers i nomi delle liste,
+## ed i geni a scendere.
+
 gene_list_files = snakemake.input
 merged_genes_file = snakemake.input[1]
 output_file = open(snakemake.output[0], 'w')

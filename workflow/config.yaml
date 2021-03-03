@@ -2,23 +2,26 @@
 # if directly coming from OrthoDB10 or lower, a scrpit will automatically format it.
 # Ortherwise, respect the column format:
 # orthogroup <\t> gene <\t> species
-# where gene must be a column with unique gene identifiers (if thats not the case,
-# simply collate the species code to the gene id).
-OrthoDB_orthology_table: #input/hymenoptera/Hymenoptera_OGs.txt
+OrthoDB_orthology_table: input/hymenoptera/hymenoptera_ogs_amell_genbank.txt
 OMA_orthology_table: # example, yet to include formatting script for OMA table
+
+# File containing lists of genes for clustering.
+# First column must contain set name, followed by all of its gene names separated
+# by tab (or in separeted cells in an Excel file saved as txt)
+gene_sets: input/hymenoptera/genelists_3.txt
 
 # Add species codes to generate specific evolutionary features files
 focus_species_list:
   - 7460
+  #- 148810 # PROBLEM: because of some Bash handling opening of files, this only works for 1 species at a time.
 
 focus_gene_list_files:
-  - input/hymenoptera/ListA_down.txt
-  #- 148810 # PROBLEM: because of some Bash handling opening of files, this only works for 1 species at a time.
+  #- input/hymenoptera/genelists.txt # ADD COLUMNS WITH OTHER LISTS
 
 # user orhtogroup features: any file of user-defined orthogroup feaures
 # Columns: orthogroup \t feat1 \t feat2 ...
 user_orthogroup_features_files:
-  # - input/hymenoptera/Hymenoptera_OGs_EvolMetrics.tsv
+  - input/hymenoptera/amell_hym_og_features.txt
 
 # user gene features: any file of user-defined gene features
 # Columns: gene \t feat1 \t feat2 ...
@@ -26,7 +29,7 @@ user_orthogroup_features_files:
 # separated by ':'. E.g.:
 # species_code:geneid
 user_gene_features_files:
-  - input/hymenoptera/amell_genes_features.txt
+  - input/hymenoptera/amell_hym_gene_features.txt
 
 
 # Specie tree file

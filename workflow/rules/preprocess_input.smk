@@ -16,6 +16,7 @@ rule process_orthology_table:
     output:
         orthogroups = 'output/orthogroups.pickle',
         genes = 'output/genes.pickle',
+        species = 'output/species.pickle',
         info = 'output/orthology_info.txt'
     script:
         '../scripts/process_orthology_table.py'
