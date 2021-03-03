@@ -62,25 +62,3 @@ selected_gene_features:
 
 default_gene_features:
   # - SYN
-
-
-# default_orthogroup_features:
-#   set_1: # needs orthology table
-#     - UNI
-#     - DUP
-#     - ACN
-#
-#   set_2: # needs ACN feature
-#     - CNV
-#
-#   set_3: # needs orthology table and
-#     - AGE
-
-
-
-## Additional features:
-# additional_orthogroup_features:
-  # - OG_SYN # IF gff file present
-
-# additional_gene_features:
-  # - GENE_SYN # IF gff file present

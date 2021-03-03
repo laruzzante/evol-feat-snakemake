@@ -20,7 +20,7 @@ rule get_orthogroup_sets_features:
     script:
         '../scripts/get_orthogroup_sets_features.py'
 
-rule hclust_sets:
+rule pvclust_sets:
     input:
         rules.get_orthogroup_sets_features.output[0]
     output:
@@ -28,4 +28,4 @@ rule hclust_sets:
     conda:
         '../envs/cluster_analysis.yaml'
     script:
-        '../scripts/cluster_analysis/hclust_sets.R'
+        '../scripts/cluster_analysis/pvclust_sets.R'
