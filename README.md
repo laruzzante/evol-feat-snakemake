@@ -1,6 +1,9 @@
 Snakemake implementation of the evol-feat pipeline.
 
 ## Installation and usage
+* Make sure to have the **conda** or **miniconda** environment manager system installed:
+https://docs.conda.io/en/latest/miniconda.html
+
 * Clone or manually download the git repository:
 ```bash
 git clone git@gitlab.com:evogenlab/evol-feat-snakemake.git
