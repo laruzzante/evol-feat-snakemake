@@ -1,4 +1,3 @@
-nakemake
 Snakemake implementation of the evol-feat pipeline.
 
 ## Installation and usage
@@ -12,16 +11,6 @@ git clone git@gitlab.com:evogenlab/evol-feat-snakemake.git
 cd evol-feat-snakemake
 ```
 
-* Create conda environment from yaml environment file:
-```bash
-conda env create -f environment.yaml
-```
-
-* Activate environment:
-```bash
-conda activate evol-feat
-```
-
 * Go into the workflow directory:
 ```bash
 cd workflow
@@ -32,9 +21,9 @@ cd workflow
 vim config.yaml
 ```
 
-* Run snakemake to execute the workflow (either specify the number of preferred cores or stick to 1):
+* Rune the pipeline, where N is the number of cores you want snakemake to use:
 ```bash
-snakemake --cores 1
+snakemake --cores <N> --use-conda
 ```
 
 * Produce the Directed Acyclic Graph (DAG) diagram:
