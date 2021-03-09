@@ -27,4 +27,6 @@ rule all:
         # rules.extract_focus_species_features.output,
         # rules.extract_gene_lists_features.output,
         # rules.get_orthogroup_sets_features.output,
-        rules.hclust_sets.output
+        rules.pvclust_on_sets.output,
+        rules.pca_on_sets.output,
+        rules.pairwise_comparisons_on_sets.output

@@ -20,12 +20,32 @@ rule get_orthogroup_sets_features:
     script:
         '../scripts/get_orthogroup_sets_features.py'
 
-rule pvclust_sets:
+rule pvclust_on_sets:
     input:
         rules.get_orthogroup_sets_features.output[0]
     output:
-        'output/cluster_analysis/hierarchical_clusters_orthogroup_sets.pdf'
+        'output/genesets_cluster_analysis/hierarchical_clusters_of_orthogroup_sets.pdf'
     conda:
         '../envs/cluster_analysis.yaml'
     script:
-        '../scripts/cluster_analysis/pvclust_sets.R'
+        '../scripts/genesets_cluster_analysis/pvclust.R'
+
+rule pca_on_sets:
+    input:
+        rules.get_orthogroup_sets_features.output[0]
+    output:
+        'output/genesets_cluster_analysis/pca_of_orthogroup_sets.pdf'
+    conda:
+        '../envs/cluster_analysis.yaml'
+    script:
+        '../scripts/genesets_cluster_analysis/pca.R'
+
+rule pairwise_comparisons_on_sets:
+    input:
+        rules.get_orthogroup_sets_features.output[0]
+    output:
+        'output/genesets_cluster_analysis/pairwise_comparisons_of_orthogroup_sets.pdf'
+    conda:
+        '../envs/cluster_analysis.yaml'
+    script:
+        '../scripts/genesets_cluster_analysis/pairwise_comparisons.R'

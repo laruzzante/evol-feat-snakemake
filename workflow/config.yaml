@@ -1,5 +1,5 @@
 # OrthoDB orthology table:
-# if directly coming from OrthoDB10 or lower, a scrpit will automatically format it.
+# if directly coming from OrthoDB10 or lower, a script will automatically format it.
 # Ortherwise, respect the column format:
 # orthogroup <\t> gene <\t> species
 OrthoDB_orthology_table: input/hymenoptera/hymenoptera_ogs_amell_genbank.txt
@@ -8,7 +8,7 @@ OMA_orthology_table: # example, yet to include formatting script for OMA table
 # File containing lists of genes for clustering.
 # First column must contain set name, followed by all of its gene names separated
 # by tab (or in separeted cells in an Excel file saved as txt)
-gene_sets: input/hymenoptera/genelists_3.txt
+gene_sets: input/hymenoptera/genelists_all.txt
 
 # Add species codes to generate specific evolutionary features files
 focus_species_list:

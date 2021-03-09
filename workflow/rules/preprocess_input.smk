@@ -16,9 +16,9 @@ rule process_orthology_table:
     input:
         rules.format_OrthoDB_table.output[0]
     output:
-        orthogroups = 'output/orthogroups.pickle',
-        genes = 'output/genes.pickle',
-        species = 'output/species.pickle',
+        orthogroups = 'output/.orthogroups.pickle',
+        genes = 'output/.genes.pickle',
+        species = 'output/.species.pickle',
         info = 'output/orthology_info.txt'
     conda:
         '../envs/basic.yaml'

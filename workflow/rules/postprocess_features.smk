@@ -1,3 +1,5 @@
+# def get output filenames from input focus species
+
 
 rule extract_focus_species_features:
     input:
