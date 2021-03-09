@@ -9,4 +9,5 @@ dependencies:
   - r-pvclust=2.2
   - r-complexheatmap=1.12
   - r-factoextra=1.0.5
-  - r-ggally=1.4.0 
+  - r-ggally=1.4.0
+  - r-rtsne=0.15

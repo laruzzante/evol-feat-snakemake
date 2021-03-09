@@ -29,4 +29,5 @@ rule all:
         # rules.get_orthogroup_sets_features.output,
         rules.pvclust_on_sets.output,
         rules.pca_on_sets.output,
-        rules.pairwise_comparisons_on_sets.output
+        rules.pairwise_comparisons_on_sets.output,
+        rules.tsne_on_sets.output
