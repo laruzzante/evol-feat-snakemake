@@ -24,7 +24,7 @@ with open(input_file) as f:
         orthogroup = line.split('\t')[0]
         gene = line.split('\t')[1]
         spec = line.split('\t')[2]
-        gene = spec + ':' + gene
+        # gene = spec + ':' + gene
         if orthogroup not in orthogroups.keys():
             orthogroups[orthogroup] = {"genes": [gene], "species": [spec]}
         else:
@@ -38,10 +38,11 @@ with open(input_file) as f:
             # genes[gene]["orthogroup"].append(orthogroup)
             # genes[gene]["species"].append(spec)
         if spec not in species.keys():
-            species[spec] = {"orthogroup": [orthogroup], "genes": [gene]}
+            species[spec] = {"orthogroups": [orthogroup], "genes": [gene]}
         else:
-            species[spec]["orthogroup"].append(orthogroup)
+            species[spec]["orthogroups"].append(orthogroup)
             species[spec]["genes"].append(gene)
+
 
 # Check integrity of orthology table
 # for gene in genes.keys():
