@@ -8,7 +8,7 @@ pc_orthogroups <- prcomp(scaled_features[3:ncol(scaled_features)], center=TRUE, 
 
 
 n_principal_components <- 5
-n_bootstraps <- 1000
+n_bootstraps <- 10000
 seed <- 1234
 method.dist <- 'euclidean'
 method.hclust <- 'ward.D2'
@@ -17,9 +17,9 @@ mean_matrix <- format_features_matrix(scaled_features, aggregator_function='mean
 pc_mean_sets <- prcomp(mean_matrix, center=TRUE, scale.=TRUE)$x[,1:n_principal_components]
 mean_sets_dendrogram <- pvclust(t(pc_mean_sets), method.dist=method.dist, method.hclust=method.hclust, nboot=n_bootstraps, parallel=T, iseed=seed)
 
-median_matrix <- format_features_matrix(scaled_features, aggregator_function='median')
-pc_median_sets <- prcomp(median_matrix, center=TRUE, scale.=TRUE)$x[,1:n_principal_components]
-median_sets_dendrogram <- pvclust(t(pc_median_sets), method.dist=method.dist, method.hclust=method.hclust, nboot=n_bootstraps, parallel=T, iseed=seed)
+# median_matrix <- format_features_matrix(scaled_features, aggregator_function='median')
+# pc_median_sets <- prcomp(median_matrix, center=TRUE, scale.=TRUE)$x[,1:n_principal_components]
+# median_sets_dendrogram <- pvclust(t(pc_median_sets), method.dist=method.dist, method.hclust=method.hclust, nboot=n_bootstraps, parallel=T, iseed=seed)
 
 
 pdf(file=snakemake@output[[1]])
@@ -33,8 +33,8 @@ pdf(file=snakemake@output[[1]])
   plot(mean_sets_dendrogram, main=paste('orthogroup sets averaged by mean\n',
                                         n_principal_components, 'principal components'))
   pvrect(mean_sets_dendrogram)
-  plot(median_sets_dendrogram, main=paste('orthogroup sets averaged by median\n',
-                                        n_principal_components, 'principal components'))
-  pvrect(median_sets_dendrogram)
+  # plot(median_sets_dendrogram, main=paste('orthogroup sets averaged by median\n',
+  #                                       n_principal_components, 'principal components'))
+  # pvrect(median_sets_dendrogram)
 
 dev.off()

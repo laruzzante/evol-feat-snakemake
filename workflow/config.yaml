@@ -8,7 +8,7 @@ OMA_orthology_table: # example, yet to include formatting script for OMA table
 # File containing lists of genes for clustering.
 # First column must contain set name, followed by all of its gene names separated
 # by tab (or in separeted cells in an Excel file saved as txt)
-gene_sets: input/hymenoptera/genelists_all.txt
+gene_sets: input/hymenoptera/diet-virus-genesets.txt
 
 # Add species codes to generate specific evolutionary features files
 focus_species_list:
