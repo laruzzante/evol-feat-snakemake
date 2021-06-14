@@ -51,6 +51,27 @@ rule compute_age:
     output:
         'output/computed_orthogroup_features/AGE.tsv'
     conda:
-        'envs/phylogeny.yaml'
+        '../envs/phylogeny.yaml'
     script:
         '../scripts/compute_features/compute_AGE.py'
+
+
+rule create_mrca_ntips_table:
+    input:
+        input_list["ultrametric_species_tree"]
+    output:
+        'output/mrca_ntips.tsv'
+    script:
+        '../scripts/create_mrca_ntips_table.R'
+
+
+rule compute_relative_universality:
+    input:
+        rules.process_orthology_table.output.orthogroups,
+        mrca_ntips = rules.create_mrca_ntips_table.output[0]
+    output:
+        'output/computed_orthogroup_features/RUN.tsv'
+    conda:
+        '../envs/phylogeny.yaml'
+    script:
+        '../scripts/compute_features/compute_RUN.py'
