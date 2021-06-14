@@ -49,7 +49,7 @@ for line in lines[1:]:
 output_file_orthogroups.write('orthogroup' + '\t' 'AGE' + '\n')
 # output_file_genes.write('gene' + '\t' 'AGE' + '\n')
 for orthogroup in sorted(orthogroups.keys()):
-    species_list = orthogroups[orthogroup]["species"]
+    species_list = set(orthogroups[orthogroup]["species"])
     AGE = getAGE_from_specieslist(species_list, AGE_LCAbranchlengths_dict)
     output_file_orthogroups.write(orthogroup + '\t' + str(AGE) + '\n')
     # for gene in sorted(orthogroups[orthogroup]["genes"]):
