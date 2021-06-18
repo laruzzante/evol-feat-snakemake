@@ -17,24 +17,41 @@ genes = {}
 species = {}
 
 with open(input_file) as f:
+
+    # Creating dictionaries from formatted orthology table
     for line in f:
         line = line.strip()
         if 'orthogroup' in line or 'gene' in line or 'species' in line:
             continue
+
+        # Assuming the required format is satisfied
         orthogroup = line.split('\t')[0]
         gene = line.split('\t')[1]
-        spec = line.split('\t')[2]
-        # gene = spec + ':' + gene
+        if len(line.split('\t')) > 2:
+            spec = line.split('\t')[2]
+        # However if column species is not provided, we try to infer gene
+        # and species name from OrthoDB gene codes.
+        elif ':' in gene:
+            spec = gene.split(':')[0]
+        else:
+            print('WARNING: no species column detected. Please format your orthology table as required.')
+
+        # Adding orthogroup to dictionary
         if orthogroup not in orthogroups.keys():
-            orthogroups[orthogroup] = {"genes": [gene], "species": [spec]}
+            # Adding the species in this way will provide a list of species to each orthogroup
+            # which can be repeated. I.E. multiple appearances of the same species name
+            # might appear in the orthogroup species list, due to multicopy genes, hence to
+            # get a unique species list we will still have to "set" the list. Leaving it like
+            # this is useful to compute later multi-copy evolutionary features.
         else:
             orthogroups[orthogroup]["genes"].append(gene)
             orthogroups[orthogroup]["species"].append(spec)
         if gene not in genes.keys():
             genes[gene] = {"orthogroup": orthogroup, "species": spec}
         else:
-            print(f'WARNING: gene {gene} already associated to orthogroup \
-{genes[gene]["orthogroup"]}. Association with {orthogroup} will be discarded.')
+            with open(snakemake.log.log, "a") as logfile:
+                logfile.write(f'WARNING: gene {gene} already associated to orthogroup \
+{genes[gene]["orthogroup"]}. Association with {orthogroup} will be discarded.\n')
             # genes[gene]["orthogroup"].append(orthogroup)
             # genes[gene]["species"].append(spec)
         if spec not in species.keys():
@@ -74,6 +91,7 @@ output_file_info.write('n_species\tn_orthogroups\tn_genes\n')
 output_file_info.write(f'{n_species}\t{n_orthogroups}\t{n_genes}\n')
 
 # Process output files
+# Saving dictionaries as pickle files so that they can be easily used by other python scripts later on.
 pickle.dump(orthogroups, output_file_orthogroups, protocol=pickle.HIGHEST_PROTOCOL)
 pickle.dump(genes, output_file_genes, protocol=pickle.HIGHEST_PROTOCOL)
 pickle.dump(species, output_file_species, protocol=pickle.HIGHEST_PROTOCOL)

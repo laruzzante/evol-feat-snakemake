@@ -20,6 +20,8 @@ rule process_orthology_table:
         genes = 'output/.genes.pickle',
         species = 'output/.species.pickle',
         info = 'output/orthology_info.txt'
+    log:
+        log = 'log/process_orthology_table.log'
     conda:
         '../envs/basic.yaml'
     script:

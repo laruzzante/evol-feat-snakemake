@@ -2,7 +2,7 @@
 # if directly coming from OrthoDB10 or lower, a script will automatically format it.
 # Ortherwise, respect the column format:
 # orthogroup <\t> gene <\t> species
-OrthoDB_orthology_table: input/hymenoptera/hymenoptera_ogs_amell_genbank.txt
+OrthoDB_orthology_table: input/6656/odb10v1_OG2genes_arthropoda.tab
 OMA_orthology_table: # example, yet to include formatting script for OMA table
 
 # File containing lists of genes for clustering.
@@ -12,7 +12,7 @@ gene_sets: # input/hymenoptera/diet-virus-genesets.txt
 
 # Add species codes to generate specific evolutionary features files
 focus_species_list:
-  - 7460
+  # - 7460
   #- 148810 # PROBLEM: because of some Bash handling opening of files, this only works for 1 species at a time.
 
 focus_gene_list_files:
@@ -21,7 +21,7 @@ focus_gene_list_files:
 # user orhtogroup features: any file of user-defined orthogroup feaures
 # Columns: orthogroup \t feat1 \t feat2 ...
 user_orthogroup_features_files:
-  - input/hymenoptera/amell_hym_og_features.txt
+  - input/6656/6656_evolrates_odb10v1.tab
 
 # user gene features: any file of user-defined gene features
 # Columns: gene \t feat1 \t feat2 ...
@@ -29,11 +29,11 @@ user_orthogroup_features_files:
 # separated by ':'. E.g.:
 # species_code:geneid
 user_gene_features_files:
-  - input/hymenoptera/amell_hym_gene_features.txt
+  # - input/hymenoptera/amell_hym_gene_features.txt
 
 
 # Specie tree file
-ultrametric_species_tree: input/hymenoptera/Hymenoptera_RO_ultrametric.pep
+ultrametric_species_tree: input/6656/arthropoda_rooted_time.tree
 
 # CAFE summary report
 cafe_report:
@@ -60,7 +60,17 @@ default_orthogroup_features:
   - RUN
 
 selected_gene_features:
-  # - SYN
+  - UNI
+  - DUP
+  - ACN
+  - CNV
+  - AGE
+  - RUN
 
 default_gene_features:
-  # - SYN
+  - UNI
+  - DUP
+  - ACN
+  - CNV
+  - AGE
+  - RUN

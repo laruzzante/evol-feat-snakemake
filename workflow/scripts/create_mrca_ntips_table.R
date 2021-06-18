@@ -30,7 +30,7 @@ get_mrca_Ntip <- function(tree){
       }
     }
   }
-  colnames(Ntip_dataframe) <- c("species1", "species2", "Ntip")
+  colnames(Ntip_dataframe) <- c("species1", "species2", "ntips")
   rownames(Ntip_dataframe) <- 1:nrow(Ntip_dataframe)
   return(as.data.frame(Ntip_dataframe))
 }

@@ -5,53 +5,53 @@ from collections import defaultdict
 
 # Retrieve information from Snakemake
 orthogroups = pickle.load(open(snakemake.input[0], 'rb'))
-mrca_branchlengths = open(snakemake.input.mrca_Ntip)
+mrca_ntips = open(snakemake.input.mrca_ntips)
 output_file_orthogroups = open(snakemake.output[0], 'w')
 
 
-def getRUN_from_specieslist(species_list, AGE_LCAbranchlengths_dict):
+def get_MRCA_ntips_from_specieslist(species_list, mrca_ntips_dict):
 
-    AGE_max = 0
+    ntips_max = 0
 
     for spec1 in sorted(species_list):
         for spec2 in sorted(species_list):
             if(spec1 != spec2):
-                if AGE_LCAbranchlengths_dict[spec1][spec2]:
-                    AGE = AGE_LCAbranchlengths_dict[spec1][spec2]
-                elif AGE_LCAbranchlengths_dict[spec2][spec1]:
-                    AGE = AGE_LCAbranchlengths_dict[spec2][spec1]
+                if mrca_ntips_dict[spec1][spec2]:
+                    ntips = mrca_ntips_dict[spec1][spec2]
+                elif mrca_ntips_dict[spec2][spec1]:
+                    ntips = mrca_ntips_dict[spec2][spec1]
                 else:
-                    print('ERROR: species combination not present in LCA branchlengths dictionary.')
+                    print('ERROR: species combination not present in MRCA ntips dictionary.')
                     sys.close()
 
-                if AGE > AGE_max:
-                    AGE_max = AGE
+                if ntips > ntips_max:
+                    ntips_max = ntips
 
-    if AGE_max == 0:
-        print('ERROR: species list ' + ' '.join(species_list) + ' returns a LCA branchlengths of 0.')
+    if ntips_max == 0:
+        print('ERROR: species list ' + ' '.join(species_list) + ' returns a MRCA ntips of 0.')
 
-    return AGE_max
+    return ntips_max
 
 
-lines = mrca_branchlengths.readlines()
+lines = mrca_ntips.readlines()
 
-AGE_LCAbranchlengths_dict = defaultdict(defaultdict)
+mrca_ntips_dict = defaultdict(defaultdict)
 
 for line in lines[1:]:
     splitline = line.strip().split()
     spec1 = splitline[0]
     spec2 = splitline[1]
-    AGE = float(splitline[2])
-    AGE_LCAbranchlengths_dict[spec1][spec2] = AGE
+    ntips = float(splitline[2])
+    mrca_ntips_dict[spec1][spec2] = ntips
 
 
 # Process output files
-output_file_orthogroups.write('orthogroup' + '\t' 'AGE' + '\n')
+output_file_orthogroups.write('orthogroup' + '\t' 'RUN' + '\n')
 # output_file_genes.write('gene' + '\t' 'AGE' + '\n')
 for orthogroup in sorted(orthogroups.keys()):
     species_list = set(orthogroups[orthogroup]["species"])
-    AGE = getAGE_from_specieslist(species_list, AGE_LCAbranchlengths_dict)
-    output_file_orthogroups.write(orthogroup + '\t' + str(AGE) + '\n')
+    RUN = len(species_list) / get_MRCA_ntips_from_specieslist(species_list, mrca_ntips_dict)
+    output_file_orthogroups.write(orthogroup + '\t' + str(RUN) + '\n')
     # for gene in sorted(orthogroups[orthogroup]["genes"]):
     #     output_file_genes.write(gene + '\t' + str(AGE) + '\n')
 
@@ -67,5 +67,5 @@ for orthogroup in sorted(orthogroups.keys()):
         #     print('\t... 100%')
 
 # Close files
-mrca_branchlengths.close()
+mrca_ntips.close()
 output_file_orthogroups.close()

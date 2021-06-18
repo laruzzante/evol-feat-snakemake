@@ -15,8 +15,11 @@ for input_file in gene_features_files:
     df = pd.read_csv(open(input_file), sep='\t')
     gene_features.append(df)
 
-merged_gene_features = reduce(lambda left, right: pd.merge(left, right, on='gene', how='outer'), gene_features).fillna('NA')
-merged_gene_features.to_csv(output_file, sep='\t', index=False)
+if gene_features != []:
+    merged_gene_features = reduce(lambda left, right: pd.merge(left, right, on='gene', how='outer'), gene_features).fillna('NA')
+    merged_gene_features.to_csv(output_file, sep='\t', index=False)
+else:
+    print('No gene features.')
 
 # Close files
 output_file.close()

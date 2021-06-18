@@ -22,8 +22,8 @@ include: 'rules/genesets_clusters.smk'
 
 rule all:
     input:
-        rules.merge_orthogroup_features.output,
-        rules.merge_gene_features.output
+        rules.merge_orthogroup_features.output
+        #rules.merge_gene_features.output
         # rules.extract_focus_species_features.output,
         # rules.extract_gene_lists_features.output,
         # rules.get_orthogroup_sets_features.output,
