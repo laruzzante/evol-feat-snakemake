@@ -16,11 +16,12 @@ for line in genesets_file:
 for set in genesets.keys():
     for gene in genesets[set]:
         if gene in genes_ortho_dict.keys():
-            og = genes_ortho_dict[gene]['orthogroup']
-            if set not in ogsets.keys():
-                ogsets[set] = [og]
-            else:
-                ogsets[set].append(og)
+            ogs = genes_ortho_dict[gene]['orthogroups']
+            for og in ogs:
+                if set not in ogsets.keys():
+                    ogsets[set] = [og]
+                else:
+                    ogsets[set].append(og)
         else:
             print(f'WARNING: gene {gene} missing from orthology table. Discarding.')
 

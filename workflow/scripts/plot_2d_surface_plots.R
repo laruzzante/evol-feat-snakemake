@@ -2,7 +2,7 @@ df <- read.delim("~/evol-feat-snakemake/workflow/output/merged_orthogroup_featur
 
 library(plot3D)
 
-i <- 7
+i <- 2
 j <- 8
 
 x <- df[[i]]

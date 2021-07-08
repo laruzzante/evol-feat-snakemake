@@ -43,15 +43,19 @@ with open(input_file) as f:
             # might appear in the orthogroup species list, due to multicopy genes, hence to
             # get a unique species list we will still have to "set" the list. Leaving it like
             # this is useful to compute later multi-copy evolutionary features.
+            orthogroups[orthogroup] = {"genes": [gene], "species": [spec]}
         else:
             orthogroups[orthogroup]["genes"].append(gene)
             orthogroups[orthogroup]["species"].append(spec)
         if gene not in genes.keys():
-            genes[gene] = {"orthogroup": orthogroup, "species": spec}
+            genes[gene] = {"orthogroups": [orthogroup], "species": [spec]}
         else:
+            genes[gene]["orthogroups"].append(orthogroup)
+            genes[gene]["species"].append(spec)
+
             with open(snakemake.log.log, "a") as logfile:
                 logfile.write(f'WARNING: gene {gene} already associated to orthogroup \
-{genes[gene]["orthogroup"]}. Association with {orthogroup} will be discarded.\n')
+{genes[gene]["orthogroups"]}. \n')
             # genes[gene]["orthogroup"].append(orthogroup)
             # genes[gene]["species"].append(spec)
         if spec not in species.keys():
