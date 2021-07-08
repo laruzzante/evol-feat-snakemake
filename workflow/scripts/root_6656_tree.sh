@@ -1,0 +1,1 @@
+nw_reroot arthropoda.tree Euroglyphus_maynei Sarcoptes_scabiei Tetranychus_urticae Tropilaelaps_mercedesae Varroa_jacobsoni Galendromus_occidentalis Ixodes_scapularis Parasteatoda_tepidariorum Stegodyphus_mimosarum Centruroides_sculpturatus Limulus_polyphemus Strigamia_maritima | nw_order -> arthropoda_rooted.tree
