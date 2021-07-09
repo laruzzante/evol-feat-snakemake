@@ -75,3 +75,8 @@ rule compute_relative_universality:
         '../envs/phylogeny.yaml'
     script:
         '../scripts/compute_features/compute_RUN.py'
+
+
+rule create_cafe_report:
+    input:
+        input_list["ultrametric_species_tree"]
