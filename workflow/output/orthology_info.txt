@@ -1,2 +1,0 @@
-n_species	n_orthogroups	n_genes
-41	18482	37522
