@@ -45,4 +45,5 @@ average copy-number: average of per species gene copy-number
 copy-number variation: per species standard deviation of gene copies, divided by average copy-number
 * ### AGE
 orthogroup age: age of the most recent common ancestor of the orthogroup's species span
-
+* ### RUN
+relative universality: orthogroup species-span relative to the clade originating from the orthogroup's last common ancestor
