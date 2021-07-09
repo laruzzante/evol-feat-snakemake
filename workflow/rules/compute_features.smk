@@ -81,6 +81,46 @@ rule compute_relative_universality:
         '../scripts/compute_features/compute_RUN.py'
 
 
-rule create_cafe_report:
-    input:
-        input_list["ultrametric_species_tree"]
+# rule create_gene_counts_table:
+#     input:
+#         rules.process_orthology_table.output.orthogroups,
+#         rules.process_orthology_table.output.species
+#     output:
+#         'output/gene_counts_table.tsv'
+#     conda:
+#         '../envs/basic.yaml'
+#     script:
+#         '../orthogroups_2_gene_counts.py'
+#
+#
+# rule create_cafe_report:
+#     input:
+#         tree = input_list["ultrametric_species_tree"]
+#         gene_counts = rules.create_gene_counts_table.output[0]
+#     output:
+#         'output/cafe_report.txt'
+#     conda:
+#         '../envs/cafe.yaml'
+#     shell:
+#         '
+#         #!shell
+#         date
+#
+#         # load ultrametric tree
+#         tree -i trees/fungi_RO_ultrametric.pep
+#
+#         # load gene counts, filtering out non-rooting families
+#         load -i gene_counts/cafe_fungi.txt -p 0.05 -t 8 -l cafe_runs/output_fungi.txt
+#
+#         # generate log
+#         log cafe_runs/log_fungi.txt
+#
+#         # search for lambda
+#         lambdamu -s -t (((((1,1)1,1)1,((((1,1)1,1)1,1)1,((1,1)1,1)1)1)1,((1,1)1,((1,1)1,1)1)1)1,1)
+#
+#         # correct for assembly copy-number errors
+#         errormodel
+#
+#         # generate report
+#         report cafe_runs/report_run_fungi_p005
+#         '
