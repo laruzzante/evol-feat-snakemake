@@ -116,7 +116,7 @@ rule compute_relative_universality:
 #         log cafe_runs/log_fungi.txt
 #
 #         # search for lambda
-#         lambdamu -s -t (((((1,1)1,1)1,((((1,1)1,1)1,1)1,((1,1)1,1)1)1)1,((1,1)1,((1,1)1,1)1)1)1,1)
+#         lambda -s
 #
 #         # correct for assembly copy-number errors
 #         errormodel

@@ -57,11 +57,8 @@ def get_input():
     input_list['all_orthogroup_features'] = input_list['user_orthogroup_features'] + input_list['orthogroup_features_to_compute']
     input_list['all_gene_features'] = input_list['user_gene_features'] + input_list['gene_features_to_compute']
 
-    if config['OrthoDB_orthology_table']:
-        input_list['orthology_table'] = config['OrthoDB_orthology_table']
-    ## ADD IF CONDITIONS FOR OTHER ORTHOLOGY TABLE DATABASES, e.g.:
-    # if config['OMA_orthology_table']:
-    #   input_list['orthology_table'] = config['OMA_orthology_table']
+    if config['orthology_table']:
+        input_list['orthology_table'] = config['orthology_table']
 
     if config['ultrametric_species_tree']:
         input_list['ultrametric_species_tree'] = config['ultrametric_species_tree']

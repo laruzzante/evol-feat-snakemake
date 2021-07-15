@@ -17,24 +17,16 @@ genes = {}
 species = {}
 
 with open(input_file) as f:
+    next(f) # skipping header row of formatted table
 
     # Creating dictionaries from formatted orthology table
     for line in f:
         line = line.strip()
-        if 'orthogroup' in line or 'gene' in line or 'species' in line:
-            continue
 
         # Assuming the required format is satisfied
         orthogroup = line.split('\t')[0]
         gene = line.split('\t')[1]
-        if len(line.split('\t')) > 2:
-            spec = line.split('\t')[2]
-        # However if column species is not provided, we try to infer gene
-        # and species name from OrthoDB gene codes.
-        elif ':' in gene:
-            spec = gene.split(':')[0]
-        else:
-            print('WARNING: no species column detected. Please format your orthology table as required.')
+        spec = line.split('\t')[2]
 
         # Adding orthogroup to dictionary
         if orthogroup not in orthogroups.keys():
@@ -93,6 +85,8 @@ n_genes = len(genes.keys())
 
 output_file_info.write('n_species\tn_orthogroups\tn_genes\n')
 output_file_info.write(f'{n_species}\t{n_orthogroups}\t{n_genes}\n')
+output_file_info.write('\nRecognised species:\n')
+output_file_info.write('\n'.join(species.keys()))
 
 # Process output files
 # Saving dictionaries as pickle files so that they can be easily used by other python scripts later on.

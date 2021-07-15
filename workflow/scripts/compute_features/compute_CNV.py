@@ -47,7 +47,11 @@ for orthogroup in sorted(orthogroups.keys()):
     for spec in unique_species:
         species_copy_count = orthogroups[orthogroup]["species"].count(spec)
         species_copy_counts.append(species_copy_count)
-    species_copy_counts_stdev = stat.stdev(species_copy_counts)
+    if len(species_copy_counts) == 1:
+        print(f'WARNING: orthogroup {orthogroup} is present in only 1 species, {spec}')
+        species_copy_counts_stdev = 0
+    else:
+        species_copy_counts_stdev = stat.stdev(species_copy_counts)
     CNV = species_copy_counts_stdev / ACN_dictionary[orthogroup]
     output_file_orthogroups.write(orthogroup + '\t' + str(CNV) + '\n')
 

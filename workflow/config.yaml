@@ -1,9 +1,10 @@
 # OrthoDB orthology table:
-# if directly coming from OrthoDB10 or lower, a script will automatically format it.
+# if directly coming from OrthoDB v10 or lower, a script will automatically format it.
 # Ortherwise, respect the column format:
 # orthogroup <\t> gene <\t> species
-OrthoDB_orthology_table: input/6656/odb10v1_OG2genes_arthropoda.tab
-OMA_orthology_table: # example, yet to include formatting script for OMA table
+# Make sure that gene names are unique across species, in order to avoid potential downstream flaws.
+# One way to make gene ids unique is to simply attach the species name to it.
+orthology_table: input/arthropoda_odb10v1_OG2genes.tab
 
 # File containing lists of genes for clustering.
 # First column must contain set name, followed by all of its gene names separated
@@ -21,7 +22,7 @@ focus_gene_list_files:
 # user orhtogroup features: any file of user-defined orthogroup feaures
 # Columns: orthogroup \t feat1 \t feat2 ...
 user_orthogroup_features_files:
-  - input/6656/6656_evolrates_odb10v1.tab
+  - input/arthropoda_evolrates_odb10v1.tab
 
 # user gene features: any file of user-defined gene features
 # Columns: gene \t feat1 \t feat2 ...
@@ -33,7 +34,7 @@ user_gene_features_files:
 
 
 # Specie tree file
-ultrametric_species_tree: input/6656/arthropoda_rooted_time.tree
+ultrametric_species_tree: input/arthropoda_rooted_time.tree
 
 # CAFE summary report
 cafe_report:
