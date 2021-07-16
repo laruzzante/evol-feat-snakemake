@@ -12,7 +12,7 @@ hasSpeciesCol = False
 # Checking if the provided orthology table has the required default header
 default_header = 'orthogroup\tgene\tspecies'
 
-with open(orthology_table_path) as infile:
+with open(orthology_table_path, 'r') as infile:
     try:
         first_line = infile.readline()
     except EOFError:
