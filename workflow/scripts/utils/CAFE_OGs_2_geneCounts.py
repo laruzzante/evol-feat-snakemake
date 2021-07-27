@@ -12,7 +12,7 @@ parser.add_argument('-i', '--input', dest='inputFile', metavar='input_file',
 
 args = parser.parse_args()
 
-outputName = args.inputFile.replace('.txt', '_geneCounts.txt')
+outputName = args.inputFile.replace('.tab', '_geneCounts.tab')
 
 with open(args.inputFile) as f:
     lines = f.readlines()
@@ -25,8 +25,8 @@ for line in lines[1:]:
 
     line = line.strip()
     og = line.split('\t')[0]
-    geneid = line.split('\t')[3]
-    spec = line.split('\t')[4]
+    geneid = line.split('\t')[1]
+    spec = line.split('\t')[2]
 
     ogDict[og][spec].append(geneid)
     specList.append(spec)
