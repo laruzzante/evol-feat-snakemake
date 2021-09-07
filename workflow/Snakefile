@@ -18,6 +18,7 @@ include: 'rules/merge_orthogroup_features.smk'
 include: 'rules/merge_gene_features.smk'
 include: 'rules/postprocess_features.smk'
 include: 'rules/genesets_clusters.smk'
+include: 'rules/preprocess_cafe_results.smk'
 
 
 rule all:

@@ -11,6 +11,7 @@ def get_input():
     input_list['user_gene_features_files'] = []
     input_list['orthology_table'] = ''
     input_list['ultrametric_species_tree'] = ''
+    input_list['cafe_results'] = ''
     input_list['gff_file'] = ''
     input_list['focus_species_list'] = []
     input_list['focus_gene_list_files'] = []
@@ -65,6 +66,9 @@ def get_input():
 
     if config['gff_file']:
         input_list['gff_file'] = config['gff_file']
+
+    if config['cafe_results']:
+        input_list['cafe_results'] = config['cafe_results']
 
     if config['focus_species_list']:
         input_list['focus_species_list'] = config['focus_species_list']
