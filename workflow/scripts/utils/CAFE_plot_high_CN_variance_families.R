@@ -8,7 +8,7 @@ topVariance <- head(CN_variance[order(CN_variance$V2, decreasing = T),])
 topVariance
 
 for(og in topVariance$V1){
-  # og = '41813at6656'
+  #og = '40422at6656'
   sdf <- df[df$orthogroup==og,]
   summary(sdf$species)
   hist(summary(sdf$species), breaks=100, main=og, xlab='per species copy-number')

@@ -81,6 +81,17 @@ rule compute_relative_universality:
         '../scripts/compute_features/compute_RUN.py'
 
 
+rule compute_age:
+    input:
+        rules.process_orthology_table.output.orthogroups,
+        mrca_branchlengths = rules.create_mrca_branchlengths_table.output[0]
+    output:
+        'output/computed_orthogroup_features/AGE.tsv'
+    conda:
+        '../envs/phylogeny.yaml'
+    script:
+        '../scripts/compute_features/compute_AGE.py'
+
 # rule create_gene_counts_table:
 #     input:
 #         rules.process_orthology_table.output.orthogroups,
