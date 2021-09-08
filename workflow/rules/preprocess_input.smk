@@ -1,8 +1,8 @@
 rule format_orthology_table:
     input:
-        input_list['orthology_table']
+        orthology_table = input_list['orthology_table']
     output:
-        'output/formatted_orthology_table.tsv'
+        formatted_orthology_table = 'output/formatted_orthology_table.tsv'
     conda:
         '../envs/basic.yaml'
     script:
@@ -14,7 +14,7 @@ rule format_orthology_table:
 
 rule process_orthology_table:
     input:
-        rules.format_orthology_table.output[0]
+        formatted_orthology_table = rules.format_orthology_table.output.formatted_orthology_table
     output:
         orthogroups = 'output/.orthogroups.pickle',
         genes = 'output/.genes.pickle',

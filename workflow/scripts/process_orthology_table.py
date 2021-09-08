@@ -4,7 +4,7 @@ import pandas as pd
 import pickle
 
 # Retrieve information from Snakemake
-input_file = snakemake.input[0]
+input_file = snakemake.input.formatted_orthology_table
 output_file_orthogroups = open(snakemake.output.orthogroups, 'wb') # 'wb' to write binary object instead of strings
 output_file_genes = open(snakemake.output.genes, 'wb')
 output_file_species = open(snakemake.output.species, 'wb')

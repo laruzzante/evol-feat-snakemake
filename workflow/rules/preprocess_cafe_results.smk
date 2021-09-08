@@ -1,9 +1,9 @@
-rule create_cafe_base_change_table:
+rule create_copy_number_variation_table:
     input:
-        input_list['cafe_results']
+        cafe_results = input_list['cafe_results']
     output:
-        'output/cafe_base_change_table.tsv'
+        copy_number_variation_table = 'output/copy_number_variation_table.tsv'
     conda:
         '../envs/basic.yaml'
     script:
-        'process_cafe5_base_change.py'
+        '../scripts/process_cafe5_base_change.py'

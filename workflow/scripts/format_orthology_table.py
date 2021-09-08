@@ -1,8 +1,8 @@
 import pandas as pd
 import sys
 
-orthology_table_path = snakemake.input[0]
-output_file = open(snakemake.output[0], 'w')
+orthology_table_path = snakemake.input.orthology_table
+output_file = open(snakemake.output.formatted_orthology_table, 'w')
 
 isOrthoDBv9 = False
 isOrthoDBv10 = False
