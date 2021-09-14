@@ -35,7 +35,7 @@ rule compute_duplicability:
         '../scripts/compute_features/compute_DUP.py'
 
 
-include: 'rules/preprocess_tree.smk'
+include: 'preprocess_tree.smk'
 
 
 rule compute_age:
@@ -62,7 +62,7 @@ rule compute_relative_universality:
         '../scripts/compute_features/compute_RUN.py'
 
 
-include: 'rules/preprocess_cafe_results.smk'
+include: 'preprocess_cafe_results.smk'
 
 
 rule compute_expansions:
@@ -75,15 +75,36 @@ rule compute_expansions:
         '../scripts/compute_features/compute_EXP.py'
 
 
-rule compute_relative_expansions:
+rule compute_stabilities:
     input:
         orthogroups = rules.process_orthology_table.output.orthogroups,
-        copy_number_variation_table = rules.create_copy_number_variation_table.output.copy_number_variation_table,
-        AGE = rules.compute_AGE.output[0]
+        copy_number_variation_table = rules.create_copy_number_variation_table.output.copy_number_variation_table
     output:
-        'output/computed_orthogroup_features/REX.tsv'
+        'output/computed_orthogroup_features/STA.tsv'
     script:
-        '../scripts/compute_features/compute_REX.py'
+        '../scripts/compute_features/compute_STA.py'
+
+
+rule compute_contractions:
+    input:
+        orthogroups = rules.process_orthology_table.output.orthogroups,
+        copy_number_variation_table = rules.create_copy_number_variation_table.output.copy_number_variation_table
+    output:
+        'output/computed_orthogroup_features/CON.tsv'
+    script:
+        '../scripts/compute_features/compute_CON.py'
+
+
+# rule relative_expansions:
+#     input:
+#         orthogroups = rules.process_orthology_table.output.orthogroups,
+#         EXP = rules.compute_EXP.output[0]
+#         AGE = rules.compute_AGE.output[0]
+#     output:
+#         'output/computed_orthogroup_features/REX.tsv'
+#     script:
+#         '../scripts/compute_features/compute_REX.py'
+
 
 # rule create_gene_counts_table:
 #     input:

@@ -52,6 +52,8 @@ selected_orthogroup_features:
   - AGE
   - RUN
   - EXP
+  - STA
+  - CON
 
 default_orthogroup_features:
   - UNI
@@ -61,6 +63,8 @@ default_orthogroup_features:
   - AGE
   - RUN
   - EXP
+  - STA
+  - CON
 
 selected_gene_features:
   - UNI
@@ -70,6 +74,8 @@ selected_gene_features:
   - AGE
   - RUN
   - EXP
+  - STA
+  - CON
 
 default_gene_features:
   - UNI
@@ -79,3 +85,5 @@ default_gene_features:
   - AGE
   - RUN
   - EXP
+  - STA
+  - CON

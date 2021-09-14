@@ -18,13 +18,12 @@ include: 'rules/merge_orthogroup_features.smk'
 include: 'rules/merge_gene_features.smk'
 include: 'rules/postprocess_features.smk'
 include: 'rules/genesets_clusters.smk'
-include: 'rules/preprocess_cafe_results.smk'
 
 
 rule all:
     input:
         rules.merge_orthogroup_features.output,
-        rules.create_copy_number_variation_table.output,
+        # rules.create_copy_number_variation_table.output,
 
         # rules.merge_gene_features.output,
         # rules.extract_focus_species_features.output
