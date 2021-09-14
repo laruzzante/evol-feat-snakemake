@@ -2,11 +2,12 @@ df <- read.delim("~/evol-feat-snakemake/workflow/output/merged_orthogroup_featur
 
 library(plot3D)
 
-i <- 7
-j <- 11
+i <- 2
+j <- 10
 
 x <- df[[i]]
 y <- df[[j]]
+
 
 ##  Create cuts:
 n_cuts <- 50
