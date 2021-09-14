@@ -1,7 +1,7 @@
 
 rule compute_average_copy_number:
     input:
-        rules.process_orthology_table.output.orthogroups
+        orthogroups = rules.process_orthology_table.output.orthogroups
     output:
         'output/computed_orthogroup_features/ACN.tsv'
     script:
@@ -9,7 +9,7 @@ rule compute_average_copy_number:
 
 rule compute_copy_number_variation:
     input:
-        rules.process_orthology_table.output.orthogroups
+        orthogroups = rules.process_orthology_table.output.orthogroups
     output:
         'output/computed_orthogroup_features/CNV.tsv'
     script:
@@ -18,7 +18,7 @@ rule compute_copy_number_variation:
 
 rule compute_universality:
     input:
-        rules.process_orthology_table.output.orthogroups,
+        orthogroups = rules.process_orthology_table.output.orthogroups,
         info = rules.process_orthology_table.output.info
     output:
         'output/computed_orthogroup_features/UNI.tsv'
@@ -28,27 +28,19 @@ rule compute_universality:
 
 rule compute_duplicability:
     input:
-        rules.process_orthology_table.output.orthogroups
+        orthogroups = rules.process_orthology_table.output.orthogroups
     output:
         'output/computed_orthogroup_features/DUP.tsv'
     script:
         '../scripts/compute_features/compute_DUP.py'
 
 
-rule create_mrca_branchlengths_table:
-    input:
-        input_list["ultrametric_species_tree"]
-    output:
-        'output/mrca_branchlengths.tsv'
-    conda:
-        '../envs/phylogeny.yaml'
-    script:
-        '../scripts/create_mrca_branchlengths_table.R'
+include: 'rules/preprocess_tree.smk'
 
 
 rule compute_age:
     input:
-        rules.process_orthology_table.output.orthogroups,
+        orthogroups = rules.process_orthology_table.output.orthogroups,
         mrca_branchlengths = rules.create_mrca_branchlengths_table.output[0]
     output:
         'output/computed_orthogroup_features/AGE.tsv'
@@ -58,20 +50,9 @@ rule compute_age:
         '../scripts/compute_features/compute_AGE.py'
 
 
-rule create_mrca_ntips_table:
-    input:
-        input_list["ultrametric_species_tree"]
-    output:
-        'output/mrca_ntips.tsv'
-    conda:
-        '../envs/phylogeny.yaml'
-    script:
-        '../scripts/create_mrca_ntips_table.R'
-
-
 rule compute_relative_universality:
     input:
-        rules.process_orthology_table.output.orthogroups,
+        orthogroups = rules.process_orthology_table.output.orthogroups,
         mrca_ntips = rules.create_mrca_ntips_table.output[0]
     output:
         'output/computed_orthogroup_features/RUN.tsv'
@@ -80,6 +61,29 @@ rule compute_relative_universality:
     script:
         '../scripts/compute_features/compute_RUN.py'
 
+
+include: 'rules/preprocess_cafe_results.smk'
+
+
+rule compute_expansions:
+    input:
+        orthogroups = rules.process_orthology_table.output.orthogroups,
+        copy_number_variation_table = rules.create_copy_number_variation_table.output.copy_number_variation_table
+    output:
+        'output/computed_orthogroup_features/EXP.tsv'
+    script:
+        '../scripts/compute_features/compute_EXP.py'
+
+
+rule compute_relative_expansions:
+    input:
+        orthogroups = rules.process_orthology_table.output.orthogroups,
+        copy_number_variation_table = rules.create_copy_number_variation_table.output.copy_number_variation_table,
+        AGE = rules.compute_AGE.output[0]
+    output:
+        'output/computed_orthogroup_features/REX.tsv'
+    script:
+        '../scripts/compute_features/compute_REX.py'
 
 # rule create_gene_counts_table:
 #     input:

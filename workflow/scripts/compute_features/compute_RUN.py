@@ -4,7 +4,7 @@ import pickle
 from collections import defaultdict
 
 # Retrieve information from Snakemake
-orthogroups = pickle.load(open(snakemake.input[0], 'rb'))
+orthogroups = pickle.load(open(snakemake.input.orthogroups, 'rb'))
 mrca_ntips = open(snakemake.input.mrca_ntips)
 output_file_orthogroups = open(snakemake.output[0], 'w')
 

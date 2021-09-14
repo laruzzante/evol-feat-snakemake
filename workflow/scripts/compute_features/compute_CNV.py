@@ -4,7 +4,7 @@ import pickle
 import statistics as stat
 
 # Retrieve information from Snakemake
-orthogroups = pickle.load(open(snakemake.input[0], 'rb'))
+orthogroups = pickle.load(open(snakemake.input.orthogroups, 'rb'))
 # ACN_orthogroups = open(snakemake.input.ACN_orthogroups[0])
 output_file_orthogroups = open(snakemake.output[0], 'w')
 

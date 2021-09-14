@@ -51,6 +51,7 @@ selected_orthogroup_features:
   - CNV
   - AGE
   - RUN
+  - EXP
 
 default_orthogroup_features:
   - UNI
@@ -59,6 +60,7 @@ default_orthogroup_features:
   - CNV
   - AGE
   - RUN
+  - EXP
 
 selected_gene_features:
   - UNI
@@ -67,6 +69,7 @@ selected_gene_features:
   - CNV
   - AGE
   - RUN
+  - EXP
 
 default_gene_features:
   - UNI
@@ -75,3 +78,4 @@ default_gene_features:
   - CNV
   - AGE
   - RUN
+  - EXP
