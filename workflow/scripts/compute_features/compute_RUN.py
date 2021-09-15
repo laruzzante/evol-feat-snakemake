@@ -2,35 +2,12 @@
 
 import pickle
 from collections import defaultdict
+from MRCA_functions import get_MRCA_ntips_from_species_list
 
 # Retrieve information from Snakemake
 orthogroups = pickle.load(open(snakemake.input.orthogroups, 'rb'))
 mrca_ntips = open(snakemake.input.mrca_ntips)
 output_file_orthogroups = open(snakemake.output[0], 'w')
-
-
-def get_MRCA_ntips_from_specieslist(species_list, mrca_ntips_dict):
-
-    ntips_max = 0
-
-    for spec1 in sorted(species_list):
-        for spec2 in sorted(species_list):
-            if(spec1 != spec2):
-                if mrca_ntips_dict[spec1][spec2]:
-                    ntips = mrca_ntips_dict[spec1][spec2]
-                elif mrca_ntips_dict[spec2][spec1]:
-                    ntips = mrca_ntips_dict[spec2][spec1]
-                else:
-                    print('ERROR: species combination not present in MRCA ntips dictionary.')
-                    sys.close()
-
-                if ntips > ntips_max:
-                    ntips_max = ntips
-
-    if ntips_max == 0:
-        print('ERROR: species list ' + ' '.join(species_list) + ' returns a MRCA ntips of 0.')
-
-    return ntips_max
 
 
 lines = mrca_ntips.readlines()
@@ -50,7 +27,7 @@ output_file_orthogroups.write('orthogroup' + '\t' + 'RUN' + '\n')
 # output_file_genes.write('gene' + '\t' 'AGE' + '\n')
 for orthogroup in sorted(orthogroups.keys()):
     species_list = set(orthogroups[orthogroup]["species"])
-    RUN = len(species_list) / get_MRCA_ntips_from_specieslist(species_list, mrca_ntips_dict)
+    RUN = len(species_list) / get_MRCA_ntips_from_species_list(species_list, mrca_ntips_dict)
     output_file_orthogroups.write(orthogroup + '\t' + str(RUN) + '\n')
     # for gene in sorted(orthogroups[orthogroup]["genes"]):
     #     output_file_genes.write(gene + '\t' + str(AGE) + '\n')

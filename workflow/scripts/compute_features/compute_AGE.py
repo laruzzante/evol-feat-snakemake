@@ -2,6 +2,7 @@
 
 import pickle
 from collections import defaultdict
+from MRCA_functions import get_MRCA_branchlength_from_species_list
 
 # Retrieve information from Snakemake
 orthogroups = pickle.load(open(snakemake.input.orthogroups, 'rb'))
@@ -9,40 +10,16 @@ mrca_branchlengths = open(snakemake.input.mrca_branchlengths)
 output_file_orthogroups = open(snakemake.output[0], 'w')
 
 
-def getAGE_from_specieslist(species_list, AGE_LCAbranchlengths_dict):
-
-    AGE_max = 0
-
-    for spec1 in sorted(species_list):
-        for spec2 in sorted(species_list):
-            if(spec1 != spec2):
-                if AGE_LCAbranchlengths_dict[spec1][spec2]:
-                    AGE = AGE_LCAbranchlengths_dict[spec1][spec2]
-                elif AGE_LCAbranchlengths_dict[spec2][spec1]:
-                    AGE = AGE_LCAbranchlengths_dict[spec2][spec1]
-                else:
-                    print('ERROR: species combination not present in LCA branchlengths dictionary.')
-                    sys.close()
-
-                if AGE > AGE_max:
-                    AGE_max = AGE
-
-    if AGE_max == 0:
-        print('ERROR: species list ' + ' '.join(species_list) + ' returns a LCA branchlengths of 0.')
-
-    return AGE_max
-
-
 lines = mrca_branchlengths.readlines()
 
-AGE_LCAbranchlengths_dict = defaultdict(defaultdict)
+MRCA_branchlengths_dict = defaultdict(defaultdict)
 
 for line in lines[1:]:
     splitline = line.strip().split()
     spec1 = splitline[0]
     spec2 = splitline[1]
     AGE = float(splitline[2])
-    AGE_LCAbranchlengths_dict[spec1][spec2] = AGE
+    MRCA_branchlengths_dict[spec1][spec2] = AGE
 
 
 # Process output files
@@ -50,7 +27,7 @@ output_file_orthogroups.write('orthogroup' + '\t' + 'AGE' + '\n')
 # output_file_genes.write('gene' + '\t' 'AGE' + '\n')
 for orthogroup in sorted(orthogroups.keys()):
     species_list = set(orthogroups[orthogroup]["species"])
-    AGE = getAGE_from_specieslist(species_list, AGE_LCAbranchlengths_dict)
+    AGE = get_MRCA_branchlength_from_species_list(species_list, MRCA_branchlengths_dict)
     output_file_orthogroups.write(orthogroup + '\t' + str(AGE) + '\n')
     # for gene in sorted(orthogroups[orthogroup]["genes"]):
     #     output_file_genes.write(gene + '\t' + str(AGE) + '\n')
