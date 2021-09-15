@@ -6,11 +6,11 @@ from MRCA_functions import get_MRCA_branchlength_from_species_list
 
 # Retrieve information from Snakemake
 orthogroups = pickle.load(open(snakemake.input.orthogroups, 'rb'))
-mrca_branchlengths = open(snakemake.input.mrca_branchlengths)
+MRCA_branchlengths = open(snakemake.input.MRCA_branchlengths)
 output_file_orthogroups = open(snakemake.output[0], 'w')
 
 
-lines = mrca_branchlengths.readlines()
+lines = MRCA_branchlengths.readlines()
 
 MRCA_branchlengths_dict = defaultdict(defaultdict)
 
@@ -44,5 +44,5 @@ for orthogroup in sorted(orthogroups.keys()):
         #     print('\t... 100%')
 
 # Close files
-mrca_branchlengths.close()
+MRCA_branchlengths.close()
 output_file_orthogroups.close()

@@ -41,7 +41,7 @@ include: 'preprocess_tree.smk'
 rule compute_age:
     input:
         orthogroups = rules.process_orthology_table.output.orthogroups,
-        mrca_branchlengths = rules.create_mrca_branchlengths_table.output[0]
+        MRCA_branchlengths = rules.create_MRCA_branchlengths_table.output[0]
     output:
         'output/computed_orthogroup_features/AGE.tsv'
     conda:
@@ -53,7 +53,7 @@ rule compute_age:
 rule compute_relative_universality:
     input:
         orthogroups = rules.process_orthology_table.output.orthogroups,
-        mrca_ntips = rules.create_mrca_ntips_table.output[0]
+        MRCA_ntips = rules.create_MRCA_ntips_table.output[0]
     output:
         'output/computed_orthogroup_features/RUN.tsv'
     conda:

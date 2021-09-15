@@ -6,20 +6,20 @@ from MRCA_functions import get_MRCA_ntips_from_species_list
 
 # Retrieve information from Snakemake
 orthogroups = pickle.load(open(snakemake.input.orthogroups, 'rb'))
-mrca_ntips = open(snakemake.input.mrca_ntips)
+MRCA_ntips = open(snakemake.input.MRCA_ntips)
 output_file_orthogroups = open(snakemake.output[0], 'w')
 
 
-lines = mrca_ntips.readlines()
+lines = MRCA_ntips.readlines()
 
-mrca_ntips_dict = defaultdict(defaultdict)
+MRCA_ntips_dict = defaultdict(defaultdict)
 
 for line in lines[1:]:
     splitline = line.strip().split()
     spec1 = splitline[0]
     spec2 = splitline[1]
     ntips = float(splitline[2])
-    mrca_ntips_dict[spec1][spec2] = ntips
+    MRCA_ntips_dict[spec1][spec2] = ntips
 
 
 # Process output files
@@ -27,7 +27,7 @@ output_file_orthogroups.write('orthogroup' + '\t' + 'RUN' + '\n')
 # output_file_genes.write('gene' + '\t' 'AGE' + '\n')
 for orthogroup in sorted(orthogroups.keys()):
     species_list = set(orthogroups[orthogroup]["species"])
-    RUN = len(species_list) / get_MRCA_ntips_from_species_list(species_list, mrca_ntips_dict)
+    RUN = len(species_list) / get_MRCA_ntips_from_species_list(species_list, MRCA_ntips_dict)
     output_file_orthogroups.write(orthogroup + '\t' + str(RUN) + '\n')
     # for gene in sorted(orthogroups[orthogroup]["genes"]):
     #     output_file_genes.write(gene + '\t' + str(AGE) + '\n')
@@ -44,5 +44,5 @@ for orthogroup in sorted(orthogroups.keys()):
         #     print('\t... 100%')
 
 # Close files
-mrca_ntips.close()
+MRCA_ntips.close()
 output_file_orthogroups.close()
