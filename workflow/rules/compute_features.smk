@@ -95,15 +95,15 @@ rule compute_contractions:
         '../scripts/compute_features/compute_CON.py'
 
 
-# rule relative_expansions:
+# rule relative_stabilities:
 #     input:
 #         orthogroups = rules.process_orthology_table.output.orthogroups,
-#         EXP = rules.compute_EXP.output[0]
+#         STA = rules.compute_STA.output[0],
 #         AGE = rules.compute_AGE.output[0]
 #     output:
-#         'output/computed_orthogroup_features/REX.tsv'
+#         'output/computed_orthogroup_features/RST.tsv'
 #     script:
-#         '../scripts/compute_features/compute_REX.py'
+#         '../scripts/compute_features/compute_RST.py'
 
 
 # rule create_gene_counts_table:
