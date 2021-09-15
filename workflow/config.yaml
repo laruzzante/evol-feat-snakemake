@@ -22,7 +22,7 @@ focus_gene_list_files:
 # user orhtogroup features: any file of user-defined orthogroup feaures
 # Columns: orthogroup \t feat1 \t feat2 ...
 user_orthogroup_features_files:
-  # - input/arthropoda_evolrates_odb10v1.tab
+  - input/arthropoda_evolrates_odb10v1.tab
 
 # user gene features: any file of user-defined gene features
 # Columns: gene \t feat1 \t feat2 ...
@@ -30,7 +30,7 @@ user_orthogroup_features_files:
 # separated by ':'. E.g.:
 # species_code:geneid
 user_gene_features_files:
-  - input/hymenoptera/amell_hym_gene_features.txt
+  #- input/hymenoptera/amell_hym_gene_features.txt
 
 
 # Specie tree file
