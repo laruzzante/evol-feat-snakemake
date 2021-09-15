@@ -20,7 +20,7 @@ with open(copy_number_variation_table) as f:
 
 # Process output files
 
-output_file_orthogroups.write('orthogroup' + '\t' 'STA' + '\n')
+output_file_orthogroups.write('orthogroup' + '\t' + 'STA' + '\n')
 
 for orthogroup in sorted(orthogroups.keys()):
     if orthogroup in stabilities.keys():

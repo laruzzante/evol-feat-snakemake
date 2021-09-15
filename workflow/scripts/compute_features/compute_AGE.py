@@ -46,7 +46,7 @@ for line in lines[1:]:
 
 
 # Process output files
-output_file_orthogroups.write('orthogroup' + '\t' 'AGE' + '\n')
+output_file_orthogroups.write('orthogroup' + '\t' + 'AGE' + '\n')
 # output_file_genes.write('gene' + '\t' 'AGE' + '\n')
 for orthogroup in sorted(orthogroups.keys()):
     species_list = set(orthogroups[orthogroup]["species"])

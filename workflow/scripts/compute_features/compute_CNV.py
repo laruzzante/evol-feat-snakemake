@@ -33,7 +33,7 @@ output_file_orthogroups = open(snakemake.output[0], 'w')
 
 
 ACN_dictionary = {}
-output_file_orthogroups.write('orthogroup' + '\t' 'CNV' + '\n')
+output_file_orthogroups.write('orthogroup' + '\t' + 'CNV' + '\n')
 for orthogroup in sorted(orthogroups.keys()):
     # Computing average copy-number first
     unique_species = sorted(set(orthogroups[orthogroup]["species"]))

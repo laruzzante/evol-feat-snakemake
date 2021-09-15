@@ -7,7 +7,7 @@ orthogroups = pickle.load(open(snakemake.input.orthogroups, 'rb'))
 output_file_orthogroups = open(snakemake.output[0], 'w')
 
 # Process output files
-output_file_orthogroups.write('orthogroup' + '\t' 'ACN' + '\n')
+output_file_orthogroups.write('orthogroup' + '\t' + 'ACN' + '\n')
 
 for orthogroup in sorted(orthogroups.keys()):
     unique_species = sorted(set(orthogroups[orthogroup]['species']))

@@ -14,7 +14,7 @@ n_species = int(info_lines[1].split('\t')[0])
 # n_species_from_config = float(snakemake.config["n_species"])
 
 # Process output files
-output_file_orthogroups.write('orthogroup' + '\t' 'UNI' + '\n')
+output_file_orthogroups.write('orthogroup' + '\t' + 'UNI' + '\n')
 # output_file_genes.write('gene' + '\t' 'UNI' + '\n')
 for orthogroup in sorted(orthogroups.keys()):
     n_unique_species = len(set(orthogroups[orthogroup]["species"]))
