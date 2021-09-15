@@ -19,7 +19,7 @@ focus_species_list:
 focus_gene_list_files:
   #- input/hymenoptera/genelists.txt # ADD COLUMNS WITH OTHER LISTS
 
-# user orhtogroup features: any file of user-defined orthogroup feaures
+# user orhtogroup features: any file of user-defined orthogroup features
 # Columns: orthogroup \t feat1 \t feat2 ...
 user_orthogroup_features_files:
   - input/arthropoda_evolrates_odb10v1.tab
