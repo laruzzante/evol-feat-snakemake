@@ -37,7 +37,7 @@ user_gene_features_files:
 ultrametric_species_tree: input/arthropoda_rooted_time.tree
 
 # CAFE5 Base_change.tab results
-cafe_results: input/arthropoda_Base_change.tab
+cafe_results: input/arthropoda_Base_asr.tre
 
 # Aggregated GFF file:
 gff_file: # YET TO IMPLEMENT

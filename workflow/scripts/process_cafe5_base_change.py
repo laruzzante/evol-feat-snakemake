@@ -1,9 +1,9 @@
-# Create table of oirthogroup copy number variations across tree from the CAFE5 Base_change results table
+# Create table of orthogroup copy number variations across tree from the CAFE5 Base_change results table
 # Each line of the CAFE5 Base_change results table contains the ortogroup id in the first column and
 # subsequently its copy-number variation count at each tree node.
 
-import pandas as pd
-import pickle
+# import pandas as pd
+# import pickle
 
 # Retrieve information from Snakemake
 input_file = snakemake.input.cafe_results
@@ -39,9 +39,9 @@ with open(input_file) as f:
                                               'CON': n_contractions}
 
 
+# Process output files
 output_file.write('orthogroup\tEXP\tSTA\tCON\n')
 
-# Process output files
 for orthogroup in sorted(copy_number_variations.keys()):
     output_file.write(f"{orthogroup}\t{copy_number_variations[orthogroup]['EXP']}\t{copy_number_variations[orthogroup]['STA']}\t{copy_number_variations[orthogroup]['CON']}\n")
 

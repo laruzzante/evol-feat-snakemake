@@ -5,7 +5,7 @@ library(ape)
 
 get_nodelengths_table <- function(tree){
 
-  branchlength_matrix <- matrix(rep(NA), Ntip(tree),Ntip(tree))
+  branchlength_matrix <- matrix(rep(NA), Ntip(tree), Ntip(tree))
   rownames(branchlength_matrix) <- tree$tip.label
   colnames(branchlength_matrix) <- tree$tip.label
 
@@ -14,9 +14,13 @@ get_nodelengths_table <- function(tree){
   for(spec1 in sort(tree$tip.label)){
     for(spec2 in sort(tree$tip.label)){
       if(spec1 != spec2){
-        mrca_node <- as.numeric(getMRCA(phy=tree, tip = c(spec1, spec2)))
-        mrca_branchlength <- as.numeric(branching.times(tree)[mrca_node - Ntip(tree)])
-        branchlength_row <- c(spec1, spec2, mrca_branchlength)
+        # Getting MRCA node ID from pairwaise species selection
+        MRCA_node <- as.numeric(getMRCA(phy=tree, tip = c(spec1, spec2)))
+        # In 'ape', the branchlengths storage table does not include tips indices,
+        # hence we need to remove them from the MRCA node in order to access the correct
+        # MRCA node id and get its branchlength value.
+        MRCA_branchlength <- as.numeric(branching.times(tree)[MRCA_node - Ntip(tree)])
+        branchlength_row <- c(spec1, spec2, MRCA_branchlength)
         branchlength_dataframe <- rbind(branchlength_dataframe, branchlength_row)
       }
     }

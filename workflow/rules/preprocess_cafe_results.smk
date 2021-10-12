@@ -6,4 +6,4 @@ rule create_copy_number_variation_table:
     conda:
         '../envs/basic.yaml'
     script:
-        '../scripts/process_cafe5_base_change.py'
+        '../scripts/process_cafe5_base_asr.py'

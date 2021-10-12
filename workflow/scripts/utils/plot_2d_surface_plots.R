@@ -1,4 +1,4 @@
-this.dir <- dirname(parent.frame(2)$ofile) ## To run this command, the entire script must be sourced, exectuing line by line won't work
+this.dir <- dirname(parent.frame(2)$ofile) ## To run this command, the entire script must be sourced, executing line by line won't work
 setwd(this.dir)
 df <- read.delim("../../output/merged_orthogroup_features.tsv")
 
