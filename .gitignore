@@ -1,1 +1,4 @@
+workflow/input
+workflow/output
+workflow/log
 .snakemake
