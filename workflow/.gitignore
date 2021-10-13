@@ -2,4 +2,3 @@ input
 output
 log
 .snakemake
-../.snakemake
