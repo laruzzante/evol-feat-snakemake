@@ -1,3 +1,9 @@
+# Script that uses regular expression functions to extract a single node-children subtree from each tree-line in the NEXUS cafe5 output file.
+# The goal of this script is to parse the whole tree (and at each line, as there is
+# one tree per line in the CAFE 5 results Base_asr.tre file) by iteratevily removing each single node-children subtree so
+# to extract gene copy number counts at each bifurcation, and record it as either
+# Gene copy number Expansion (EXP, gene duplications), Contraction (CON, gene losses) or Stability (maintaned same copy-number, excluding n=0) events.
+
 import sys
 import re
 from collections import defaultdict
@@ -72,9 +78,9 @@ def addEventCounts(countsDict, eventCounts_Dict):
     return eventCounts_Dict
 
 
-# Regular expression function to extract a signle node-children subtree from each tree-line in the NEXUS cafe5 output file.
+# Regular expression function to extract a single node-children subtree from each tree-line in the NEXUS cafe5 output file.
 # The goal of this function is to parse the whole tree by iteratevily removing each single node-children subtree so
-# to extract gene copy number counts at each bifurcation. 
+# to extract gene copy number counts at each bifurcation.
 def getCAFEevents(CAFEreportInputFile):
 
     lines = readCAFEreport(CAFEreportInputFile)
@@ -92,7 +98,9 @@ def getCAFEevents(CAFEreportInputFile):
         eventCountsDict = {'n_expansions': 0, 'n_stabilities': 0, 'n_contractions': 0}
 
         # Regular expression, don't touch
-        match = re.search(r'\([^\(]*?\).*?[\,)]', tree)
+        recursive_regex = r'\([^\(]*?\).*?[\,)]'
+        last_regex = r'\([^\(]*?\).*?$'
+        match = re.search(recursive_regex, tree)
 
         while match is not None:
             leaves = match.group().split(')')[0].strip('(')
@@ -103,11 +111,13 @@ def getCAFEevents(CAFEreportInputFile):
             # to compute the events related to that node with its parent
             # in a recursive way
             tree = tree[:match.span()[0]] + tree[tree.find(')') + 1:]
-            match = re.search(r'\([^\(]*?\).*?[\,)]', tree)
+            match = re.search(recursive_regex, tree)
 
         # The very last iteration has a different '(leaves)node' syntax,
-        # so it must be dealt apart, with its own RegEx.
-        last_match = re.search(r'\([^\(]*?\).*?$', tree)
+        # so it must be dealt apart, with its own RegEx. This is because after
+        # the removal of the last recursive parent-children bifurcation, we are
+        # left with the parent node only and no children.
+        last_match = re.search(last_regex, tree)
         if last_match is not None:
             leaves = last_match.group().split(')')[0].strip('(')
             node = last_match.group().split(')')[1].strip(',')
