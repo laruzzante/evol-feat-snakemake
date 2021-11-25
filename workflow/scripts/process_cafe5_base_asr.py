@@ -12,6 +12,7 @@ input_file = snakemake.input.cafe_results
 output_file = open(snakemake.output.copy_number_variation_table, 'w')
 
 
+# Function that stores the CAFE results input file in a lines object
 def readCAFEreport(CAFEreportInputFile):
 
     with open(input_file) as f:
@@ -20,25 +21,37 @@ def readCAFEreport(CAFEreportInputFile):
     return lines
 
 
-# String pattern search function to detect copy number counts in the the tree elements (node or leaf1 or leaf2)
+# Function that returns the matching pattern and positional index of the geny copy
+# count number reported after the underscore following the node label (the node
+# label is inside the chevrons < >) in the newick tree.
+# E.g. : (Blattella_germanica<271>_0:143.217,Zootermopsis_nevadensis<270>_0:143.217)<277>_0:78.9221
+# Because CAFE reports a star when the expanion/loss variation is stastically significant,
+# we need to identify the two different cases. This is because we later need
+# the exact positional index in order to read the number that follows either
+# the '>_' or '>*_' patterns and transform it from a string into a numerical value.
+def get_match(tree_element):
+
+    count_pattern = '>_'
+    significant_count_pattern = '>*_'
+    count_index = 2
+    if significant_count_pattern in tree_element:
+        count_pattern = significant_count_pattern
+        count_index = 3
+
+    return [count_pattern, count_index]
+
+
+# String pattern search function to detect copy number counts in the tree elements (node or leaf1 or leaf2).
 def getEventCounts(leaves, node):
+
     if ';' in node:
         node = node.strip(';')
 
-
-    def get_match(tree_element):
-        count_pattern = '>_'
-        significant_count_pattern = '>*_'
-        count_index = 2
-        if significant_count_pattern in tree_element:
-            count_pattern = significant_count_pattern
-            count_index = 3
-
-        return [count_pattern, count_index]
-
-
     count_pattern, count_index = get_match(node)
 
+    # Should add a try/except structure here, with an error message, covering
+    # the cases where the report might differ and give a feedback rather than
+    # simply breaking the program.
     if ':' in node:
         counts_node = float(node[node.index(count_pattern)+count_index : node.index(':')])
     else:
@@ -83,7 +96,11 @@ def addEventCounts(countsDict, eventCounts_Dict):
 # to extract gene copy number counts at each bifurcation.
 def getCAFEevents(CAFEreportInputFile):
 
+    # Reading CAFE results and storing each line
     lines = readCAFEreport(CAFEreportInputFile)
+
+    # Initiliazing dictionary where we will store CAFE events, i.e.:
+    # Counts of Expansions, Stabilities or Contractions
     CAFEeventCountsDict = defaultdict(dict)
 
     for line in lines:
@@ -98,6 +115,8 @@ def getCAFEevents(CAFEreportInputFile):
         eventCountsDict = {'n_expansions': 0, 'n_stabilities': 0, 'n_contractions': 0}
 
         # Regular expression, don't touch
+        # This regex finds everything that is in between round parenthesis (the two leaves/children)
+        # and the adjacent characters up to the first comma (the parent node)
         recursive_regex = r'\([^\(]*?\).*?[\,)]'
         last_regex = r'\([^\(]*?\).*?$'
         match = re.search(recursive_regex, tree)

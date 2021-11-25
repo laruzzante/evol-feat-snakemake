@@ -26,8 +26,8 @@ heatmap_colors <- paste0("#", heatmap_colors)
 #                 density.info = "none", col = rev(heatmap_colors), scale = "column", key = FALSE)
 
 library(circlize)
-col_fun = colorRamp2(seq(-2, 2), c("red", "yellow", "white", "cyan", "darkblue"))
-col_fun = colorRamp2(seq(-5.5, 5.5), heatmap_colors)
+# col_fun = colorRamp2(seq(-2, 2), rev(c("red", "yellow", "white", "cyan", "darkblue")))
+col_fun = colorRamp2(seq(-5.5, 5.5), rev(heatmap_colors))
 
 plot(bootstraps_metrics)
 plot(bootstraps_families)

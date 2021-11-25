@@ -2,13 +2,13 @@
 # Each line of the CAFE5 Base_change results table contains the ortogroup id in the first column and
 # subsequently its copy-number variation count at each tree node.
 
-# import pandas as pd
-# import pickle
 
 # Retrieve information from Snakemake
 input_file = snakemake.input.cafe_results
 output_file = open(snakemake.output.copy_number_variation_table, 'w')
 
+# Initiliazing dictionary where we will store CAFE events, i.e.:
+# Counts of Expansions, Stabilities or Contractions
 copy_number_variations = {}
 
 with open(input_file) as f:
