@@ -13,7 +13,7 @@ gene_sets:  input/hymenoptera/diet-virus-genesets.txt
 
 # Add species codes to generate specific evolutionary features files
 focus_species_list:
-  - 7460
+  #- 7460
   #- 148810 # PROBLEM: because of some Bash handling opening of files, this only works for 1 species at a time.
 
 focus_gene_list_files:
