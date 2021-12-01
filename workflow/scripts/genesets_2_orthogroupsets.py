@@ -9,9 +9,12 @@ ogsets = {}
 
 for line in genesets_file:
     split_line = line.strip().split('\t')
-    set_name = split_line[0]
-    genes = split_line[1:]
-    genesets[set_name] = genes
+    gene_id = split_line[0]
+    set_name = split_line[1]
+    if set_name in genesets.keys():
+        genesets[set_name].append(gene_id)
+    else:
+        genesets[set_name] = [gene_id]
 
 for set in genesets.keys():
     for gene in genesets[set]:
