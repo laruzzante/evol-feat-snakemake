@@ -11,3 +11,5 @@ dependencies:
   - r-factoextra=1.0.5
   - r-ggally=1.4.0
   - r-rtsne=0.15
+  - r-scales=1.0.0
+  - r-rcolorbrewer=1.1_2
