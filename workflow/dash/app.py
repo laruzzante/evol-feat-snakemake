@@ -14,6 +14,9 @@ from sklearn import preprocessing
 from sklearn.cluster import KMeans
 # from sklearn.cluster import DBSCAN  # could be OPTICS, SpectralClustering, ..., look at sklearn manual for available options
 
+PORT = 8000
+ADDRESS = '127.0.0.1'
+
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 data = pd.read_csv('../output/merged_orthogroup_features.tsv', sep='\t')
@@ -227,4 +230,6 @@ def update_feature_heatmap(metric):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=False)
+    app.run_server(
+        port=PORT,
+        host=ADDRESS)
