@@ -9,7 +9,7 @@ output_file = open(snakemake.output[0], 'w')
 
 # Process output files
 orthogroup_features = []
-for input_file in orthogroup_features_files:
+for input_file in sorted(orthogroup_features_files):
     # I <open(input_file)> and don't just use <input_file> here because if given a string,
     # pandas.read_csv() will automatically close the file, which is instead needed to be open for later.
     df = pd.read_csv(open(input_file), sep='\t')
