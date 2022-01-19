@@ -9,7 +9,7 @@ orthology_table: input/arthropoda_odb10v1_OG2genes.tab
 # File containing lists of genes for clustering.
 # First column must contain set name, followed by all of its gene names separated
 # by tab (or in separeted cells in an Excel file saved as txt)
-gene_sets:  input/dmel_immune_families.csv
+gene_sets:  input/dmel_immune_superfamilies.csv
 
 # Add species codes to generate specific evolutionary features files
 focus_species_list:
@@ -54,6 +54,9 @@ selected_orthogroup_features:
   - EXP
   - STA
   - CON
+  - REX
+  - RST
+  - RCO
 
 default_orthogroup_features:
   - UNI
@@ -65,6 +68,9 @@ default_orthogroup_features:
   - EXP
   - STA
   - CON
+  - REX
+  - RST
+  - RCO
 
 selected_gene_features:
   - UNI
@@ -76,6 +82,9 @@ selected_gene_features:
   - EXP
   - STA
   - CON
+  - REX
+  - RST
+  - RCO
 
 default_gene_features:
   - UNI
@@ -87,3 +96,6 @@ default_gene_features:
   - EXP
   - STA
   - CON
+  - REX
+  - RST
+  - RCO

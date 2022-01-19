@@ -95,15 +95,34 @@ rule compute_contractions:
         '../scripts/compute_features/compute_CON.py'
 
 
-# rule relative_stabilities:
-#     input:
-#         orthogroups = rules.process_orthology_table.output.orthogroups,
-#         STA = rules.compute_STA.output[0],
-#         AGE = rules.compute_AGE.output[0]
-#     output:
-#         'output/computed_orthogroup_features/RST.tsv'
-#     script:
-#         '../scripts/compute_features/compute_RST.py'
+rule compute_relative_expansions:
+    input:
+        orthogroups = rules.process_orthology_table.output.orthogroups,
+        MRCA_ntips = rules.create_MRCA_ntips_table.output[0]
+    output:
+        'output/computed_orthogroup_features/REX.tsv'
+    script:
+        '../scripts/compute_features/compute_REX.py'
+
+
+rule compute_relative_stabilities:
+    input:
+        orthogroups = rules.process_orthology_table.output.orthogroups,
+        MRCA_ntips = rules.create_MRCA_ntips_table.output[0]
+    output:
+        'output/computed_orthogroup_features/RST.tsv'
+    script:
+        '../scripts/compute_features/compute_RST.py'
+
+
+rule compute_relative_contractions:
+    input:
+        orthogroups = rules.process_orthology_table.output.orthogroups,
+        MRCA_ntips = rules.create_MRCA_ntips_table.output[0]
+    output:
+        'output/computed_orthogroup_features/RCO.tsv'
+    script:
+        '../scripts/compute_features/compute_RCO.py'
 
 
 # rule create_gene_counts_table:

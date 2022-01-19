@@ -1,4 +1,6 @@
-# Compute orthogroup relative universality (species span divided by the total number of species in the phylogeny originating from orthogroup's Most Recent Common Ancestor)
+# Compute orthogroup relative expansions (number of CAFE expansion events
+# divided by total number of internal nodes + leaves arising from orthogroup's
+# Most Recent Common Ancestor). Or simply the number of "events" after the MRCA
 
 import pickle
 from collections import defaultdict
@@ -23,12 +25,14 @@ for line in lines[1:]:
 
 
 # Process output files
-output_file_orthogroups.write('orthogroup' + '\t' + 'RUN' + '\n')
+output_file_orthogroups.write('orthogroup' + '\t' + 'REX' + '\n')
 # output_file_genes.write('gene' + '\t' 'AGE' + '\n')
 for orthogroup in sorted(orthogroups.keys()):
     species_list = set(orthogroups[orthogroup]["species"])
-    RUN = len(species_list) / get_MRCA_ntips_from_species_list(species_list, MRCA_ntips_dict)
-    output_file_orthogroups.write(orthogroup + '\t' + str(RUN) + '\n')
+    # In a bifurcating tree, the number of Events = 2 * (n_tips - 1)
+    n_nodes = 2 * ( get_MRCA_ntips_from_species_list(species_list, MRCA_ntips_dict) - 1 )
+    REX = len(species_list) / n_nodes
+    output_file_orthogroups.write(orthogroup + '\t' + str(REX) + '\n')
     # for gene in sorted(orthogroups[orthogroup]["genes"]):
     #     output_file_genes.write(gene + '\t' + str(AGE) + '\n')
 

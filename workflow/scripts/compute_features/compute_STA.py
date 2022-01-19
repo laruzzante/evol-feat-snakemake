@@ -11,6 +11,7 @@ output_file_orthogroups = open(snakemake.output[0], 'w')
 stabilities = {}
 
 with open(copy_number_variation_table) as f:
+    next(f)
     for line in f:
         splitline = line.strip().split('\t')
         orthogroup = splitline[0]
