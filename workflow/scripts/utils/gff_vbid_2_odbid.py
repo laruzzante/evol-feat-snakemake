@@ -74,10 +74,10 @@ with open(gff) as f, open(gff_converted, 'w') as f2:
             case = ['Name=', '-']
             start = id.find(case[0])
             end = id.find(case[1])
-        elif source == 'Flybase':
+        elif source == 'FlyBase':
             case = ['Parent=', '']
             start = id.find(case[0])
-            end = len(id)
+            end = len(id) + 1
         elif source == 'EMBL':
             case = ['ID=cds-', ';']
             start = id.find(case[0])
