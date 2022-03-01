@@ -39,8 +39,9 @@ ultrametric_species_tree: input/arthropoda_rooted_time.tree
 # CAFE5 Base_change.tab results
 cafe_results: input/arthropoda_Base_asr.tre
 
-# Aggregated GFF file:
-gff_file: # YET TO IMPLEMENT
+# # Directory containing GFFs. GFF filenames must start with the species name.
+# gff_directory:
+#   - input/GFFs
 
 # Metrics from the default_orthogroup_features that will be included in the computation process
 # Comment the ones you wish to not compute.

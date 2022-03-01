@@ -1,12 +1,8 @@
 #!/usr/bin/env python3
 
-import sys
+# The following part of code applies specifically to GFF file formatting
 
-if len(sys.argv) > 1:
-    infile = open(sys.argv[1], 'r')
-else:
-    print('Specify input file.')
-
+import os
 
 map = {
 '7167_0': 'Anopheles_albimanus',
@@ -88,7 +84,7 @@ map = {
 '211228_0': 'Cephus_cinctus',
 '156304_0': 'Ceratina_calcarata',
 '7213_0': 'Ceratitis_capitata',
-'326594_0': 'Ceratosolen_solmsi_marchali',
+'142686_0': 'Ceratosolen_solmsi_marchali',
 '168631_0': 'Chilo_suppressalis',
 '79782_0': 'Cimex_lectularius',
 '29053_0': 'Copidosoma_floridanum',
@@ -181,11 +177,28 @@ map = {
 '7168_0': 'Anopheles_dirus'
 }
 
-for line in infile:
-    new_line = line
-    for id in map.keys():
-        if id in line:
-            name = map[id]
-            # name = name.replace('_','') # Only for OrthoDB where IDs are fomratted as ID_0
-            new_line = new_line.replace(id, name)
-    print(new_line.strip())
+missing_species = dict(map)
+folder = '/media/lruzzant/DATA/evol-feat-data-processing/gff_final/'
+output_folder = '/media/lruzzant/DATA/evol-feat-data-processing/gff_final_formatted/'
+for file_name in os.listdir(folder):
+    filename_taxid = file_name.split('_')[0]
+    odb_taxid = filename_taxid + '_0'
+    specname_from_filename = map[odb_taxid]
+    # Tracking species which had no corresponding GFF file
+    missing_species.pop(odb_taxid)
+
+    with open(os.fsencode(folder+file_name)) as infile, open(os.fsencode(output_folder+file_name), 'w') as outfile:
+        for line in infile:
+            geneid_with_taxid = line.strip().split('\t')[8]
+            gene_taxid = geneid_with_taxid.split(':')[0]
+            gene_code = geneid_with_taxid.split(':')[1]
+            specname_from_geneid = map[gene_taxid]
+            if specname_from_filename == specname_from_geneid:
+                geneid_name = map[gene_taxid] + ':' + gene_code
+                new_line = line.strip() + '\t' + geneid_name + '\t' + specname_from_geneid + '\n'
+                outfile.write(new_line)
+            else:
+                print('WARNING: geneid' + geneid_taxid + 'not belonging to species of GFF file' + file_name)
+
+print('The following species did not have a corresponding GFF file:')
+print(missing_species)
