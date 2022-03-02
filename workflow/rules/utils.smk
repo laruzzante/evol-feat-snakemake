@@ -12,7 +12,7 @@ def get_input():
     input_list['orthology_table'] = ''
     input_list['ultrametric_species_tree'] = ''
     input_list['cafe_results'] = ''
-    input_list['gff_file'] = ''
+    input_list['gff'] = ''
     input_list['focus_species_list'] = []
     input_list['focus_gene_list_files'] = []
     input_list['gene_sets'] = []
@@ -64,8 +64,8 @@ def get_input():
     if config['ultrametric_species_tree']:
         input_list['ultrametric_species_tree'] = config['ultrametric_species_tree']
 
-    if config['gff_file']:
-        input_list['gff_file'] = config['gff_file']
+    if config['gff']:
+        input_list['gff'] = config['gff']
 
     if config['cafe_results']:
         input_list['cafe_results'] = config['cafe_results']

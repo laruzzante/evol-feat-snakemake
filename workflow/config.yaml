@@ -32,12 +32,15 @@ user_orthogroup_features_files:
 user_gene_features_files:
   #- input/hymenoptera/amell_hym_gene_features.txt
 
-
 # Specie tree file
 ultrametric_species_tree: input/arthropoda_rooted_time.tree
 
 # CAFE5 Base_change.tab results
 cafe_results: input/arthropoda_Base_asr.tre
+
+# Concatenated GFF file
+gff:
+  - input/allspecies.gff
 
 # # Directory containing GFFs. GFF filenames must start with the species name.
 # gff_directory:
@@ -58,6 +61,7 @@ selected_orthogroup_features:
   - REX
   - RST
   - RCO
+  # - SYN
 
 default_orthogroup_features:
   - UNI
@@ -72,6 +76,7 @@ default_orthogroup_features:
   - REX
   - RST
   - RCO
+  # - SYN
 
 selected_gene_features:
   - UNI
@@ -86,6 +91,7 @@ selected_gene_features:
   - REX
   - RST
   - RCO
+  # - SYN
 
 default_gene_features:
   - UNI
@@ -100,3 +106,4 @@ default_gene_features:
   - REX
   - RST
   - RCO
+  # - SYN

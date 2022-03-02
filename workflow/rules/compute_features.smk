@@ -35,9 +35,6 @@ rule compute_duplicability:
         '../scripts/compute_features/compute_DUP.py'
 
 
-include: 'preprocess_tree.smk'
-
-
 rule compute_age:
     input:
         orthogroups = rules.process_orthology_table.output.orthogroups,
@@ -60,9 +57,6 @@ rule compute_relative_universality:
         '../envs/phylogeny.yaml'
     script:
         '../scripts/compute_features/compute_RUN.py'
-
-
-include: 'preprocess_cafe_results.smk'
 
 
 rule compute_expansions:
@@ -124,6 +118,14 @@ rule compute_relative_contractions:
     script:
         '../scripts/compute_features/compute_RCO.py'
 
+
+# rule compute_synteny:
+#     input:
+#         ordered_gff_genes = rules.process_gff.output[0]
+#     output:
+#         'output/computed_orthogroup_features/SYN.tsv'
+#     script:
+#         '../scripts/compute_features/compute_SYN.py'
 
 # rule create_gene_counts_table:
 #     input:

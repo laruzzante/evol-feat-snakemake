@@ -12,6 +12,9 @@ GENE_FEATURES_TO_COMPUTE = input_list['gene_features_to_compute']
 FOCUS_SPECIES_LIST = input_list['focus_species_list']
 
 include: 'rules/preprocess_orthology_table.smk'
+include: 'rules/preprocess_tree.smk'
+include: 'rules/preprocess_cafe_results.smk'
+include: 'rules/process_gff.smk/'
 include: 'rules/user_features.smk'
 include: 'rules/compute_features.smk'
 include: 'rules/merge_orthogroup_features.smk'
@@ -23,6 +26,8 @@ include: 'rules/genesets_clusters.smk'
 rule all:
     input:
         rules.merge_orthogroup_features.output,
+
+        rules.process_gff.output,
 
         # rules.merge_gene_features.output,
 
