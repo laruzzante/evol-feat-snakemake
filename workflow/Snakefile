@@ -27,7 +27,7 @@ rule all:
     input:
         rules.merge_orthogroup_features.output,
 
-        rules.process_gff.output,
+        rules.create_synteny_counts_table.output,
 
         # rules.merge_gene_features.output,
 

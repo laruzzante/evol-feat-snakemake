@@ -19,6 +19,7 @@ rule process_orthology_table:
         orthogroups = 'output/.orthogroups.pickle',
         genes = 'output/.genes.pickle',
         species = 'output/.species.pickle',
+        orthogroups_2_species_2_genes = 'output/.orthogroups_2_species_2_genes.pickle',
         info = 'output/orthology_info.txt'
     log:
         log = 'log/process_orthology_table.log'
