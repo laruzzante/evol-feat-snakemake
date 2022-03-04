@@ -30,6 +30,8 @@ pc <- princomp(na.omit(sdf))
 
 plot(pc$scores[,1],pc$scores[,2], pch=19, col=t.blue, cex=0.2)
 
+print(pc$loadings)
+
 summary(pc)
 
 plot3d(pc$scores[,3], y=pc$scores[,1], z=pc$scores[,2],col=t.blue)
