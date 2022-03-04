@@ -148,7 +148,7 @@ for reference_species in ordered_gff_species_2_orthogroups.keys():
 # Process output files
 pickle.dump(synteny_counts, output_synteny_dict, protocol=pickle.HIGHEST_PROTOCOL)
 
-output_synteny_counts.write('orthogroup\tgff_n_species\tmax_syn\tavg_syn\tmed_syn\n')
+output_synteny_counts.write('orthogroup\tgff_n_species\tmax_syn\tavg_syn\tmed_syn\tsd_synn')
 for orthogroup in sorted(synteny_counts.keys()):
     n = len(ordered_gff_orthogroups_2_species[orthogroup])
     max_counts = max(synteny_counts[orthogroup])

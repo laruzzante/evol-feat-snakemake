@@ -119,13 +119,35 @@ rule compute_relative_contractions:
         '../scripts/compute_features/compute_RCO.py'
 
 
-# rule compute_synteny:
-#     input:
-#         ordered_gff_genes = rules.process_gff.output[0]
-#     output:
-#         'output/computed_orthogroup_features/SYN.tsv'
-#     script:
-#         '../scripts/compute_features/compute_SYN.py'
+rule compute_synteny:
+    input:
+        orthogroups = rules.process_orthology_table.output.orthogroups,
+        synteny_counts = rules.create_synteny_counts_table.output.synteny_counts
+    output:
+        'output/computed_orthogroup_features/SYN.tsv'
+    script:
+        '../scripts/compute_features/compute_SYN.py'
+
+
+rule compute_relative_synteny:
+    input:
+        orthogroups = rules.process_orthology_table.output.orthogroups,
+        synteny_counts = rules.create_synteny_counts_table.output.synteny_counts,
+        MRCA_ntips = rules.create_MRCA_ntips_table.output[0]
+    output:
+        'output/computed_orthogroup_features/RSY.tsv'
+    script:
+        '../scripts/compute_features/compute_RSY.py'
+
+
+rule compute_maximum_synteny:
+    input:
+        orthogroups = rules.process_orthology_table.output.orthogroups,
+        synteny_counts = rules.create_synteny_counts_table.output.synteny_counts
+    output:
+        'output/computed_orthogroup_features/MSY.tsv'
+    script:
+        '../scripts/compute_features/compute_MSY.py'
 
 # rule create_gene_counts_table:
 #     input:

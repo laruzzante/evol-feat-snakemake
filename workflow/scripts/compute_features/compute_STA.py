@@ -1,7 +1,6 @@
 # Compute orthogroup number of stabilities across the tree (counts of gene number maintenance from the CAFE5 Base_change results table)
 
 import pickle
-from collections import defaultdict
 
 # Retrieve information from Snakemake
 orthogroups = pickle.load(open(snakemake.input.orthogroups, 'rb'))

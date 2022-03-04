@@ -61,7 +61,9 @@ selected_orthogroup_features:
   - REX
   - RST
   - RCO
-  # - SYN
+  - SYN
+  - RSY
+  - MSY
 
 default_orthogroup_features:
   - UNI
@@ -76,7 +78,9 @@ default_orthogroup_features:
   - REX
   - RST
   - RCO
-  # - SYN
+  - SYN
+  - RSY
+  - MSY
 
 selected_gene_features:
   - UNI
@@ -91,7 +95,9 @@ selected_gene_features:
   - REX
   - RST
   - RCO
-  # - SYN
+  - SYN
+  - RSY
+  - MSY
 
 default_gene_features:
   - UNI
@@ -106,4 +112,6 @@ default_gene_features:
   - REX
   - RST
   - RCO
-  # - SYN
+  - SYN
+  - RSY
+  - MSY

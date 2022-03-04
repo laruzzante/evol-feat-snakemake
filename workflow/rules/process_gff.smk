@@ -12,6 +12,7 @@ rule crate_ordered_gff_genes_table:
     script:
         '../scripts/crate_ordered_gff_genes_table.py'
 
+
 rule create_synteny_counts_table:
     input:
         orthogroups_2_species_2_genes = rules.process_orthology_table.output.orthogroups_2_species_2_genes,
