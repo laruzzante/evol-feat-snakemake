@@ -20,6 +20,10 @@ rule create_synteny_counts_table:
     output:
         synteny_dict = 'output/.synteny.pickle',
         synteny_counts = 'output/synteny_counts.tsv'
+    threads: 8
+    resources:
+        mem_mb = 32000,
+        runtime_s = 21600  # 6 hours = 21600 seconds
     log:
         log = 'log/create_synteny_counts_table.log'
     conda:
