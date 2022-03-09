@@ -6,6 +6,7 @@ library(dbscan)
 library(Rtsne)
 library(colorRamps)
 library(dendextend)
+library(uwot)
 
 # Transparent blue
 t.blue <- rgb(0, 0, 255, max = 255, alpha = 25, names = "blue50")
@@ -44,6 +45,10 @@ tsnedf <- Rtsne(sdf, perplexity = 30, check_duplicates=FALSE, pca = TRUE, dims =
 plot(tsnedf$Y, pch=19, col=t.blue, cex=0.2)
 
 n <- 10
+
+## UMAP
+umapdf <- umap(sdf, n_neighbors = 15, min_dist = 0.001, verbose = TRUE, n_threads = 8)
+plot(umapdf, pch=19, col=t.blue, cex=0.2)
 
 ## KMEANS
 
@@ -88,6 +93,20 @@ for(cl in cl.optics.cut$cluster){
 }
 plot(tsnedf$Y, pch=1, col=palette, cex=0.2)
 plot3d(tsnedf$Y, radius=0.2, col=palette)
+
+
+cl.optics <- optics(umapdf)
+cl.optics.cut <- extractDBSCAN(cl.optics, eps_cl = 0.5)
+palette <- c()
+for(cl in cl.optics.cut$cluster){
+  x <- cl + 1L # So to never have the cluster 0, but 1, because we need to start the indexing at 1 to extract the first colour in colours
+  while(x > length(colours)){
+    x <- x - length(colours)
+  }
+  palette <- c(palette, colours[x])
+}
+plot(umapdf, pch=1, col=palette, cex=0.2)
+plot3d(umapdf, radius=0.2, col=palette)
 
 ## DBSCAN
 

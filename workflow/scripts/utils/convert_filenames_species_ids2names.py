@@ -82,7 +82,7 @@ map = {
 '211228_0': 'Cephus_cinctus',
 '156304_0': 'Ceratina_calcarata',
 '7213_0': 'Ceratitis_capitata',
-'142686_0': 'Ceratosolen_solmsi_marchali',
+'326594_0': 'Ceratosolen_solmsi_marchali', # sometimes referred to 142686_0, older NCBI taxid
 '168631_0': 'Chilo_suppressalis',
 '79782_0': 'Cimex_lectularius',
 '29053_0': 'Copidosoma_floridanum',
