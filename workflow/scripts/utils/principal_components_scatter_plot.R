@@ -47,7 +47,7 @@ plot(tsnedf$Y, pch=19, col=t.blue, cex=0.2)
 n <- 10
 
 ## UMAP
-umapdf <- umap(sdf, n_neighbors = 15, min_dist = 0.001, verbose = TRUE, n_threads = 8)
+umapdf <- umap(sdf, n_neighbors = 15, min_dist = 0.001, verbose = TRUE, n_threads = 8, metric = 'correlation')
 plot(umapdf, pch=19, col=t.blue, cex=0.2)
 
 ## KMEANS
