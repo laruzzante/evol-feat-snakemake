@@ -3,7 +3,7 @@ rule genesets_2_ogsets:
         input_list['gene_sets'],
         genes = rules.process_orthology_table.output.genes
     output:
-        'output/orthogroup_sets.tsv'
+        'output/genesets_cluster_analysis/orthogroup_sets.tsv'
     conda:
         '../envs/basic.yaml'
     script:
@@ -14,7 +14,7 @@ rule get_orthogroup_sets_features:
         ogsets = rules.genesets_2_ogsets.output[0],
         features = rules.merge_orthogroup_features.output[0]
     output:
-        'output/orthogroup_sets_features.tsv'
+        'output/genesets_cluster_analysis/orthogroup_sets_features.tsv'
     conda:
         '../envs/basic.yaml'
     script:
@@ -44,18 +44,19 @@ rule pairwise_comparisons_on_sets:
     input:
         rules.get_orthogroup_sets_features.output[0]
     output:
-        'output/genesets_cluster_analysis/pairwise_comparisons_of_orthogroup_sets.pdf'
+        'output/genesets_cluster_analysis/pairwise_comparisons_of_orthogroup_sets.pdf',
+        'output/genesets_cluster_analysis/scaled_pairwise_comparisons_of_orthogroup_sets.pdf'
     conda:
         '../envs/cluster_analysis.yaml'
     script:
         '../scripts/genesets_cluster_analysis/pairwise_comparisons.R'
 
-rule tsne_on_sets:
+rule dimensionality_reductions_on_sets:
     input:
         rules.get_orthogroup_sets_features.output[0]
     output:
-        'output/genesets_cluster_analysis/tsne_of_orthogroup_sets.pdf'
+        'output/genesets_cluster_analysis/dimensionality_reductions_of_orthogroup_sets.pdf'
     conda:
         '../envs/cluster_analysis.yaml'
     script:
-        '../scripts/genesets_cluster_analysis/tsne.R'
+        '../scripts/genesets_cluster_analysis/dimensionality_reductions.R'

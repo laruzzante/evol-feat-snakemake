@@ -7,7 +7,7 @@ scaled_features <- scale_features(input_features)
 pc_orthogroups <- prcomp(scaled_features[3:ncol(scaled_features)], center=TRUE, scale.=TRUE)
 
 
-n_principal_components <- 5
+n_principal_components <- 10
 n_bootstraps <- 10000
 seed <- 1234
 method.dist <- 'euclidean'

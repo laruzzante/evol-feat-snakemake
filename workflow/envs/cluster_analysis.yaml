@@ -4,12 +4,14 @@ channels:
   - bioconda
   - edurand
 dependencies:
-  - python=3.7.3
-  - r-base=3.6.3
-  - r-pvclust=2.2
-  - r-complexheatmap=1.12
-  - r-factoextra=1.0.5
-  - r-ggally=1.4.0
+  - python=3.10.0
+  - r-base=4.1.2
+  - r-pvclust=2.2_0
+  - bioconductor-complexheatmap=2.10.0
+  - r-factoextra=1.0.7
+  - r-ggally=2.1.2
   - r-rtsne=0.15
-  - r-scales=1.0.0
+  - r-scales=1.1.1
   - r-rcolorbrewer=1.1_2
+  - r-uwot=0.1.11
+  - r-dendextend=1.15.2

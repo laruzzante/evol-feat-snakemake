@@ -81,8 +81,8 @@ cl.optics.cut <- extractDBSCAN(cl.optics, eps_cl = 1)
 plot(pc$scores[,1],pc$scores[,2], pch=1, col=cl.optics.cut$cluster+1L, cex=0.2)
 plot3d(x=pc$scores[,1],y=pc$scores[,2],z=pc$scores[,3], radius=0.2, col=cl.optics.cut$cluster+1L)
 
-cl.optics <- optics(tsnedf$Y)
-cl.optics.cut <- extractDBSCAN(cl.optics, eps_cl = 1)
+cl.optics <- optics(tsnedf$Y, eps = 0.4)
+cl.optics.cut <- extractDBSCAN(cl.optics, eps_cl = 0.4)
 palette <- c()
 for(cl in cl.optics.cut$cluster){
   x <- cl + 1L # So to never have the cluster 0, but 1, because we need to start the indexing at 1 to extract the first colour in colours
@@ -95,8 +95,8 @@ plot(tsnedf$Y, pch=1, col=palette, cex=0.2)
 plot3d(tsnedf$Y, radius=0.2, col=palette)
 
 
-cl.optics <- optics(umapdf)
-cl.optics.cut <- extractDBSCAN(cl.optics, eps_cl = 0.5)
+cl.optics <- optics(umapdf, eps = 0.3)
+cl.optics.cut <- extractDBSCAN(cl.optics, eps_cl = 0.3)
 palette <- c()
 for(cl in cl.optics.cut$cluster){
   x <- cl + 1L # So to never have the cluster 0, but 1, because we need to start the indexing at 1 to extract the first colour in colours
@@ -111,12 +111,12 @@ plot3d(umapdf, radius=0.2, col=palette)
 ## DBSCAN
 
 # DBSCAN on PCA
-cl.dbscan <- dbscan(pc$scores, eps=0.6, weights = pc$sdev.^2 / sum(pc$sdev), minPts = 10) # I have added weights on the clustering, i.e. each PC is being weighted by the
-plot(pc$scores[,1],pc$scores[,2], pch=1, col=cl.dbscan$cluster+1L, cex=0.2)
+cl.dbscan <- dbscan(pc$scores, eps=0.3, weights = pc$sdev.^2 / sum(pc$sdev), minPts = 2) # I have added weights on the clustering, i.e. each PC is being weighted by the
+plot(tsnedf$Y, pch=1, col=cl.dbscan$cluster+1L, cex=0.2)
 plot3d(x=pc$scores[,1],y=pc$scores[,2],z=pc$scores[,3], radius=3, col=cl.dbscan$cluster+1L)
 
 # DBSCAN on tSNE (tSNE might have been done on PCA values, depending on how it was called before)
-cl.dbscan <- dbscan(tsnedf$Y, eps=0.6, minPts = 10) # I have added weights on the clustering, i.e. each PC is being weighted by the
+cl.dbscan <- dbscan(tsnedf$Y, eps=0.3, minPts = 2)
 # amount of proportional variance it explains
 n_clusters <- length(unique(cl.dbscan$cluster))
 palette <- c()
@@ -129,6 +129,21 @@ for(cl in cl.dbscan$cluster){
 }
 plot(tsnedf$Y, pch=1, col=palette, cex=0.2)
 # plot3d(x=pc$scores[,1],y=pc$scores[,2],z=pc$scores[,3], radius=3, col=cl.dbscan$cluster+1L)
+
+
+# DBSCAN on UMAP
+cl.dbscan <- dbscan(umapdf, eps=0.3, minPts = 2) # I have added weights on the clustering, i.e. each PC is being weighted by the
+# amount of proportional variance it explains
+n_clusters <- length(unique(cl.dbscan$cluster))
+palette <- c()
+for(cl in cl.dbscan$cluster){
+  x <- cl + 1L # So to never have the cluster 0, but 1, because we need to start the indexing at 1 to extract the first colour in colours
+  while(x > length(colours)){
+    x <- x - length(colours)
+  }
+  palette <- c(palette, colours[x])
+}
+plot(umapdf, pch=1, col=palette, cex=0.2)
 
 # Method for determining the optimal eps value
 # The method proposed here consists of computing the he k-nearest neighbor distances in a matrix of points.
@@ -143,7 +158,7 @@ abline(h = 2, lty = 2) # The knee seems to be around 2, hence we plot a line at 
 ## HDBSCAN
 
 cl.hdbscan <- hdbscan(pc$scores, minPts = 25)
-plot(DS3, col=cl.hdbscan$cluster, 
+plot(pc$scores, col=cl.hdbscan$cluster, 
      pch=ifelse(cl.hdbscan$cluster == 0, 8, 1), # Mark noise as star
      cex=ifelse(cl.hdbscan$cluster == 0, 0.5, 0.75), # Decrease size of noise
      xlab=NA, ylab=NA)

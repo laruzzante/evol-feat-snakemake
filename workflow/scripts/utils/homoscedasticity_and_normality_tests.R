@@ -3,6 +3,7 @@ library(ggpubr)
 library(nortest)
 library(M3C)
 library(Rtsne)
+library(uwot)
 setwd("~/evol-feat-snakemake/workflow/output")
 
 merged_orthogroup_features <- read.delim("~/evol-feat-snakemake/workflow/output/merged_orthogroup_features.tsv")
@@ -121,6 +122,7 @@ pdf("~/evol-feat-snakemake/workflow/log_principal_components_scaled_metrics_homo
 plot.new()
 txt.size <- 0.8
 text.xpos <- 0.5
+
 # Bartlett homoscedasticity test (homogeneity of variances)
 bartlett <- bartlett.test(as.data.frame(logdf))
 bartlett.txt <- paste('Log Principal Components Scores of Scaled Metrics\n\n\n',bartlett$method,':\np-value: ',bartlett$p.value, sep='')
