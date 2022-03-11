@@ -57,6 +57,25 @@ rule dbscan:
         '../scripts/dbscan.R'
 
 
+# HDBSCAN clustering on on tSNE
+rule hdbscan:
+    input:
+        tsne_coordinates = rules.dimensionality_reductions.tsne_coordinates
+    output:
+        plot = 'output/cluster_analysis/hdbscan.pdf' # Simply plotting the dbscan memberships over tsne coordinates
+        hdbscan_clusters = 'output/cluster_analysis/hdbscan.tsv'
+    threads: 8
+    resources:
+        mem_mb = 128000,
+        runtime_s = 21600  # 6 hours = 21600 seconds
+    log:
+        log = 'log/hdbscan.log'
+    conda:
+        '../envs/cluster_analysis.yaml'
+    script:
+        '../scripts/hdbscan.R'
+
+
 # OPTICS clustering on UMAP
 rule optics:
     input:

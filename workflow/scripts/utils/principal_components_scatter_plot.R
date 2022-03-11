@@ -40,7 +40,8 @@ plot3d(pc$scores[,3], y=pc$scores[,1], z=pc$scores[,2],col=t.blue)
 ## tSNE
 
 max_perplexity <- floor((nrow(sdf) - 1) / 3)
-tsnedf <- Rtsne(sdf, perplexity = 30, check_duplicates=FALSE, pca = TRUE, dims = 2, num_threads = 6) # Defaults: perplexity=30 and pca=TRUE ... i.e. we have to specify that we do not want a PCA beforehand
+perpl <- sqrt(nrow(sdf))
+tsnedf <- Rtsne(sdf, perplexity = perpl, check_duplicates=FALSE, pca = FALSE, dims = 2, num_threads = 6) # Defaults: perplexity=30 and pca=TRUE ... i.e. we have to specify that we do not want a PCA beforehand
 # plot3d(tsnedf$Y,col=t.blue) # Only for dims=3
 plot(tsnedf$Y, pch=19, col=t.blue, cex=0.2)
 
@@ -74,8 +75,9 @@ cl.kmedian <- kGmedian(pc$scores, ncenters=n, iter.max = 100)
 plot(pc$scores[,1],pc$scores[,2], pch=19, col=cl.kmedian$cluster, cex=0.2)
 plot3d(x=pc$scores[,1],y=pc$scores[,2],z=pc$scores[,3], pch=19, col=cl.kmedian$cluster, cex=0.2)
 
-## OPTICS
+### OPTICS
 
+## PCA OPTICS
 cl.optics <- optics(pc$scores)
 cl.optics.cut <- extractDBSCAN(cl.optics, eps_cl = 1)
 plot(pc$scores[,1],pc$scores[,2], pch=1, col=cl.optics.cut$cluster+1L, cex=0.2)
@@ -108,16 +110,18 @@ for(cl in cl.optics.cut$cluster){
 plot(umapdf, pch=1, col=palette, cex=0.2)
 plot3d(umapdf, radius=0.2, col=palette)
 
-## DBSCAN
+### DBSCAN
 
-# DBSCAN on PCA
+## DBSCAN on PCA
 cl.dbscan <- dbscan(pc$scores, eps=0.3, weights = pc$sdev.^2 / sum(pc$sdev), minPts = 2) # I have added weights on the clustering, i.e. each PC is being weighted by the
-plot(tsnedf$Y, pch=1, col=cl.dbscan$cluster+1L, cex=0.2)
+coords <- Rtsne(pc$scores[,1:5], perplexity = perpl, check_duplicates=FALSE, pca = FALSE, dims = 2, num_threads = 6) # Defaults: perplexity=30 and pca=TRUE ... i.e. we have to specify that we do not want a PCA beforehand
+plot(coords$Y, pch=1, col=cl.dbscan$cluster+1L, cex=0.2)
+plot(pc$scores, pch=1, col=cl.dbscan$cluster+1L, cex=0.2)
 plot3d(x=pc$scores[,1],y=pc$scores[,2],z=pc$scores[,3], radius=3, col=cl.dbscan$cluster+1L)
 
 # DBSCAN on tSNE (tSNE might have been done on PCA values, depending on how it was called before)
 cl.dbscan <- dbscan(tsnedf$Y, eps=0.3, minPts = 2)
-# amount of proportional variance it explains
+cl.dbscan_filtered <- subset(cl.dbscan, cl.dbscan$cluster != 0)
 n_clusters <- length(unique(cl.dbscan$cluster))
 palette <- c()
 for(cl in cl.dbscan$cluster){
@@ -156,8 +160,10 @@ abline(h = 2, lty = 2) # The knee seems to be around 2, hence we plot a line at 
 
 
 ## HDBSCAN
-
-cl.hdbscan <- hdbscan(pc$scores, minPts = 25)
+HDBminPoints = 25
+hdb <- hdbscan(tsnedf, minPts = HDBminPoints, gen_hdbscan_tree = T)
+hdb_fitlered <- subset(hdb, hdb$cluster != 0)
+hdb <- hdbscan(df_norm, minPts = HDBminPoints, gen_hdbscan_tree = T)
 plot(pc$scores, col=cl.hdbscan$cluster, 
      pch=ifelse(cl.hdbscan$cluster == 0, 8, 1), # Mark noise as star
      cex=ifelse(cl.hdbscan$cluster == 0, 0.5, 0.75), # Decrease size of noise
