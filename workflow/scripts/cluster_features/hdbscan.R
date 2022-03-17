@@ -6,7 +6,7 @@ library(dbscan)
 umap.coords <- read.delim(snakemake@input[['umap']], header = F)
 merged_orthogroup_features <- read.delim(snakemake@input[['features']])
 
-minPoints <- 2
+minPoints <- 25
 
 ## OPTICS on tSNE
 pdf(file=snakemake@output[['plot']])
