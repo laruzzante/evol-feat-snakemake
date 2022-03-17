@@ -38,4 +38,4 @@ rule all:
         rules.hierarchichal_clustering.output,
         rules.optics.output,
         rules.dbscan.output,
-        rules.hdbscan.output
+        # rules.hdbscan.output

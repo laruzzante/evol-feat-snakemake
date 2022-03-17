@@ -1,6 +1,6 @@
 input_features <- na.omit(read.delim(snakemake@input[[1]]))
 
-source('scripts/genesets_cluster_analysis/functions.R')
+source('scripts/cluster_analysis_functions.R')
 library(factoextra, quietly=TRUE)
 
 scaled_features <- scale_features(input_features)
