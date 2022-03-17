@@ -24,4 +24,4 @@ orthogroups <- na.omit(merged_orthogroup_features)[,1]
 cluster_ids <- cl.hdbscan$cluster
 memberships <- cbind(orthogroups, cluster_ids)
 
-write.table(memberships, snakemake@output[['optics_clusters']], quote = F, row.names = F, col.names = F, sep='\t')
+write.table(memberships, snakemake@output[['hdbscan_clusters']], quote = F, row.names = F, col.names = F, sep='\t')
