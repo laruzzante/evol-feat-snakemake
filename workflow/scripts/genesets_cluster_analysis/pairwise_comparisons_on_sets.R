@@ -37,18 +37,12 @@ library(GGally, quietly=TRUE)
 sets <- input_features[, 2]
 metrics <- input_features[, 3:ncol(input_features)]
 scaled_metrics <- scale(metrics, center = T, scale = T)
-df <- data.frame(cbind.data.frame(sets, metrics))
-sdf <- data.frame(cbind.data.frame(sets, scaled_metrics))
-
-print(sdf)
+df <- data.frame(cbind.data.frame(sets, scaled_metrics))
 
 pdf(file=snakemake@output[[1]], height=30, width=30)
   ggpairs(df, aes(color=sets, alpha=0.4), cardinality_threshold = NULL)
 dev.off()
 
-pdf(file=snakemake@output[[2]], height=30, width=30)
-  ggpairs(sdf, aes(color=sets, alpha=0.4), cardinality_threshold = NULL)
-dev.off()
 # for(i in 1:length(partitions)){
 #   ggpairs(partitions[[i]], aes(color=set, alpha=0.4), cardinality_threshold = NULL)
 # }

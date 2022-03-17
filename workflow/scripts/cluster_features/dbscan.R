@@ -1,21 +1,30 @@
-## READ
 
-# DBSCAN on Principal Components
-cl.dbscan <- dbscan(pc$scores, eps=0.3, weights = pc$sdev.^2 / sum(pc$sdev), minPts = 2) # I have added weights on the clustering, i.e. each PC is being weighted by the
-cl.dbscan <- subset(cl.dbscan, cl.dbscan$cl != 0)
-plot(tsnedf$Y, pch=1, col=cl.dbscan$cluster+1L, cex=0.2)
+source('scripts/cluster_analysis_functions.R')
 
+library(dbscan)
 
-# # DBSCAN on tSNE (tSNE might have been done on PCA values, depending on how it was called before)
-# cl.dbscan <- dbscan(tsnedf$Y, eps=0.3, minPts = 2) # I have added weights on the clustering, i.e. each PC is being weighted by the
-# # amount of proportional variance it explains
-# n_clusters <- length(unique(cl.dbscan$cluster))
-# palette <- c()
-# for(cl in cl.dbscan$cluster){
-#   x <- cl + 1L # So to never have the cluster 0, but 1, because we need to start the indexing at 1 to extract the first colour in colours
-#   while(x > length(colours)){
-#     x <- x - length(colours)
-#   }
-#   palette <- c(palette, colours[x])
-# }
-# plot(tsnedf$Y, pch=1, col=palette, cex=0.2)
+merged_orthogroup_features <- read.delim(snakemake@input[[1]])
+df <- na.omit(merged_orthogroup_features[,2:ncol(merged_orthogroup_features)])
+
+## Scaling and centering
+sdf <- scale(df, center = TRUE, scale = TRUE)
+
+## Principal Components to use as weighted scores for DBSCAN
+pc <- princomp(sdf)
+
+## DBSCAN on weighted Principal Components
+pdf(file=snakemake@output[['plot']])
+dbscan::kNNdistplot(pc$scores, k = 10) ## By plotting this one we can check where the knee is. Careful, k must be equal to minPoints used above in dbscan
+abline(h = 1.5, lty = 2) # The knee seems to be around 2, hence we plot a line at h=2 just to see the actual intersection
+cl.dbscan <- dbscan(pc$scores, eps=1.5, weights = pc$sdev.^2 / sum(pc$sdev), minPts = 10)
+# I have added weights on the clustering, i.e. each PC is being weighted by the proportion of explained variance
+mapping <- map_palette_to_clusters(cl.dbscan)
+
+plot(pc$scores[,c(1,2)], col=mapping$palette, pch=mapping$symbols, cex=0.2, lwd=0.2)
+dev.off()
+
+orthogroups <- na.omit(merged_orthogroup_features)[,1]
+cluster_ids <- cl.dbscan$cluster
+memberships <- cbind(orthogroups, cluster_ids)
+
+write.table(memberships, snakemake@output[['weighted_dbscan_clusters']], quote = F, row.names = F, col.names = F, sep='\t')

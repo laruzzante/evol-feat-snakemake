@@ -1,0 +1,10 @@
+name: annotated_heatmap
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - r-base=4.1.2
+  - r-pvclust=2.2_0
+  - r-dendextend=1.15.2
+  - r-colorramps=2.3
+  - r-gplots=3.0.1

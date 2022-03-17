@@ -14,4 +14,4 @@ dependencies:
   - r-scales=1.1.1
   - r-rcolorbrewer=1.1_2
   - r-uwot=0.1.11
-  - r-dendextend=1.15.2
+  - r-dbscan=1.1_10

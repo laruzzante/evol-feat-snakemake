@@ -1,3 +1,4 @@
+
 rule genesets_2_ogsets:
     input:
         input_list['gene_sets'],
@@ -8,6 +9,7 @@ rule genesets_2_ogsets:
         '../envs/basic.yaml'
     script:
         '../scripts/genesets_2_orthogroupsets.py'
+
 
 rule get_orthogroup_sets_features:
     input:
@@ -20,7 +22,8 @@ rule get_orthogroup_sets_features:
     script:
         '../scripts/get_orthogroup_sets_features.py'
 
-rule pvclust_on_sets:
+
+rule hierarchichal_clustering_on_sets:
     input:
         rules.get_orthogroup_sets_features.output[0]
     output:
@@ -28,7 +31,8 @@ rule pvclust_on_sets:
     conda:
         '../envs/cluster_analysis.yaml'
     script:
-        '../scripts/genesets_cluster_analysis/pvclust.R'
+        '../scripts/genesets_cluster_analysis/hierarchichal_clustering_on_sets.R'
+
 
 rule pca_on_sets:
     input:
@@ -38,18 +42,19 @@ rule pca_on_sets:
     conda:
         '../envs/cluster_analysis.yaml'
     script:
-        '../scripts/genesets_cluster_analysis/pca.R'
+        '../scripts/genesets_cluster_analysis/pca_on_sets.R'
+
 
 rule pairwise_comparisons_on_sets:
     input:
         rules.get_orthogroup_sets_features.output[0]
     output:
         'output/genesets_cluster_analysis/pairwise_comparisons_of_orthogroup_sets.pdf',
-        'output/genesets_cluster_analysis/scaled_pairwise_comparisons_of_orthogroup_sets.pdf'
     conda:
         '../envs/cluster_analysis.yaml'
     script:
-        '../scripts/genesets_cluster_analysis/pairwise_comparisons.R'
+        '../scripts/genesets_cluster_analysis/pairwise_comparisons_on_sets.R'
+
 
 rule dimensionality_reductions_on_sets:
     input:
@@ -59,4 +64,14 @@ rule dimensionality_reductions_on_sets:
     conda:
         '../envs/cluster_analysis.yaml'
     script:
-        '../scripts/genesets_cluster_analysis/dimensionality_reductions.R'
+        '../scripts/genesets_cluster_analysis/dimensionality_reductions_on_sets.R'
+
+
+rule genesets_clusters:
+    input:
+        rules.hierarchichal_clustering_on_sets.output,
+        rules.pca_on_sets.output,
+        rules.pairwise_comparisons_on_sets.output,
+        rules.dimensionality_reductions_on_sets.output
+    output:
+        touch('output/genesets_cluster_analysis/.done')

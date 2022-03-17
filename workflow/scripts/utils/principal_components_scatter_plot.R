@@ -8,6 +8,16 @@ library(colorRamps)
 library(dendextend)
 library(uwot)
 
+library(factoextra)
+
+# Control variable colors using their contributions
+fviz_pca_var(pc, col.var="contrib",
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+             repel = TRUE # Avoid text overlapping
+) +  theme_minimal()
+
+fviz_pca_biplot(pc, pointsize=0.2, label='var', repel=T, col.var = 'red', col.ind='blue', alpha.ind=0.2) + theme_minimal()
+
 # Transparent blue
 t.blue <- rgb(0, 0, 255, max = 255, alpha = 25, names = "blue50")
 
@@ -27,7 +37,7 @@ sdf <- scale(df)
 
 
 ## PCA
-pc <- princomp(na.omit(sdf))
+pc <- princomp(sdf)
 
 plot(pc$scores[,1],pc$scores[,2], pch=19, col=t.blue, cex=0.2)
 
@@ -48,7 +58,13 @@ plot(tsnedf$Y, pch=19, col=t.blue, cex=0.2)
 n <- 10
 
 ## UMAP
-umapdf <- umap(sdf, n_neighbors = 15, min_dist = 0.001, verbose = TRUE, n_threads = 8, metric = 'correlation')
+# umapdf <- umap(sdf, n_neighbors = 15, min_dist = 0.001, verbose = TRUE, n_threads = 8, metric = 'correlation')
+umapdf <- umap(sdf, n_neighbors = 15, min_dist = 0.001, verbose = TRUE, n_threads = 8, metric = 'correlation') # Default settings for everything apart from min_dist, set from 0.01 to 0.001 and metric from Euclidean to correlation
+# min_dist	
+# The effective minimum distance between embedded points. Smaller values will result in a more clustered/clumped embedding where nearby points on
+# the manifold are drawn closer together, while larger values will result on a more even dispersal of points. The value should be set relative to the
+# spread value, which determines the scale at which embedded points will be spread out.
+
 plot(umapdf, pch=19, col=t.blue, cex=0.2)
 
 ## KMEANS
@@ -97,26 +113,70 @@ plot(tsnedf$Y, pch=1, col=palette, cex=0.2)
 plot3d(tsnedf$Y, radius=0.2, col=palette)
 
 
-cl.optics <- optics(umapdf, eps = 0.3)
-cl.optics.cut <- extractDBSCAN(cl.optics, eps_cl = 0.3)
+cl.optics <- optics(umapdf, eps = 0.15, minPts = 10)
+cl.optics.cut <- extractDBSCAN(cl.optics, eps_cl = 0.15)
 palette <- c()
+symbols <- c()
 for(cl in cl.optics.cut$cluster){
-  x <- cl + 1L # So to never have the cluster 0, but 1, because we need to start the indexing at 1 to extract the first colour in colours
-  while(x > length(colours)){
-    x <- x - length(colours)
+  if(cl == 0){
+    palette <- c(palette, '#000000') # When cluster == 0, i.e. points that could not be assigned to any cluster, then colour is black
+    symbols <- c(symbols, 4)# When cluster == 0, i.e. points that could not be assigned to any cluster, then symbol is a 'x'
+  } else {
+    x <- cl + 1L # So to never have the cluster 0, but 1, because we need to start the indexing at 1 to extract the first colour in colours
+    while(x > length(colours)){
+      x <- x - length(colours)
+    }
+    palette <- c(palette, colours[x])
+    
+    symbol <- cl%%25
+    if(symbol == 4){
+      symbol <- 0
+    }
+    symbols <- c(symbols, symbol)
   }
-  palette <- c(palette, colours[x])
 }
-plot(umapdf, pch=1, col=palette, cex=0.2)
+plot(umapdf, pch=symbols, col=palette, cex=0.2, lwd=0.2)
 plot3d(umapdf, radius=0.2, col=palette)
 
 ### DBSCAN
 
 ## DBSCAN on PCA
-cl.dbscan <- dbscan(pc$scores, eps=0.3, weights = pc$sdev.^2 / sum(pc$sdev), minPts = 2) # I have added weights on the clustering, i.e. each PC is being weighted by the
-coords <- Rtsne(pc$scores[,1:5], perplexity = perpl, check_duplicates=FALSE, pca = FALSE, dims = 2, num_threads = 6) # Defaults: perplexity=30 and pca=TRUE ... i.e. we have to specify that we do not want a PCA beforehand
-plot(coords$Y, pch=1, col=cl.dbscan$cluster+1L, cex=0.2)
-plot(pc$scores, pch=1, col=cl.dbscan$cluster+1L, cex=0.2)
+dbscan::kNNdistplot(pc$scores, k = 10) ## By plotting this one we can check where the knee is. Careful, k must be equal to minPoints used above in dbscan
+abline(h = 1.5, lty = 2) # The knee seems to be around 0.15, hence we plot a line at h=0.15 just to see the actual intersection
+
+cl.dbscan <- dbscan(pc$scores, eps=1.5, weights = pc$sdev.^2 / sum(pc$sdev), minPts = 10) # I have added weights on the clustering, i.e. each PC is being weighted by the
+n_clusters <- length(unique(cl.dbscan$cluster))
+palette <- c()
+symbols <- c()
+for(cl in cl.dbscan$cluster){
+  if(cl == 0){
+    palette <- c(palette, '#000000') # When cluster == 0, i.e. points that could not be assigned to any cluster, then colour is black
+    symbols <- c(symbols, 4)# When cluster == 0, i.e. points that could not be assigned to any cluster, then symbol is a 'x'
+  } else {
+    x <- cl + 1L # So to never have the cluster 0, but 1, because we need to start the indexing at 1 to extract the first colour in colours
+    while(x > length(colours)){
+      x <- x - length(colours)
+    }
+    palette <- c(palette, colours[x])
+    
+    symbol <- cl%%25
+    if(symbol == 4){
+      symbol <- 0
+    }
+    symbols <- c(symbols, symbol)
+  }
+}
+mapping <- list('palette'=palette, 'symbols'=symbols)
+map2cl <- function(){
+  mapping <- 
+  return()
+}
+
+plot(pc$scores[,c(1,2)], pch=unlist(mapping['symbols']), col=unlist(mapping['palette']), cex=0.2, lwd=0.2)
+
+# coords <- Rtsne(pc$scores[,1:5], perplexity = perpl, check_duplicates=FALSE, pca = FALSE, dims = 2, num_threads = 6) # Defaults: perplexity=30 and pca=TRUE ... i.e. we have to specify that we do not want a PCA beforehand
+# plot(coords$Y, pch=1, col=cl.dbscan$cluster+1L, cex=0.2)
+# plot(pc$scores, pch=1, col=cl.dbscan$cluster+1L, cex=0.2)
 plot3d(x=pc$scores[,1],y=pc$scores[,2],z=pc$scores[,3], radius=3, col=cl.dbscan$cluster+1L)
 
 # DBSCAN on tSNE (tSNE might have been done on PCA values, depending on how it was called before)
@@ -136,18 +196,6 @@ plot(tsnedf$Y, pch=1, col=palette, cex=0.2)
 
 
 # DBSCAN on UMAP
-cl.dbscan <- dbscan(umapdf, eps=0.3, minPts = 2) # I have added weights on the clustering, i.e. each PC is being weighted by the
-# amount of proportional variance it explains
-n_clusters <- length(unique(cl.dbscan$cluster))
-palette <- c()
-for(cl in cl.dbscan$cluster){
-  x <- cl + 1L # So to never have the cluster 0, but 1, because we need to start the indexing at 1 to extract the first colour in colours
-  while(x > length(colours)){
-    x <- x - length(colours)
-  }
-  palette <- c(palette, colours[x])
-}
-plot(umapdf, pch=1, col=palette, cex=0.2)
 
 # Method for determining the optimal eps value
 # The method proposed here consists of computing the he k-nearest neighbor distances in a matrix of points.
@@ -155,21 +203,87 @@ plot(umapdf, pch=1, col=palette, cex=0.2)
 # Next, these k-distances are plotted in an ascending order. The aim is to determine the “knee”, which corresponds to the optimal eps parameter.
 # A knee corresponds to a threshold where a sharp change occurs along the k-distance curve.
 # The function kNNdistplot() [in dbscan package] can be used to draw the k-distance plot:
-dbscan::kNNdistplot(pc$scores, k = 10) ## By plotting this one we can check where the knee is. Careful, k must be equal to minPoints used above in dbscan
-abline(h = 2, lty = 2) # The knee seems to be around 2, hence we plot a line at h=2 just to see the actual intersection
+dbscan::kNNdistplot(umapdf, k = 10) ## By plotting this one we can check where the knee is. Careful, k must be equal to minPoints used above in dbscan
+abline(h = 0.15, lty = 2) # The knee seems to be around 0.15, hence we plot a line at h=0.15 just to see the actual intersection
 
+cl.dbscan <- dbscan(umapdf, eps=0.15, minPts = 10)
+n_clusters <- length(unique(cl.dbscan$cluster))
+palette <- c()
+symbols <- c()
+for(cl in cl.dbscan$cluster){
+  if(cl == 0){
+    palette <- c(palette, '#000000') # When cluster == 0, i.e. points that could not be assigned to any cluster, then colour is black
+    symbols <- c(symbols, 4)# When cluster == 0, i.e. points that could not be assigned to any cluster, then symbol is a 'x'
+  } else {
+    x <- cl + 1L # So to never have the cluster 0, but 1, because we need to start the indexing at 1 to extract the first colour in colours
+    while(x > length(colours)){
+      x <- x - length(colours)
+    }
+    palette <- c(palette, colours[x])
+    
+    symbol <- cl%%25
+    if(symbol == 4){
+      symbol <- 0
+    }
+    symbols <- c(symbols, symbol)
+  }
+}
+plot(umapdf, pch=symbols, col=palette, cex=0.2, lwd=0.2)
+
+library(ggplot2)
+library(cowplot)
+# Basic scatter plot
+print(length(cl.hdbscan$cluster[cl.hdbscan$cluster==0])) ## Printing N of unassigned orthogroups (noise points)
+print(length(unique(cl.hdbscan$cluster)) -1 ) ## Printing N of clusters, minus 1, i.e. to remove cluster id 0 (unassigned)
+umap.df <-data.frame(umapdf)
+ggplot(umap.df, aes(x=X1, y=X2)) +
+  geom_point(shape=symbols, color=palette, fill=palette, size=0.8, alpha=0.2, stroke=0.4) +
+  theme_bw() + xlab(label='UMAP.X') + ylab(label='UMAP.Y')
 
 ## HDBSCAN
-HDBminPoints = 25
-hdb <- hdbscan(tsnedf, minPts = HDBminPoints, gen_hdbscan_tree = T)
-hdb_fitlered <- subset(hdb, hdb$cluster != 0)
-hdb <- hdbscan(df_norm, minPts = HDBminPoints, gen_hdbscan_tree = T)
-plot(pc$scores, col=cl.hdbscan$cluster, 
-     pch=ifelse(cl.hdbscan$cluster == 0, 8, 1), # Mark noise as star
-     cex=ifelse(cl.hdbscan$cluster == 0, 0.5, 0.75), # Decrease size of noise
+HDBminPoints = 10
+sset <- umapdf[sample(nrow(umapdf), 20000), ]
+cl.hdbscan <- hdbscan(sset, minPts = HDBminPoints, gen_hdbscan_tree = T)
+# hdb_filtered <- subset(hdb, hdb$cluster != 0)
+
+palette <- c()
+symbols <- c()
+for(cl in cl.hdbscan$cluster){
+  if(cl == 0){
+    palette <- c(palette, '#000000') # When cluster == 0, i.e. points that could not be assigned to any cluster, then colour is black
+    symbols <- c(symbols, 4)# When cluster == 0, i.e. points that could not be assigned to any cluster, then symbol is a 'x'
+  } else {
+    x <- cl + 1L # So to never have the cluster 0, but 1, because we need to start the indexing at 1 to extract the first colour in colours
+    while(x > length(colours)){
+      x <- x - length(colours)
+    }
+    palette <- c(palette, colours[x])
+    
+    symbol <- cl%%25
+    if(symbol == 4){
+      symbol <- 0
+    }
+    symbols <- c(symbols, symbol)
+  }
+}
+plot(umapdf, pch=symbols, col=palette, cex=0.2, lwd=0.2)
+
+library(ggplot2)
+library(cowplot)
+# Basic scatter plot
+print(length(cl.dbscan$cluster[cl.dbscan$cluster==0])) ## Printing N of unassigned orthogroups (noise points)
+print(length(unique(cl.dbscan$cluster)) -1 ) ## Printing N of clusters, minus 1, i.e. to remove cluster id 0 (unassigned)
+umap.df <-data.frame(umapdf)
+ggplot(umap.df, aes(x=X1, y=X2)) +
+  geom_point(shape=symbols, color=palette, fill=palette, size=0.8, alpha=0.2, stroke=0.4) +
+  theme_bw() + xlab(label='UMAP.X') + ylab(label='UMAP.Y')
+
+plot(sset, col=hdb$cluster, 
+     pch=ifelse(hdb$cluster == 0, 8, 1), # Mark noise as star
+     cex=ifelse(hdb$cluster == 0, 0.5, 0.75), # Decrease size of noise
      xlab=NA, ylab=NA)
-colors <- sapply(1:length(cl2$cluster), 
-                 function(i) adjustcolor(palette()[(cl2$cluster+1)[i]], alpha.f = cl2$membership_prob[i]))
+colors <- sapply(1:length(hdb$cluster), 
+                 function(i) adjustcolor(palette()[(hdb$cluster+1)[i]], alpha.f = hdb$membership_prob[i]))
 points(DS3, col=colors, pch=20)
 
 
