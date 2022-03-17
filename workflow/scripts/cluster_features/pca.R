@@ -26,6 +26,9 @@ fviz_pca_var(pc, col.var="contrib",
 fviz_pca_biplot(pc, pointsize=0.2, label='var', repel=TRUE, col.var = 'red',
                 col.ind='blue', alpha.ind=0.2) + theme_minimal()
 
-plot(pc)
+# Contributions of variables
+for(i in 1:length(pc$sdev)){
+  print(fviz_contrib(pc, choice = "var", axes = i, top = Inf))
+}
 
 dev.off()

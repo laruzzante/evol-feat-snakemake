@@ -60,7 +60,8 @@ rule hierarchichal_clustering:
 # OPTICS clustering on tSNE
 rule optics:
     input:
-        features = rules.dimensionality_reductions.output.tsne_coordinates
+        tsne = rules.dimensionality_reductions.output.tsne_coordinates,
+        features = rules.merge_orthogroup_features.output[0]
     output:
         plot = 'output/cluster_analysis/optics.pdf', # Plotting the optics memberships over umap coordinates
         optics_clusters = 'output/cluster_analysis/optics.tsv'
@@ -80,10 +81,8 @@ rule optics:
 rule dbscan:
     input:
         features = rules.merge_orthogroup_features.output[0]
-        # tsne_coordinates = rules.dimensionality_reductions.output.tsne_coordinates
     output:
         plot = 'output/cluster_analysis/weighted_dbscan.pdf', # Plotting the dbscan memberships over tsne coordinates
-        # dbscan_clusters = 'output/cluster_analysis/dbscan.tsv',
         weighted_dbscan_clusters = 'output/cluster_analysis/weighted_dbscan.tsv'
     threads: MAX_THREADS
     resources:
@@ -100,7 +99,8 @@ rule dbscan:
 # HDBSCAN clustering on UMAP
 rule hdbscan:
     input:
-        tsne_coordinates = rules.dimensionality_reductions.output.tsne_coordinates
+        umap = rules.dimensionality_reductions.output.umap_coordinates,
+        features = rules.merge_orthogroup_features.output[0]
     output:
         plot = 'output/cluster_analysis/hdbscan.pdf', # Plotting the hdbscan memberships over tsne coordinates
         hdbscan_clusters = 'output/cluster_analysis/hdbscan.tsv'

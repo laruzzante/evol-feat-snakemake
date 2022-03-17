@@ -51,7 +51,7 @@ plot3d(pc$scores[,3], y=pc$scores[,1], z=pc$scores[,2],col=t.blue)
 
 max_perplexity <- floor((nrow(sdf) - 1) / 3)
 perpl <- sqrt(nrow(sdf))
-tsnedf <- Rtsne(sdf, perplexity = perpl, check_duplicates=FALSE, pca = FALSE, dims = 2, num_threads = 6) # Defaults: perplexity=30 and pca=TRUE ... i.e. we have to specify that we do not want a PCA beforehand
+tsnedf <- Rtsne(pc$scores, perplexity = perpl, check_duplicates=FALSE, pca = FALSE, dims = 2, num_threads = 6) # Defaults: perplexity=30 and pca=TRUE ... i.e. we have to specify that we do not want a PCA beforehand
 # plot3d(tsnedf$Y,col=t.blue) # Only for dims=3
 plot(tsnedf$Y, pch=19, col=t.blue, cex=0.2)
 
@@ -59,7 +59,7 @@ n <- 10
 
 ## UMAP
 # umapdf <- umap(sdf, n_neighbors = 15, min_dist = 0.001, verbose = TRUE, n_threads = 8, metric = 'correlation')
-umapdf <- umap(sdf, n_neighbors = 15, min_dist = 0.001, verbose = TRUE, n_threads = 8, metric = 'correlation') # Default settings for everything apart from min_dist, set from 0.01 to 0.001 and metric from Euclidean to correlation
+umapdf <- umap(pc$scores, n_neighbors = 15, min_dist = 0.001, verbose = TRUE, n_threads = 8, metric = 'correlation') # Default settings for everything apart from min_dist, set from 0.01 to 0.001 and metric from Euclidean to correlation
 # min_dist	
 # The effective minimum distance between embedded points. Smaller values will result in a more clustered/clumped embedding where nearby points on
 # the manifold are drawn closer together, while larger values will result on a more even dispersal of points. The value should be set relative to the
@@ -99,8 +99,10 @@ cl.optics.cut <- extractDBSCAN(cl.optics, eps_cl = 1)
 plot(pc$scores[,1],pc$scores[,2], pch=1, col=cl.optics.cut$cluster+1L, cex=0.2)
 plot3d(x=pc$scores[,1],y=pc$scores[,2],z=pc$scores[,3], radius=0.2, col=cl.optics.cut$cluster+1L)
 
-cl.optics <- optics(tsnedf$Y, eps = 0.4)
-cl.optics.cut <- extractDBSCAN(cl.optics, eps_cl = 0.4)
+dbscan::kNNdistplot(tsnedf$Y, k = 5)
+abline(h = 0.3, lty = 2) # The knee seems to be around 0.15, hence we plot a line at h=0.15 just to see the actual intersection
+cl.optics <- optics(tsnedf$Y, eps = 0.3, minPts = 5)
+cl.optics.cut <- extractDBSCAN(cl.optics, eps_cl = 0.3)
 palette <- c()
 for(cl in cl.optics.cut$cluster){
   x <- cl + 1L # So to never have the cluster 0, but 1, because we need to start the indexing at 1 to extract the first colour in colours
@@ -167,12 +169,13 @@ for(cl in cl.dbscan$cluster){
   }
 }
 mapping <- list('palette'=palette, 'symbols'=symbols)
-map2cl <- function(){
-  mapping <- 
-  return()
-}
 
 plot(pc$scores[,c(1,2)], pch=unlist(mapping['symbols']), col=unlist(mapping['palette']), cex=0.2, lwd=0.2)
+
+orthogroups <- na.omit(merged_orthogroup_features)[,1]
+memberships <- cl.dbscan$cluster
+
+memerbships <- cbind(orthogroups, memberships)
 
 # coords <- Rtsne(pc$scores[,1:5], perplexity = perpl, check_duplicates=FALSE, pca = FALSE, dims = 2, num_threads = 6) # Defaults: perplexity=30 and pca=TRUE ... i.e. we have to specify that we do not want a PCA beforehand
 # plot(coords$Y, pch=1, col=cl.dbscan$cluster+1L, cex=0.2)
@@ -266,7 +269,7 @@ for(cl in cl.hdbscan$cluster){
     symbols <- c(symbols, symbol)
   }
 }
-plot(umapdf, pch=symbols, col=palette, cex=0.2, lwd=0.2)
+plot(sset, pch=symbols, col=palette, cex=0.2, lwd=0.2)
 
 library(ggplot2)
 library(cowplot)

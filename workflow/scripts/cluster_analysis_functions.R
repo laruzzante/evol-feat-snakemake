@@ -1,6 +1,5 @@
 library(pvclust, quietly=TRUE)
-library(ComplexHeatmap, quietly=TRUE)
-suppressPackageStartupMessages(library(ComplexHeatmap))
+suppressPackageStartupMessages(library(ComplexHeatmap, quietly=TRUE))
 library(RColorBrewer)
 
 
