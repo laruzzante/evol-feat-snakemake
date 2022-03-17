@@ -13,7 +13,7 @@ pdf(file=snakemake@output[['plot']])
 
 dbscan::kNNdistplot(umap.coords, k = minPoints)
 abline(h = 0.15, lty = 2) # The knee seems to be around 0.3, hence we plot a line at h=0.3 just to see the actual intersection
-cl.hdbscan <- hdbscan(umap.coords, minPts = minPoints, gen_hdbscan_tree = T)
+cl.hdbscan <- hdbscan(umap.coords, minPts = minPoints, gen_hdbscan_tree = FALSE)
 
 mapping <- map_palette_to_clusters(hdbscan)
 
