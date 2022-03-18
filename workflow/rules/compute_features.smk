@@ -4,20 +4,26 @@ rule compute_average_copy_number:
         orthogroups = rules.process_orthology_table.output.orthogroups
     output:
         'output/computed_orthogroup_features/ACN.tsv'
-    script:
-        '../scripts/compute_features/compute_ACN.py'
     log:
         'log/compute_average_copy_number.log'
+    conda:
+        '../envs/basic.yaml'
+    script:
+        '../scripts/compute_features/compute_ACN.py'
+
 
 rule compute_copy_number_variation:
     input:
         orthogroups = rules.process_orthology_table.output.orthogroups
     output:
         'output/computed_orthogroup_features/CNV.tsv'
-    script:
-        '../scripts/compute_features/compute_CNV.py'
     log:
         'log/compute_copy_number_variation.log'
+    conda:
+        '../envs/basic.yaml'
+    script:
+        '../scripts/compute_features/compute_CNV.py'
+
 
 rule compute_universality:
     input:
@@ -25,10 +31,12 @@ rule compute_universality:
         info = rules.process_orthology_table.output.info
     output:
         'output/computed_orthogroup_features/UNI.tsv'
-    script:
-        '../scripts/compute_features/compute_UNI.py'
     log:
         'log/compute_universality.log'
+    conda:
+        '../envs/basic.yaml'
+    script:
+        '../scripts/compute_features/compute_UNI.py'
 
 
 rule compute_duplicability:
@@ -36,10 +44,12 @@ rule compute_duplicability:
         orthogroups = rules.process_orthology_table.output.orthogroups
     output:
         'output/computed_orthogroup_features/DUP.tsv'
-    script:
-        '../scripts/compute_features/compute_DUP.py'
     log:
         'log/compute_duplicability.log'
+    conda:
+        '../envs/basic.yaml'
+    script:
+        '../scripts/compute_features/compute_DUP.py'
 
 
 rule compute_age:
@@ -48,12 +58,12 @@ rule compute_age:
         MRCA_branchlengths = rules.create_MRCA_branchlengths_table.output[0]
     output:
         'output/computed_orthogroup_features/AGE.tsv'
+    log:
+        'log/compute_age.log'
     conda:
         '../envs/phylogeny.yaml'
     script:
         '../scripts/compute_features/compute_AGE.py'
-    log:
-        'log/compute_age.log'
 
 
 rule compute_relative_universality:
@@ -62,12 +72,12 @@ rule compute_relative_universality:
         MRCA_ntips = rules.create_MRCA_ntips_table.output[0]
     output:
         'output/computed_orthogroup_features/RUN.tsv'
+    log:
+        'log/compute_relative_universality.log'
     conda:
         '../envs/phylogeny.yaml'
     script:
         '../scripts/compute_features/compute_RUN.py'
-    log:
-        'log/compute_relative_universality.log'
 
 
 rule compute_expansions:
@@ -76,10 +86,12 @@ rule compute_expansions:
         copy_number_variation_table = rules.create_copy_number_variation_table.output.copy_number_variation_table
     output:
         'output/computed_orthogroup_features/EXP.tsv'
-    script:
-        '../scripts/compute_features/compute_EXP.py'
     log:
         'log/compute_expansions.log'
+    conda:
+        '../envs/basic.yaml'
+    script:
+        '../scripts/compute_features/compute_EXP.py'
 
 
 rule compute_stabilities:
@@ -88,10 +100,12 @@ rule compute_stabilities:
         copy_number_variation_table = rules.create_copy_number_variation_table.output.copy_number_variation_table
     output:
         'output/computed_orthogroup_features/STA.tsv'
-    script:
-        '../scripts/compute_features/compute_STA.py'
     log:
         'log/compute_stabilities.log'
+    conda:
+        '../envs/basic.yaml'
+    script:
+        '../scripts/compute_features/compute_STA.py'
 
 
 rule compute_contractions:
@@ -100,10 +114,12 @@ rule compute_contractions:
         copy_number_variation_table = rules.create_copy_number_variation_table.output.copy_number_variation_table
     output:
         'output/computed_orthogroup_features/CON.tsv'
-    script:
-        '../scripts/compute_features/compute_CON.py'
     log:
         'log/compute_contractions.log'
+    conda:
+        '../envs/basic.yaml'
+    script:
+        '../scripts/compute_features/compute_CON.py'
 
 
 rule compute_relative_expansions:
@@ -113,10 +129,12 @@ rule compute_relative_expansions:
         expansions = rules.compute_expansions.output
     output:
         'output/computed_orthogroup_features/REX.tsv'
-    script:
-        '../scripts/compute_features/compute_REX.py'
     log:
         'log/compute_relative_expansions.log'
+    conda:
+        '../envs/basic.yaml'
+    script:
+        '../scripts/compute_features/compute_REX.py'
 
 
 rule compute_relative_stabilities:
@@ -126,10 +144,12 @@ rule compute_relative_stabilities:
         stabilities = rules.compute_stabilities.output
     output:
         'output/computed_orthogroup_features/RST.tsv'
-    script:
-        '../scripts/compute_features/compute_RST.py'
     log:
         'log/compute_relative_stabilities.log'
+    conda:
+        '../envs/basic.yaml'
+    script:
+        '../scripts/compute_features/compute_RST.py'
 
 
 rule compute_relative_contractions:
@@ -139,10 +159,12 @@ rule compute_relative_contractions:
         contractions = rules.compute_contractions.output
     output:
         'output/computed_orthogroup_features/RCO.tsv'
-    script:
-        '../scripts/compute_features/compute_RCO.py'
     log:
         'log/compute_relative_contractions.log'
+    conda:
+        '../envs/basic.yaml'
+    script:
+        '../scripts/compute_features/compute_RCO.py'
 
 
 rule compute_synteny:
@@ -151,10 +173,12 @@ rule compute_synteny:
         synteny_counts = rules.create_synteny_counts_table.output.synteny_counts
     output:
         'output/computed_orthogroup_features/SYN.tsv'
-    script:
-        '../scripts/compute_features/compute_SYN.py'
     log:
         'log/compute_synteny.log'
+    conda:
+        '../envs/basic.yaml'
+    script:
+        '../scripts/compute_features/compute_SYN.py'
 
 
 rule compute_relative_synteny:
@@ -164,10 +188,12 @@ rule compute_relative_synteny:
         MRCA_ntips = rules.create_MRCA_ntips_table.output[0]
     output:
         'output/computed_orthogroup_features/RSY.tsv'
-    script:
-        '../scripts/compute_features/compute_RSY.py'
     log:
         'log/compute_relative_synteny.log'
+    conda:
+        '../envs/basic.yaml'
+    script:
+        '../scripts/compute_features/compute_RSY.py'
 
 
 rule compute_maximum_synteny:
@@ -176,7 +202,9 @@ rule compute_maximum_synteny:
         synteny_counts = rules.create_synteny_counts_table.output.synteny_counts
     output:
         'output/computed_orthogroup_features/MSY.tsv'
-    script:
-        '../scripts/compute_features/compute_MSY.py'
     log:
         'log/compute_maximum_synteny.log'
+    conda:
+        '../envs/basic.yaml'
+    script:
+        '../scripts/compute_features/compute_MSY.py'
