@@ -37,4 +37,4 @@ rule all:
         rules.pca.output,
         rules.optics.output,
         rules.dbscan.output,
-        # rules.self_organising_map.output
+        rules.self_organising_map.output

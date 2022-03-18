@@ -14,7 +14,7 @@ rule dimensionality_reductions:
         mem_mb = MAX_MEMORY,
         runtime_s = MAX_RUNTIME
     log:
-        log = 'log/dimensionality_reductions.log'
+        'log/dimensionality_reductions.log'
     conda:
         '../envs/cluster_analysis.yaml'
     script:
@@ -31,7 +31,7 @@ rule pca:
         mem_mb = MAX_MEMORY,
         runtime_s = MAX_RUNTIME  # 6 hours = 21600 seconds
     log:
-        log = 'log/pca.log'
+        'log/pca.log'
     conda:
         '../envs/cluster_analysis.yaml'
     script:
@@ -50,7 +50,7 @@ rule hierarchichal_clustering:
         mem_mb = MAX_MEMORY,
         runtime_s = MAX_RUNTIME
     log:
-        log = 'log/hierarchichal_clustering.log'
+        'log/hierarchichal_clustering.log'
     conda:
         '../envs/cluster_analysis.yaml'
     script:
@@ -70,7 +70,7 @@ rule optics:
         mem_mb = MAX_MEMORY,
         runtime_s = MAX_RUNTIME
     log:
-        log = 'log/optics.log'
+        'log/optics.log'
     conda:
         '../envs/cluster_analysis.yaml'
     script:
@@ -92,7 +92,7 @@ rule dbscan:
         mem_mb = MAX_MEMORY,
         runtime_s = MAX_RUNTIME
     log:
-        log = 'log/dbscan.log'
+        'log/dbscan.log'
     conda:
         '../envs/cluster_analysis.yaml'
     script:
@@ -132,7 +132,7 @@ rule self_organising_map:
         mem_mb = MAX_MEMORY,
         runtime_s = MAX_RUNTIME
     log:
-        log = 'log/self_organising_map.log'
+        'log/self_organising_map.log'
     conda:
         '../envs/self_organising_map.yaml'
     script:
