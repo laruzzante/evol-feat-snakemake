@@ -4,6 +4,6 @@ channels:
   - bioconda
 dependencies:
   - python=3.10.0
-  - pandas=1.1.3
+  - pandas=1.4.1
   - r-base=4.1.2
   - r-ape=5.6
