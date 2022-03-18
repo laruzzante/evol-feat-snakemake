@@ -21,6 +21,40 @@ rule dimensionality_reductions:
         '../scripts/cluster_features/dimensionality_reductions.R'
 
 
+rule homoscedasticity:
+    input:
+        features = rules.merge_orthogroup_features.output[0]
+    output:
+        plot = 'output/cluster_analysis/homoscedasticity.pdf'
+    threads: MAX_THREADS
+    resources:
+        mem_mb = MAX_MEMORY,
+        runtime_s = MAX_RUNTIME
+    log:
+        'log/homoscedasticity.log'
+    conda:
+        '../envs/normality.yaml'
+    script:
+        '../scripts/cluster_features/homoscedasticity.R'
+
+
+rule normality:
+    input:
+        features = rules.merge_orthogroup_features.output[0]
+    output:
+        plot = 'output/cluster_analysis/normality.pdf'
+    threads: MAX_THREADS
+    resources:
+        mem_mb = MAX_MEMORY,
+        runtime_s = MAX_RUNTIME
+    log:
+        'log/normality.log'
+    conda:
+        '../envs/normality.yaml'
+    script:
+        '../scripts/cluster_features/normality.R'
+
+
 rule pca:
     input:
         features = rules.merge_orthogroup_features.output[0]

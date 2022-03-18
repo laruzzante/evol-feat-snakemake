@@ -9,7 +9,7 @@ USER_OG_FEATURES = input_list['user_orthogroup_features']
 USER_GENE_FEATURES = input_list['user_gene_features']
 OG_FEATURES_TO_COMPUTE = input_list['orthogroup_features_to_compute']
 GENE_FEATURES_TO_COMPUTE = input_list['gene_features_to_compute']
-FOCUS_SPECIES_LIST = input_list['focus_species_list']
+FOCUS_SPECIES = input_list['focus_species']
 
 include: 'rules/preprocess_orthology_table.smk'
 include: 'rules/preprocess_tree.smk'
@@ -37,4 +37,6 @@ rule all:
         rules.pca.output,
         rules.optics.output,
         rules.dbscan.output,
-        rules.self_organising_map.output
+        rules.self_organising_map.output,
+        rules.normality.output,
+        rules.homoscedasticity.output

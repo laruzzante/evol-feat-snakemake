@@ -1,0 +1,9 @@
+name: basic
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.10.0
+  - r-base=4.1.2
+  - r-nortest=1.0_4
+  - r-ggpubr=0.4.0
