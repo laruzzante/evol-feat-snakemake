@@ -9,7 +9,17 @@ from MRCA_functions import get_MRCA_ntips_from_species_list
 # Retrieve information from Snakemake
 orthogroups = pickle.load(open(snakemake.input.orthogroups, 'rb'))
 MRCA_ntips = open(snakemake.input.MRCA_ntips)
+contractions = snakemake.input.contractions[0]
 output_file_orthogroups = open(snakemake.output[0], 'w')
+
+
+contractions_dict = {}
+with open(contractions) as f:
+    next(f)
+    for line in f:
+        orthogroup = line.strip().split('\t')[0]
+        con = line.strip().split('\t')[1]
+        contractions_dict[orthogroup] = float(con)
 
 
 lines = MRCA_ntips.readlines()
@@ -26,26 +36,16 @@ for line in lines[1:]:
 
 # Process output files
 output_file_orthogroups.write('orthogroup' + '\t' + 'RCO' + '\n')
-# output_file_genes.write('gene' + '\t' 'AGE' + '\n')
 for orthogroup in sorted(orthogroups.keys()):
-    species_list = set(orthogroups[orthogroup]["species"])
-    # In a bifurcating tree, the number of Events = 2 * (n_tips - 1)
-    n_nodes = 2 * ( get_MRCA_ntips_from_species_list(species_list, MRCA_ntips_dict) - 1 )
-    RCO = len(species_list) / n_nodes
-    output_file_orthogroups.write(orthogroup + '\t' + str(RCO) + '\n')
-    # for gene in sorted(orthogroups[orthogroup]["genes"]):
-    #     output_file_genes.write(gene + '\t' + str(AGE) + '\n')
+    if(orthogroup in contractions_dict.keys()):
+        species_list = set(orthogroups[orthogroup]["species"])
+        # In a bifurcating tree, the number of Events = 2 * (n_tips - 1)
+        n_nodes = 2 * ( get_MRCA_ntips_from_species_list(species_list, MRCA_ntips_dict) - 1 )
+        RCO = contractions_dict[orthogroup] / n_nodes
+        output_file_orthogroups.write(orthogroup + '\t' + str(RCO) + '\n')
+    else:
+        print(f'WARNING: {orthogroup} not present in contractions counts table.')
 
-        # Counter idea, but computation is fast anyways, so optimization not so useful:
-        # i += 1
-        # if (i / len(ogDict) > len(ogDict) * 0.25) and (i / len(ogDict) <= len(ogDict) * 0.25 + 1):
-        #     print('\n\t... 25%')
-        # elif (i / len(ogDict) > len(ogDict) * 0.5) and (i / len(ogDict) <= len(ogDict) * 0.5 + 1):
-        #     print('\t... 50%')
-        # elif (i / len(ogDict) > len(ogDict) * 0.75) and (i / len(ogDict) <= len(ogDict) * 0.75 + 1):
-        #     print('\t... 75%')
-        # elif i == len(ogDict):
-        #     print('\t... 100%')
 
 # Close files
 MRCA_ntips.close()

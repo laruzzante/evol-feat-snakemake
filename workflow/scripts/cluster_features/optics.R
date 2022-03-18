@@ -17,7 +17,8 @@ cl.optics <- optics(tsne.coords, eps = 0.3, minPts = minPoints)
 cl.optics.cut <- extractDBSCAN(cl.optics, eps_cl = 0.3)
 mapping <- map_palette_to_clusters(cl.optics.cut)
 
-plot(tsne.coords, col=mapping$palette, pch=mapping$symbols, cex=0.2, lwd=0.2)
+plot(tsne.coords, col=mapping$palette, pch=mapping$symbols, cex=0.2, lwd=0.2,
+     xlab='tSNE.X', ylab='tSNE.Y')
 dev.off()
 
 orthogroups <- na.omit(merged_orthogroup_features)[,1]

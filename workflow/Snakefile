@@ -35,7 +35,6 @@ rule all:
 
         rules.dimensionality_reductions.output,
         rules.pca.output,
-        # rules.hierarchichal_clustering.output,
         rules.optics.output,
         rules.dbscan.output,
-        rules.hdbscan.output
+        # rules.self_organising_map.output

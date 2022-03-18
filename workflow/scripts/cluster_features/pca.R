@@ -16,6 +16,11 @@ print(pc$loadings)
 
 pdf(file=snakemake@output[['plot']])
 
+plot(cumsum(pc$sdev^2 / sum(pc$sdev^2)), type="b", ylim=0:1,
+     ylab = 'cumulative proportion of variance', xlab = 'principal component')
+
+abline(h=0.95, col='red')
+
 # Control variable colors using their contributions
 # Control variable colors using their contributions
 fviz_pca_var(pc, col.var="contrib",

@@ -10,13 +10,7 @@ library(uwot)
 
 library(factoextra)
 
-# Control variable colors using their contributions
-fviz_pca_var(pc, col.var="contrib",
-             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
-             repel = TRUE # Avoid text overlapping
-) +  theme_minimal()
 
-fviz_pca_biplot(pc, pointsize=0.2, label='var', repel=T, col.var = 'red', col.ind='blue', alpha.ind=0.2) + theme_minimal()
 
 # Transparent blue
 t.blue <- rgb(0, 0, 255, max = 255, alpha = 25, names = "blue50")
@@ -44,7 +38,13 @@ plot(pc$scores[,1],pc$scores[,2], pch=19, col=t.blue, cex=0.2)
 print(pc$loadings)
 
 summary(pc)
+# Control variable colors using their contributions
+fviz_pca_var(pc, col.var="contrib",
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+             repel = TRUE # Avoid text overlapping
+) +  theme_minimal()
 
+fviz_pca_biplot(pc, pointsize=0.2, label='var', repel=T, col.var = 'red', col.ind='blue', alpha.ind=0.2) + theme_minimal()
 plot3d(pc$scores[,3], y=pc$scores[,1], z=pc$scores[,2],col=t.blue)
 
 ## tSNE
