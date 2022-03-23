@@ -3,6 +3,8 @@ rule format_orthology_table:
         orthology_table = input_list['orthology_table']
     output:
         formatted_orthology_table = 'output/formatted_orthology_table.tsv'
+    log:
+        'log/format_orthology_table.log'
     conda:
         '../envs/basic.yaml'
     script:
@@ -22,7 +24,7 @@ rule process_orthology_table:
         orthogroups_2_species_2_genes = 'output/.orthogroups_2_species_2_genes.pickle',
         info = 'output/orthology_info.txt'
     log:
-        log = 'log/process_orthology_table.log'
+        'log/process_orthology_table.log'
     conda:
         '../envs/basic.yaml'
     script:

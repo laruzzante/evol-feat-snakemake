@@ -14,6 +14,8 @@ rule merge_orthogroup_features:
         expand('output/computed_orthogroup_features/{feature}.tsv', feature=OG_FEATURES_TO_COMPUTE)
     output:
         'output/merged_orthogroup_features.tsv'
+    log:
+        'log/merge_orthogroup_features.log'
     conda:
         '../envs/basic.yaml'
     script:

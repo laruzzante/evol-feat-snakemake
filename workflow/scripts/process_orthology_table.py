@@ -68,28 +68,6 @@ with open(input_file) as f:
             orthogroups_2_species_2_genes[orthogroup][spec].append(gene)
 
 
-
-# Check integrity of orthology table
-# for gene in genes.keys():
-#     # Checking for association of gene id to more than 1 orthogroup
-#     if len(genes[gene]["orthogroup"]) > 1:
-#         # Check for multiple association of gene to same orthogroup
-#         if len(genes[gene]["orthogroup"]) != len(set(genes[gene]["orthogroup"])):
-#             # Removing duplicated orthogroup id
-#             genes[gene]["orthogroup"] = set(genes[gene]["orthogroup"])
-#         # If after removing duplicates, the gene is still associated to multiple orthogroups, print Warning
-#         if len(genes[gene]["orthogroup"]) > 1:
-#             print('WARNING: gene id', gene, 'associated to', len(genes[gene]["orthogroup"]),'orthogroups:', genes[gene]["orthogroup"])
-#     # Checking for association of gene id to more than 1 species
-#     if len(genes[gene]["species"]) > 1:
-#         # Check for multiple association of gene to same species
-#         if len(genes[gene]["species"]) != len(set(genes[gene]["species"])):
-#             # Removing duplicated species id
-#             genes[gene]["species"] = set(genes[gene]["species"])
-#         # If after removing duplicates, the gene is still associated to multiple species, print Warning
-#         if len(genes[gene]["species"]) > 1:
-#             print('WARNING: gene id', gene, 'associated to', len(genes[gene]["species"]), 'species:', genes[gene]["species"])
-
 # Writing out orthology table Info statistics file
 n_species = len(species.keys())
 n_orthogroups = len(orthogroups.keys())

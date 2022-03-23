@@ -14,6 +14,8 @@ rule merge_gene_features:
         expand('output/computed_gene_features/{feature}.tsv', feature=GENE_FEATURES_TO_COMPUTE)
     output:
         'output/merged_gene_features.tsv'
+    log:
+        'log/merge_gene_features.log'
     conda:
         '../envs/basic.yaml'
     script:

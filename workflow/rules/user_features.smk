@@ -3,6 +3,8 @@ checkpoint split_user_orthogroup_features:
         input_list['user_orthogroup_features_files']
     output:
         directory('output/user_orthogroup_features/')
+    log:
+        'log/split_user_orthogroup_features.log'
     conda:
         '../envs/basic.yaml'
     script:
@@ -14,6 +16,8 @@ checkpoint split_user_gene_features:
         input_list['user_gene_features_files']
     output:
         directory('output/user_gene_features/')
+    log:
+        'log/split_user_gene_features.log'
     conda:
         '../envs/basic.yaml'
     script:

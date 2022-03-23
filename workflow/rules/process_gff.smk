@@ -1,3 +1,7 @@
+MAX_MEMORY = config["MAX_MEMORY"]
+MAX_RUNTIME = config["MAX_RUNTIME"] # in seconds
+MAX_THREADS = config["MAX_THREADS"]
+
 rule create_ordered_gff_genes_table:
     input:
         genes = rules.process_orthology_table.output.genes,
@@ -5,8 +9,12 @@ rule create_ordered_gff_genes_table:
         gff = input_list["gff"]
     output:
         ordered_gff_genes = 'output/ordered_gff_genes.tsv'
+    threads: MAX_THREADS
+    resources:
+        mem_mb = MAX_MEMORY,
+        runtime_s = MAX_RUNTIME
     log:
-        log = 'log/create_ordered_gff_genes_table.log'
+        'log/create_ordered_gff_genes_table.log'
     conda:
         '../envs/basic.yaml'
     script:
@@ -20,12 +28,12 @@ rule create_synteny_counts_table:
     output:
         synteny_dict = 'output/.synteny.pickle',
         synteny_counts = 'output/synteny_counts.tsv'
-    threads: 8
+    threads: MAX_THREADS
     resources:
-        mem_mb = 32000,
-        runtime_s = 21600  # 6 hours = 21600 seconds
+        mem_mb = MAX_MEMORY,
+        runtime_s = MAX_RUNTIME
     log:
-        log = 'log/create_synteny_counts_table.log'
+        'log/create_synteny_counts_table.log'
     conda:
         '../envs/basic.yaml'
     script:
