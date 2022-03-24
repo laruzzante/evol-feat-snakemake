@@ -15,13 +15,13 @@ with open(merged_orthogroup_features) as f, open(outfile_orthogroups, 'w') as f2
         if spec in orthogroups_2_species_2_genes[orthogroup].keys():
             f2.write(line)
 
-with open(orthogroup_features_by_gene) as f, open(outfile_genes, 'w') as f2:
-    header = f.readline()
-    f2.write(header)
+with open(orthogroup_features_by_gene) as f3, open(outfile_genes, 'w') as f4:
+    header = f3.readline()
+    f4.write(header)
     for line in f:
         gene = line.split('\t')[0]
         sp = line.split('\t')[1]
         orthogroup = line.split('\t')[2]
         if sp == spec:
             if gene in orthogroups_2_species_2_genes[orthogroup][spec]:
-                f2.write(line)
+                f4.write(line)
