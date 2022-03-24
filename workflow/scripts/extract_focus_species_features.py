@@ -13,7 +13,7 @@ with open(merged_orthogroup_features) as infile, open(outfile_orthogroups, 'w') 
     for line in infile:
         orthogroup = line.split('\t')[0]
         if spec in orthogroups_2_species_2_genes[orthogroup].keys():
-            f2.write(line)
+            outfile.write(line)
 
 with open(orthogroup_features_by_gene) as infile, open(outfile_genes, 'w') as outfile:
     header = infile.readline()
