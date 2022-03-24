@@ -49,5 +49,3 @@ rule extract_focus_species_features:
 rule all_focus_species:
     input:
         expand(rules.extract_focus_species_features.output, spec=FOCUS_SPECIES)
-    output:
-        touch('output/.speciesdone')
