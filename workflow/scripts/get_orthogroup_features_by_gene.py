@@ -1,5 +1,4 @@
 import pickle
-import statistics
 
 merged_orthogroup_features = snakemake.input.merged_orthogroup_features[0]
 orthogroups = pickle.load(open(snakemake.input.orthogroups, 'rb'))

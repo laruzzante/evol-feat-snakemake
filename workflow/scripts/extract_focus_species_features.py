@@ -1,5 +1,4 @@
 import pickle
-import statistics
 
 merged_orthogroup_features = snakemake.input.merged_orthogroup_features[0]
 orthogroup_features_by_gene = snakemake.input.orthogroup_features_by_gene[0]
