@@ -13,7 +13,7 @@ with open(merged_orthogroup_features) as f, open(outfile_orthogroups, 'w') as f2
     f2.write(header)
     for line in f:
         orthogroup = line.split('\t')[0]
-        if orthogroup in species[spec]['orthogroups']:
+        if orthogroup in species[spec]['orthogroups'].items():
             f2.write(line)
 
 with open(orthogroup_features_by_gene) as f, open(outfile_genes, 'w') as f2:
@@ -21,5 +21,5 @@ with open(orthogroup_features_by_gene) as f, open(outfile_genes, 'w') as f2:
     f2.write(header)
     for line in f:
         gene = line.split('\t')[0]
-        if orthogroup in species[spec]['genes']:
+        if orthogroup in species[spec]['genes'].items():
             f2.write(line)
