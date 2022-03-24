@@ -33,8 +33,8 @@ rule extract_gene_lists_features:
 rule get_orthogroup_features_by_gene:
     input:
         merged_orthogroup_features = rules.merge_orthogroup_features.output,
-        orthogroups = rules.process_orthology_table.orthogroups,
-        genes = rules.process_orthology_table.genes
+        orthogroups = rules.process_orthology_table.orthogroups[0],
+        genes = rules.process_orthology_table.genes[0]
     output:
         'output/orthogroup_features_by_gene.tsv'
     log:
