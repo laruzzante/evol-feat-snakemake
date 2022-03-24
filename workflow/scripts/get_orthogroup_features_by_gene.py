@@ -8,7 +8,7 @@ outfile = snakemake.output[0]
 
 with open(merged_orthogroup_features) as f, open(outfile, 'w') as f2:
     header = f.readline()
-    new_header = 'gene\t\species\t' + header
+    new_header = 'gene\tspecies\t' + header
     f2.write(new_header)
     for line in f:
         orthogroup = line.split('\t')[0]

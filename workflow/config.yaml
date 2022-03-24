@@ -17,6 +17,7 @@ gene_sets: input/dmel_immune_superfamilies.csv
 
 # Add species codes to generate specific evolutionary features files
 focus_species:
+  - Tribolium_castaneum
   #- 7460
   #- 148810 # PROBLEM: because of some Bash handling opening of files, this only works for 1 species at a time.
 

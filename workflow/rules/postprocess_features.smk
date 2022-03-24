@@ -1,19 +1,4 @@
 
-# rule extract_focus_species_features:
-#     input:
-#         rules.merge_gene_features.output[0]
-#     params:
-#         spec=FOCUS_SPECIES
-#     output:
-#         expand('output/{spec}_gene_features.tsv', spec=FOCUS_SPECIES)
-#     log:
-#         'log/extract_focus_species_features.log'
-#     conda:
-#         '../envs/basic.yaml'
-#     run:
-#         shell("grep {params.spec}: {input}>>{output}")
-
-
 rule extract_gene_lists_features:
     input:
         input_list['focus_gene_list_files'],
@@ -41,3 +26,21 @@ rule get_orthogroup_features_by_gene:
         '../envs/basic.yaml'
     script:
         '../scripts/get_orthogroup_features_by_gene.py'
+
+
+rule extract_focus_species_features:
+    input:
+        merged_orthogroup_features = rules.merge_orthogroups_features.output,
+        orthogroup_features_by_gene = rules.get_orthogroup_features_by_gene,
+        species = rules.process_orthology_table.output.species
+    params:
+        spec=FOCUS_SPECIES
+    output:
+        spec_orthogroups = expand('output/{spec}/merged_orthogroups_features.tsv', spec=FOCUS_SPECIES),
+        spec_genes = expand('output/{spec}/orthogroup_features_by_gene.tsv', spec=FOCUS_SPECIES)
+    log:
+        'log/{spec}_extract_focus_species_features.log'
+    conda:
+        '../envs/basic.yaml'
+    script:
+        '../scripts/extract_focus_species_features.py'
