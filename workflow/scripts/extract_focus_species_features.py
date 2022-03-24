@@ -3,11 +3,9 @@ import pickle
 merged_orthogroup_features = snakemake.input.merged_orthogroup_features[0]
 orthogroup_features_by_gene = snakemake.input.orthogroup_features_by_gene[0]
 orthogroups_2_species_2_genes = pickle.load(open(snakemake.input.orthogroups_2_species_2_genes, 'rb'))
-outfile_orthogroups = snakemake.output.spec_orthogroups[0]
-outfile_genes = snakemake.output.spec_orthogroups[0]
+outfile_orthogroups = snakemake.output.spec_orthogroups
+outfile_genes = snakemake.output.spec_orthogroups
 species_list = snakemake.params.spec
-
-print(species_list)
 
 for spec in species_list:
     with open(merged_orthogroup_features) as f, open(outfile_orthogroups, 'w') as f2:
