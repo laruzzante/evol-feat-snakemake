@@ -50,4 +50,4 @@ rule all_focus_species:
     input:
         expand(rules.extract_focus_species_features.output, spec=FOCUS_SPECIES)
     output:
-        expand(touch('output/{spec}/.done'), spec=FOCUS_SPECIES)
+        touch(expand('output/{spec}/.done'), spec=FOCUS_SPECIES))
