@@ -32,7 +32,7 @@ rule extract_focus_species_features:
     input:
         merged_orthogroup_features = rules.merge_orthogroup_features.output,
         orthogroup_features_by_gene = rules.get_orthogroup_features_by_gene.output,
-        species = rules.process_orthology_table.output.species
+        orthogroups_2_species_2_genes = rules.process_orthology_table.output.orthogroups_2_species_2_genes
     params:
         spec=FOCUS_SPECIES
     output:

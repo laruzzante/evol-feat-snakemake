@@ -3,7 +3,7 @@ import statistics
 
 merged_orthogroup_features = snakemake.input.merged_orthogroup_features[0]
 orthogroup_features_by_gene = snakemake.input.orthogroup_features_by_gene[0]
-species = pickle.load(open(snakemake.input.species, 'rb'))
+orthogroups_2_species_2_genes = pickle.load(open(snakemake.input.orthogroups_2_species_2_genes, 'rb'))
 outfile_orthogroups = snakemake.output.spec_orthogroups[0]
 outfile_genes = snakemake.output.spec_orthogroups[0]
 species_list = snakemake.params.spec
@@ -14,7 +14,7 @@ for spec in species_list:
         f2.write(header)
         for line in f:
             orthogroup = line.split('\t')[0]
-            if orthogroup in species[spec]['orthogroups']:
+            if spec in orthogroups_2_species_2_genes[orthogroup].keys():
                 f2.write(line)
 
     with open(orthogroup_features_by_gene) as f, open(outfile_genes, 'w') as f2:
@@ -22,5 +22,8 @@ for spec in species_list:
         f2.write(header)
         for line in f:
             gene = line.split('\t')[0]
-            if orthogroup in species[spec]['genes']:
-                f2.write(line)
+            sp = line.split('\t')[1]
+            orthogroup = line.split('\t')[2]
+            if sp == spec:
+                if gene in orthogroups_2_species_2_genes[orthogroup][spec]:
+                    f2.write(line)
