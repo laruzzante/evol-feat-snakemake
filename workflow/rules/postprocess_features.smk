@@ -1,19 +1,19 @@
 # def get output filenames from input focus species
 
 
-rule extract_focus_species_features:
-    input:
-        rules.merge_gene_features.output[0]
-    params:
-        spec=FOCUS_SPECIES
-    output:
-        expand('output/{spec}_gene_features.tsv', spec=FOCUS_SPECIES)
-    log:
-        'log/extract_focus_species_features.log'
-    conda:
-        '../envs/basic.yaml'
-    run:
-        shell("grep {params.spec}: {input}>>{output}")
+# rule extract_focus_species_features:
+#     input:
+#         rules.merge_gene_features.output[0]
+#     params:
+#         spec=FOCUS_SPECIES
+#     output:
+#         expand('output/{spec}_gene_features.tsv', spec=FOCUS_SPECIES)
+#     log:
+#         'log/extract_focus_species_features.log'
+#     conda:
+#         '../envs/basic.yaml'
+#     run:
+#         shell("grep {params.spec}: {input}>>{output}")
 
 
 rule extract_gene_lists_features:
