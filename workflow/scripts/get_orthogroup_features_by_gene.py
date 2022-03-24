@@ -14,8 +14,11 @@ with open(merged_orthogroup_features) as f, open(outfile, 'w') as f2:
     for line in f:
         orthogroup = line.split('\t')[0]
         genes = orthogroups[orthogroup]['genes']
+        print(orthogroup)
+        print(genes)
         for gene in genes:
             species = genes[gene]['species']
+            print(species)
             for spec in species:
-                new_line = gene + '\t' + species + '\t' + line
+                new_line = gene + '\t' + spec + '\t' + line
                 f2.write(new_line)
