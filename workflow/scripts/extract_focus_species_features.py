@@ -5,7 +5,7 @@ orthogroup_features_by_gene = snakemake.input.orthogroup_features_by_gene[0]
 orthogroups_2_species_2_genes = pickle.load(open(snakemake.input.orthogroups_2_species_2_genes, 'rb'))
 outfile_orthogroups = snakemake.output.spec_orthogroups
 outfile_genes = snakemake.output.spec_orthogroups
-spec = snakemake.params.spec
+spec = snakemake.wildcards.spec
 
 with open(merged_orthogroup_features) as f, open(outfile_orthogroups, 'w') as f2:
     header = f.readline()
