@@ -7,21 +7,21 @@ outfile_orthogroups = snakemake.output.spec_orthogroups[0]
 outfile_genes = snakemake.output.spec_orthogroups[1]
 spec = snakemake.wildcards.spec
 
-with open(merged_orthogroup_features) as f, open(outfile_orthogroups, 'w') as f2:
-    header = f.readline()
-    f2.write(header)
-    for line in f:
+with open(merged_orthogroup_features) as infile, open(outfile_orthogroups, 'w') as outfile:
+    header = infile.readline()
+    outfile.write(header)
+    for line in infile:
         orthogroup = line.split('\t')[0]
         if spec in orthogroups_2_species_2_genes[orthogroup].keys():
             f2.write(line)
 
-with open(orthogroup_features_by_gene) as f3, open(outfile_genes, 'w') as f4:
-    header = f3.readline()
-    f4.write(header)
-    for line in f3:
+with open(orthogroup_features_by_gene) as infile, open(outfile_genes, 'w') as outfile:
+    header = infile.readline()
+    outfile.write(header)
+    for line in infile:
         gene = line.split('\t')[0]
         sp = line.split('\t')[1]
         orthogroup = line.split('\t')[2]
         if sp == spec:
             if gene in orthogroups_2_species_2_genes[orthogroup][spec]:
-                f4.write(line)
+                outfile.write(line)
