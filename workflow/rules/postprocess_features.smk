@@ -1,5 +1,3 @@
-# def get output filenames from input focus species
-
 
 # rule extract_focus_species_features:
 #     input:
@@ -33,8 +31,8 @@ rule extract_gene_lists_features:
 rule get_orthogroup_features_by_gene:
     input:
         merged_orthogroup_features = rules.merge_orthogroup_features.output,
-        orthogroups = rules.process_orthology_table.orthogroups[0],
-        genes = rules.process_orthology_table.genes[0]
+        orthogroups = rules.process_orthology_table.output.orthogroups,
+        genes = rules.process_orthology_table.output.genes
     output:
         'output/orthogroup_features_by_gene.tsv'
     log:
