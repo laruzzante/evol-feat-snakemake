@@ -18,7 +18,7 @@ with open(merged_orthogroup_features) as f, open(outfile_orthogroups, 'w') as f2
 with open(orthogroup_features_by_gene) as f3, open(outfile_genes, 'w') as f4:
     header = f3.readline()
     f4.write(header)
-    for line in f:
+    for line in f3:
         gene = line.split('\t')[0]
         sp = line.split('\t')[1]
         orthogroup = line.split('\t')[2]
