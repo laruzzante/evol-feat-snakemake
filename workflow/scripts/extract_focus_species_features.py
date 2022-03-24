@@ -7,6 +7,8 @@ outfile_orthogroups = snakemake.output.spec_orthogroups[0]
 outfile_genes = snakemake.output.spec_orthogroups[0]
 species_list = snakemake.params.spec
 
+print(species_list)
+
 for spec in species_list:
     with open(merged_orthogroup_features) as f, open(outfile_orthogroups, 'w') as f2:
         header = f.readline()
