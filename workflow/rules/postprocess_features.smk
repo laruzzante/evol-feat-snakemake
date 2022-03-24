@@ -36,8 +36,8 @@ rule extract_focus_species_features:
     params:
         spec=FOCUS_SPECIES
     output:
-        spec_orthogroups = 'output/{spec}/merged_orthogroups_features.tsv',
-        spec_genes = 'output/{spec}/orthogroup_features_by_gene.tsv'
+        'output/{spec}/merged_orthogroups_features.tsv',
+        'output/{spec}/orthogroup_features_by_gene.tsv'
     log:
         'log/{spec}_extract_focus_species_features.log'
     conda:

@@ -8,7 +8,6 @@ outfile_genes = snakemake.output[1]
 spec = snakemake.wildcards.spec
 
 with open(merged_orthogroup_features) as infile, open(outfile_orthogroups, 'w') as outfile:
-    print(outfile)
     header = infile.readline()
     outfile.write(header)
     for line in infile:
