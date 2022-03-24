@@ -39,7 +39,7 @@ rule extract_focus_species_features:
         spec_orthogroups = expand('output/{spec}/merged_orthogroups_features.tsv', spec=FOCUS_SPECIES),
         spec_genes = expand('output/{spec}/orthogroup_features_by_gene.tsv', spec=FOCUS_SPECIES)
     log:
-        'log/{spec}_extract_focus_species_features.log'
+        expand('log/{spec}_extract_focus_species_features.log', spec=FOCUS_SPECIES)
     conda:
         '../envs/basic.yaml'
     script:
