@@ -4,7 +4,7 @@ import statistics
 merged_orthogroup_features = snakemake.input.merged_orthogroup_features
 orthogroups = pickle.load(open(snakemake.input.orthogroups, 'rb'))
 genes = pickle.load(open(snakemake.input.orthogroups, 'rb'))
-outfile = snakemake.output[0]
+outfile = snakemake.output
 
 with open(merged_orthogroup_features) as f, open(outfile, 'w') as f2:
     header = f.readline()
