@@ -60,7 +60,7 @@ n <- 10
 ## UMAP
 # umapdf <- umap(sdf, n_neighbors = 15, min_dist = 0.001, verbose = TRUE, n_threads = 8, metric = 'correlation')
 umapdf <- umap(pc$scores, n_neighbors = 15, min_dist = 0.001, verbose = TRUE, n_threads = 8, metric = 'correlation') # Default settings for everything apart from min_dist, set from 0.01 to 0.001 and metric from Euclidean to correlation
-# min_dist	
+# min_dist
 # The effective minimum distance between embedded points. Smaller values will result in a more clustered/clumped embedding where nearby points on
 # the manifold are drawn closer together, while larger values will result on a more even dispersal of points. The value should be set relative to the
 # spread value, which determines the scale at which embedded points will be spread out.
@@ -129,7 +129,7 @@ for(cl in cl.optics.cut$cluster){
       x <- x - length(colours)
     }
     palette <- c(palette, colours[x])
-    
+
     symbol <- cl%%25
     if(symbol == 4){
       symbol <- 0
@@ -160,7 +160,7 @@ for(cl in cl.dbscan$cluster){
       x <- x - length(colours)
     }
     palette <- c(palette, colours[x])
-    
+
     symbol <- cl%%25
     if(symbol == 4){
       symbol <- 0
@@ -223,7 +223,7 @@ for(cl in cl.dbscan$cluster){
       x <- x - length(colours)
     }
     palette <- c(palette, colours[x])
-    
+
     symbol <- cl%%25
     if(symbol == 4){
       symbol <- 0
@@ -261,7 +261,7 @@ for(cl in cl.hdbscan$cluster){
       x <- x - length(colours)
     }
     palette <- c(palette, colours[x])
-    
+
     symbol <- cl%%25
     if(symbol == 4){
       symbol <- 0
@@ -281,11 +281,11 @@ ggplot(umap.df, aes(x=X1, y=X2)) +
   geom_point(shape=symbols, color=palette, fill=palette, size=0.8, alpha=0.2, stroke=0.4) +
   theme_bw() + xlab(label='UMAP.X') + ylab(label='UMAP.Y')
 
-plot(sset, col=hdb$cluster, 
+plot(sset, col=hdb$cluster,
      pch=ifelse(hdb$cluster == 0, 8, 1), # Mark noise as star
      cex=ifelse(hdb$cluster == 0, 0.5, 0.75), # Decrease size of noise
      xlab=NA, ylab=NA)
-colors <- sapply(1:length(hdb$cluster), 
+colors <- sapply(1:length(hdb$cluster),
                  function(i) adjustcolor(palette()[(hdb$cluster+1)[i]], alpha.f = hdb$membership_prob[i]))
 points(DS3, col=colors, pch=20)
 
@@ -392,15 +392,15 @@ hm <- heatmap.2(pc$scores[1:5000,], Rowv = Rowv, Colv = Colv, trace = "none", la
                 density.info = "none", col = rev(heatmap_colors), scale = "row", key = FALSE)
 legend(x=0.01,y=0.5, title = '% AU Support',
        legend = rev(c("<60","60-65", "65-70", "70-75", "75-80", "80-85", "85-90", "90-95", "95-100")),
-       col = rev(AU_colorpalette), 
-       lty= 1,             
-       lwd = 5,           
+       col = rev(AU_colorpalette),
+       lty= 1,
+       lwd = 5,
        cex=0.5
 )
 legend <- legend(x=0,y=1, title = 'Scaled Metrics PCs',
        legend = rev(create_bins(hm)),
-       col = heatmap_colors, 
-       lty= 1,             
-       lwd = 5,           
+       col = heatmap_colors,
+       lty= 1,
+       lwd = 5,
        cex=0.5
 )
