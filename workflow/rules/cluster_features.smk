@@ -133,34 +133,14 @@ rule dbscan:
         '../scripts/cluster_features/dbscan.R'
 
 
-# HDBSCAN clustering on UMAP
-# rule hdbscan:
-#     input:
-#         umap = rules.dimensionality_reductions.output.umap_coordinates,
-#         features = rules.merge_orthogroup_features.output[0]
-#     output:
-#         plot = 'output/cluster_analysis/hdbscan.pdf', # Plotting the hdbscan memberships over tsne coordinates
-#         hdbscan_clusters = 'output/cluster_analysis/hdbscan.tsv'
-#     threads: MAX_THREADS
-#     resources:
-#         mem_mb = MAX_MEMORY,  # 6 hours = 21600 seconds
-#     log:
-#         log = 'log/hdbscan.log'
-#     conda:
-#         '../envs/cluster_analysis.yaml'
-#     script:
-#         '../scripts/cluster_features/hdbscan.R'
-
-
 # Not using dimension reductions because I want to see the features contributions
 rule self_organising_map:
     input:
         features = rules.merge_orthogroup_features.output[0]
     output:
         plot = 'output/cluster_analysis/som.pdf', # SOM plot with R Kohonen map and counts_per_cell heatmap
-        # som_clusters = 'output/cluster_analysis/som_clusters.tsv',
-        # kmeans_som_superclusters = 'output/cluster_analysis/som_kmeans_superclusters.tsv', # superclusters based on kmeans
-        # dbscan_som_superclusters = 'output/cluster_analysis/som_dbscan_superclusters.tsv' # superclusters based on DBSCAN
+        som_clusters = 'output/cluster_analysis/som_clusters.tsv',
+        som_hc_superclusters = 'output/cluster_analysis/som_hc_superclusters.tsv', # superclusters based on hierarchichal clustering
     threads: MAX_THREADS
     resources:
         mem_mb = MAX_MEMORY,
@@ -176,11 +156,13 @@ rule self_organising_map:
 rule cluster_features:
     input:
         rules.dimensionality_reductions.output,
+        rules.homoscedasticity.output,
+        rules.normality.output,
         rules.pca.output,
-        # rules.hierarchichal_clustering.output,
         rules.optics.output,
         rules.dbscan.output,
-        # rules.hdbscan.output,
         rules.self_organising_map.output
+        # rules.hierarchichal_clustering.output, ## Requires too much RAM
+
     output:
         touch('output/cluster_analysis/.done')
