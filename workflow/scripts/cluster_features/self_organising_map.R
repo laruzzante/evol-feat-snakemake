@@ -21,6 +21,7 @@ som_model <- supersom(data_train_matrix,
                  alpha=c(0.05,0.01),
                  keep.data = TRUE, cores=THREADS)
 
+## SOM plot
 
 pdf(file=snakemake@output[['plot']])
 
@@ -36,3 +37,25 @@ som.hc <- cutree(hclust(object.distances(som_model, "codes"), method='ward.D2'),
 add.cluster.boundaries(som_model, som.hc, lwd=4, col='blue')
 
 dev.off()
+
+
+## SOM cell memberships
+
+orthogroups <- na.omit(merged_orthogroup_features)[,1]
+cluster_ids <- som_model$unit.classif
+memberships <- cbind(orthogroups, cluster_ids)
+
+write.table(memberships, snakemake@output[['som_clusters']], quote = F, row.names = F, col.names = F, sep='\t')
+
+
+## SOM supercell memberships
+
+superclusters_ids <- c()
+for(i in 1:nrow(memberships)){
+  cluster_id <- as.integer(memberships[i, 'cluster_ids'])
+  superclusters_ids <- c(superclusters_ids, som.hc[cluster_id])
+}
+
+supermemberships <- cbind(orthogroups, superclusters_ids)
+
+write.table(supermemberships, snakemake@output[['som_hc_superclusters']], quote = F, row.names = F, col.names = F, sep='\t')
