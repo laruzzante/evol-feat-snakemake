@@ -1,7 +1,7 @@
 
 def get_user_gene_feature_files(wildcards):
     '''
-    CODE COMMENTS
+    Function to parse full list of user provided gene features files
     '''
     user_gene_features_dir = checkpoints.split_user_gene_features.get().output[0] # get() here forces the checkpoint to rerun the DAG. E.g. without get(), I would only get a string of the output name.
     input = expand(os.path.join(user_gene_features_dir, '{feature}.tsv'),

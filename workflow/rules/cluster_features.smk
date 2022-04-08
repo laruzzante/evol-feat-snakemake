@@ -140,7 +140,7 @@ rule self_organising_map:
     output:
         plot = 'output/cluster_analysis/som.pdf', # SOM plot with R Kohonen map and counts_per_cell heatmap
         som_clusters = 'output/cluster_analysis/som_clusters.tsv',
-        som_hc_superclusters = 'output/cluster_analysis/som_hc_superclusters.tsv', # superclusters based on hierarchichal clustering
+        som_hc_superclusters = 'output/cluster_analysis/som_hc_superclusters.tsv' # superclusters based on hierarchichal clustering
     threads: MAX_THREADS
     resources:
         mem_mb = MAX_MEMORY,

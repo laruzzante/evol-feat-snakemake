@@ -46,7 +46,7 @@ cafe_results: input/arthropoda_Base_asr.tre
 gff: input/allspecies.gff
 
 # GO universe
-go: input/crowdgo_cc.05.formatted.tab
+go_universe: input/crowdgo_cc.05.formatted.tab
 
 # Metrics from the default_orthogroup_features that will be included in the computation process
 # Comment the ones you wish to not compute.

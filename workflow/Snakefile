@@ -21,6 +21,7 @@ include: 'rules/merge_gene_features.smk'
 include: 'rules/postprocess_features.smk'
 include: 'rules/genesets_clusters.smk'
 include: 'rules/cluster_features.smk'
+include: 'rules/go_enrichment_analysis.smk'
 
 
 rule all:

@@ -1,0 +1,8 @@
+name: go_enrichment_analysis
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.10.0
+  - r-base=4.1.2
+  - bioconductor-topgo=2.46.0
