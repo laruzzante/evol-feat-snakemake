@@ -14,7 +14,7 @@ rule genes_go_2_orthogroups_go:
         mem_mb = MAX_MEMORY,
         runtime_s = MAX_RUNTIME
     log:
-        'log/topgo_enrichment_on_som_clusters.log'
+        'log/genes_go_2_orthogroups_go.log'
     conda:
         '../envs/basic.yaml'
     script:

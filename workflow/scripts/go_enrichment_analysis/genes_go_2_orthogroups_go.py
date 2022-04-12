@@ -19,7 +19,7 @@ with open(genes_go_universe) as f:
             else:
                 orthogroups_go_dict[orthogroup] = [go_term]
 
-with open(output_file) as f:
+with open(output_file, 'w') as f:
     for orthogroup in orthogroups_go_dict.keys():
         line = orthogroup + '\t' + ', '.join(orthogroups_go_dict[orthogroup]) + '\n'
         f.write(line)
