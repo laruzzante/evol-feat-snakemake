@@ -30,5 +30,6 @@ rule all:
         rules.get_orthogroup_features_by_gene.output,
         rules.all_focus_species.output,
         rules.genesets_clusters.output,
-        rules.cluster_features.output
+        rules.cluster_features.output,
+        rules.genes_go_2_orthogroups_go.output
         # rules.extract_gene_lists_features.output,
