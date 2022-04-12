@@ -2,7 +2,7 @@ import pickle
 
 genes = pickle.load(open(snakemake.input.genes, 'rb'))
 genes_go_universe = snakemake.input.genes_go_universe
-output_file = open(snakemake.output.orthogroups_go_universe, 'w')
+output_file = snakemake.output.orthogroups_go_universe
 
 orthogroups_go_dict = {}
 
