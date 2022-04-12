@@ -18,7 +18,7 @@ rule genes_go_2_orthogroups_go:
     conda:
         '../envs/basic.yaml'
     script:
-        'scripts/go_enrichment_analysis/genes_go_2_orthogroups_go.py'
+        '../scripts/go_enrichment_analysis/genes_go_2_orthogroups_go.py'
 
 
 rule topgo_enrichment_on_feature_ranks:
@@ -36,7 +36,7 @@ rule topgo_enrichment_on_feature_ranks:
     conda:
         '../envs/go_enrichment_analysis.yaml'
     script:
-        'scripts/go_enrichment_analysis/topgo_enrichment_on_feature_ranks.R'
+        '../scripts/go_enrichment_analysis/topgo_enrichment_on_feature_ranks.R'
 
 
 rule topgo_enrichment_on_som_clusters:
@@ -54,7 +54,7 @@ rule topgo_enrichment_on_som_clusters:
     conda:
         '../envs/go_enrichment_analysis.yaml'
     script:
-        'scripts/go_enrichment_analysis/topgo_enrichment_on_som_clusters.R'
+        '../scripts/go_enrichment_analysis/topgo_enrichment_on_som_clusters.R'
 
 
 rule topgo_enrichment_on_som_hc_superclusters:
@@ -72,4 +72,4 @@ rule topgo_enrichment_on_som_hc_superclusters:
     conda:
         '../envs/go_enrichment_analysis.yaml'
     script:
-        'scripts/go_enrichment_analysis/topgo_enrichment_on_som_hc_superclusters.R'
+        '../scripts/go_enrichment_analysis/topgo_enrichment_on_som_hc_superclusters.R'
