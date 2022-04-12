@@ -29,7 +29,7 @@ with open(genes_go_universe) as f, open(log_file, 'w') as logf:
                 orthogroups_go_dict[orthogroup] = [go_term]
 
 if missing_genes_counts > 0:
-    print(f"WARNING: {missing_genes_counts} gene ids from go_universe file not present in orthology table. Full list written in rule's logfile.")
+    print(f"WARNING: {missing_genes_counts} gene ids from go_universe input file not present in the input orthology table. Full list written in rule's logfile.")
 
 with open(output_file, 'w') as f:
     for orthogroup in sorted(orthogroups_go_dict.keys()):
