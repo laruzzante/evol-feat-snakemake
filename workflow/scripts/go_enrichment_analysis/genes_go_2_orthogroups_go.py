@@ -3,17 +3,20 @@ import pickle
 genes = pickle.load(open(snakemake.input.genes, 'rb'))
 genes_go_universe = snakemake.input.genes_go_universe
 output_file = snakemake.output.orthogroups_go_universe
+log_file = snakemake.log
 
 orthogroups_go_dict = {}
+missing_genes_counts = 0
 
-with open(genes_go_universe) as f:
+with open(genes_go_universe) as f, open(log_file, 'w') as log:
     for line in f:
         gene = line.strip().split('\t')[0]
         go_term = line.strip().split('\t')[1]
         if gene in genes.keys():
             orthogroups = genes[gene]["orthogroups"]
         else:
-            print(f"WARNING: geneid '{gene}' from go_universe not present in orthology table. Skipping.")
+            missing_genes_counts += 1
+            log.write(f"WARNING: geneid '{gene}' from go_universe not present in orthology table. Skipping.")
             next(f)
         for orthogroup in orthogroups:
             if orthogroup in orthogroups_go_dict.keys():
@@ -21,7 +24,10 @@ with open(genes_go_universe) as f:
             else:
                 orthogroups_go_dict[orthogroup] = [go_term]
 
+if missing_genes_counts > 0:
+    print(f"WARNING: {missing_genes_counts} gene ids from go_universe file not present in orthology table. Full list written in rule's logfile.")
+
 with open(output_file, 'w') as f:
-    for orthogroup in orthogroups_go_dict.keys():
+    for orthogroup in sorted(orthogroups_go_dict.keys()):
         line = orthogroup + '\t' + ', '.join(orthogroups_go_dict[orthogroup]) + '\n'
         f.write(line)
