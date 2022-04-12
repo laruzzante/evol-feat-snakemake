@@ -14,7 +14,7 @@ with open(genes_go_universe) as f:
             orthogroups = genes[gene]["orthogroups"]
         else:
             print(f"WARNING: geneid '{gene}' from go_universe not present in orthology table. Skipping.")
-            next()
+            next(f)
         for orthogroup in orthogroups:
             if orthogroup in orthogroups_go_dict.keys():
                 orthogroups_go_dict[orthogroup].append(go_term)
