@@ -6,6 +6,7 @@ output_file = snakemake.output.orthogroups_go_universe
 log_file = snakemake.log[0]
 
 orthogroups_go_dict = {}
+missing_genes_dict = {}
 missing_genes_counts = 0
 
 with open(genes_go_universe) as f, open(log_file, 'w') as logf:
@@ -15,8 +16,11 @@ with open(genes_go_universe) as f, open(log_file, 'w') as logf:
         if gene in genes.keys():
             orthogroups = genes[gene]["orthogroups"]
         else:
-            missing_genes_counts += 1
-            logf.write(f"WARNING: geneid '{gene}' from go_universe not present in orthology table. Skipping.\n")
+            # CrowGO gene universe lists only one goterm at a time, hence multiple lines with same gene id are present. We only count unique gene identifiers.
+            if gene not in missing_genes_dict.keys():
+                missing_genes_dict[gene] = ''
+                missing_genes_counts += 1
+                logf.write(f"WARNING: geneid '{gene}' from go_universe not present in orthology table. Skipping.\n")
             next(f)
         for orthogroup in orthogroups:
             if orthogroup in orthogroups_go_dict.keys():
