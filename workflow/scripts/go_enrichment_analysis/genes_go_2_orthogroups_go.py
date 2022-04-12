@@ -45,11 +45,11 @@ with open(genes_go_universe) as f, open(log_file, 'w') as logf:
                 orthogroups_go_dict[orthogroup] = [go_term]
 
 n_matching_genes = len(matching_genes.keys())
-print(f"Parsed {n_matching_genes} unique matching genes from go_universe input file.")
+print(f"Parsed {n_matching_genes} unique matching genes from the go_universe input file.\n")
 n_orthology_genes = len(genes.keys())
 ratio = 100 * n_matching_genes / n_orthology_genes
 n_matching_species = len(matching_species.keys())
-print(f"GO terms for {n_matching_genes} genes of {n_matching_species} species from the {n_orthology_genes} total input orthology gene list, {ratio} % orthology gene ids recovery.")
+print(f"Parsed GO terms for {n_matching_genes} genes of {n_matching_species} species from the {n_orthology_genes} total input orthology gene list, {ratio} % orthology gene ids recovery ratio.\n")
 
 if missing_genes_counts > 0:
     print(f"WARNING: {missing_genes_counts} gene ids from go_universe input file not present in the input orthology table. Full list written in rule's logfile.")
