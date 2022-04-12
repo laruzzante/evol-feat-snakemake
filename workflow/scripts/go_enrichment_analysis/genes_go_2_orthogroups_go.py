@@ -20,7 +20,7 @@ with open(genes_go_universe) as f, open(log_file, 'w') as logf:
             if gene not in missing_genes_dict.keys():
                 missing_genes_dict[gene] = ''
                 missing_genes_counts += 1
-                logf.write(f"WARNING: geneid '{gene}' from go_universe not present in orthology table. Skipping.\n")
+                logf.write(f"WARNING: geneid '{gene}' from the go_universe input file are not present in orthology table. Skipping.\n")
             next(f)
         for orthogroup in orthogroups:
             if orthogroup in orthogroups_go_dict.keys():
