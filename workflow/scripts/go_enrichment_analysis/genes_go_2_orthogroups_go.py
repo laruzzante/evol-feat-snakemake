@@ -1,5 +1,5 @@
 genes = snakemake.input.genes
-genes_go_universe = snakemake.input.gene_go_universe
+genes_go_universe = snakemake.input.genes_go_universe
 output_file = open(snakemake.output.orthogroups_go_universe, 'w')
 
 orthogroups_go_dict = {}
