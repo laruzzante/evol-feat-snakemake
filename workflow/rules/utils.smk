@@ -16,6 +16,7 @@ def get_input():
     input_list['focus_species'] = []
     input_list['focus_gene_list_files'] = []
     input_list['gene_sets'] = []
+    input_list['go_universe'] = []
     USER_ORTHOGROUP_FEATURES = []
     USER_GENE_FEATURES = []
 
@@ -68,5 +69,8 @@ def get_input():
 
     if config['gene_sets']:
         input_list['gene_sets'] = config['gene_sets']
+
+    if config['go_universe']:
+        input_list['go_universe'] = config['go_universe']
 
     return input_list
