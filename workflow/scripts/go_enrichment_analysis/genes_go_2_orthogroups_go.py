@@ -1,3 +1,10 @@
+'''
+    Script which converts gene-specific go terms to orthogroup-specific go terms.
+    Orthogroups go terms are assigned by merging together all of the orthgroup's gene
+    go terms. Alternative ways can be implemented, such as considering only go terms
+    which appear in e.g. at least 2/3 of the orthogroup's genes.
+'''
+
 import pickle
 
 genes = pickle.load(open(snakemake.input.genes, 'rb'))
@@ -8,15 +15,24 @@ log_file = snakemake.log[0]
 orthogroups_go_dict = {}
 missing_genes_dict = {}
 missing_genes_counts = 0
+matching_species = {}
+matching_genes = {}
 
 with open(genes_go_universe) as f, open(log_file, 'w') as logf:
     for line in f:
         gene = line.strip().split('\t')[0]
         go_term = line.strip().split('\t')[1]
         if gene in genes.keys():
-            orthogroups = genes[gene]["orthogroups"]
+            # checking if all genes are covered in the go_universe file
+            matching_genes[gene] = ''
+            # checking if all species are covered in the go_universe file
+            species = set(genes[gene]["species"])
+            for spec in species:
+                matching_species[spec] = ''
+            # extracting the orthogroup(s) to which the gene is mapped.
+            orthogroups = set(genes[gene]["orthogroups"])
         else:
-            # CrowGO gene universe lists only one goterm at a time, hence multiple lines with same gene id are present. We only count unique gene identifiers.
+            # CrowGO gene universe only lists one go term at a time, hence multiple lines with same gene id are present. We only count unique gene identifiers.
             if gene not in missing_genes_dict.keys():
                 missing_genes_dict[gene] = ''
                 missing_genes_counts += 1
@@ -27,6 +43,13 @@ with open(genes_go_universe) as f, open(log_file, 'w') as logf:
                 orthogroups_go_dict[orthogroup].append(go_term)
             else:
                 orthogroups_go_dict[orthogroup] = [go_term]
+
+n_matching_genes = len(matching_genes.keys())
+print(f"Parsed {n_matching_genes} unique matching genes from go_universe input file.")
+n_orthology_genes = len(genes.keys())
+ratio = 100 * n_matching_genes / n_orthology_genes
+n_matching_species = len(matching_species.keys())
+print(f"GO terms for {n_matching_genes} genes of {n_matching_species} species from the {n_orthology_genes} total input orthology gene list, {ratio} % orthology gene ids recovery.")
 
 if missing_genes_counts > 0:
     print(f"WARNING: {missing_genes_counts} gene ids from go_universe input file not present in the input orthology table. Full list written in rule's logfile.")
