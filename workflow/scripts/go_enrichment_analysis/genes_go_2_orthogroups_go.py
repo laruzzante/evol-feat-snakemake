@@ -49,7 +49,7 @@ print(f"Parsed {n_matching_genes} unique matching genes from the go_universe inp
 n_orthology_genes = len(genes.keys())
 ratio = 100 * n_matching_genes / n_orthology_genes
 n_matching_species = len(matching_species.keys())
-print(f"Parsed GO terms for {n_matching_genes} genes of {n_matching_species} species from the {n_orthology_genes} total input orthology gene list, {ratio} % orthology gene ids recovery ratio.\n")
+print(f"Parsed GO terms for {n_matching_genes} genes of {n_matching_species} species out of {n_orthology_genes} total input orthologous genes, {ratio} % orthologous gene ids recovery ratio.\n")
 
 if missing_genes_counts > 0:
     print(f"WARNING: {missing_genes_counts} gene ids from go_universe input file not present in the input orthology table. Full list written in rule's logfile.")
