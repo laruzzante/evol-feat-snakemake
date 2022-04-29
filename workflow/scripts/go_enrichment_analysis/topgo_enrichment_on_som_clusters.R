@@ -9,7 +9,7 @@ orthogroupsUniverse <- names(orthogroups2go)
 orthogroups_of_interest <- read.table(som_clusters)
 
 som_clusters_go <- c()
-for cluster in unique(orthogroups_of_interest$V2){
+for(cluster in unique(sorted(orthogroups_of_interest$V2))){
   orthogroups_per_cluster <- as.character(orthogroups_of_interest[orthogroups_of_interest$V2==cluster,'V1'])
   print(paste0('Cluster ', cluster))
   print(orthogroups_per_cluster)
