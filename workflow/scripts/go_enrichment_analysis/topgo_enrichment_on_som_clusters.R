@@ -17,7 +17,7 @@ for(cluster in unique(sort(orthogroups_of_interest$V2))){
   ogList <- factor(as.integer(orthogroupsUniverse %in% orthogroups_per_cluster))
   names(ogList) <- orthogroupsUniverse
 
-  myGOdata <- new(paste0("topGOdata",clsuter), description="Evol-Feat SOM cell", ontology="BP", allGenes=ogList, annot=annFUN.gene2GO, gene2GO=orthogroups2go)
+  myGOdata <- new(paste0("topGOdata",cluster), description="Evol-Feat SOM cell", ontology="BP", allGenes=ogList, annot=annFUN.gene2GO, gene2GO=orthogroups2go)
   sg <- sigGenes(myGOdata)
   str(sg)
   numSigGenes(myGOdata)
