@@ -1,9 +1,11 @@
-library(topGO)
-library(Rgraphviz)
+library(topGO, quietly = T)
+library(Rgraphviz, quietly = T)
 
 go_universe <- snakemake@input[['go_universe']]
 som_clusters <- snakemake@input[['som_clusters']]
 ontology <- snakemake@params[['ontology']]
+
+print(ontology)
 
 output_table <- snakemake@output[['som_clusters_go']]
 output_pdf <- snakemake@output[['som_clusters_go_dag']]
