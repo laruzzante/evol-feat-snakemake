@@ -3,7 +3,7 @@ library(Rgraphviz)
 
 go_universe <- snakemake@input[['go_universe']]
 som_clusters <- snakemake@input[['som_clusters']]
-ontology <- snakemake@input[['ontology']]
+ontology <- snakemake@params[['ontology']]
 
 output_table <- snakemake@output[['som_clusters_go']]
 output_pdf <- snakemake@output[['som_clusters_go_dag']]
