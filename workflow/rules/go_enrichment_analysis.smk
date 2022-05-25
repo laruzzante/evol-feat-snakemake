@@ -27,8 +27,6 @@ rule topgo_enrichment_on_feature_ranks:
         go_universe = rules.genes_go_2_orthogroups_go.output.orthogroups_go_universe
     output:
         feature_ranks_go = 'output/go_enrichment_analysis/feature_ranks_go.tsv'
-    params:
-        ontology = config["ontology"]
     threads: MAX_THREADS
     resources:
         mem_mb = MAX_MEMORY,
@@ -48,6 +46,8 @@ rule topgo_enrichment_on_som_clusters:
     output:
         som_clusters_go = 'output/go_enrichment_analysis/som_clusters_go.tsv',
         som_clusters_go_dag = 'output/go_enrichment_analysis/som_clusters_go_DAG.pdf'
+    params:
+        ontology = config["ontology"]
     threads: MAX_THREADS
     resources:
         mem_mb = MAX_MEMORY,
