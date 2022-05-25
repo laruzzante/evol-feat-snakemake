@@ -2,6 +2,8 @@ MAX_MEMORY = config["MAX_MEMORY"]
 MAX_RUNTIME = config["MAX_RUNTIME"] # in seconds
 MAX_THREADS = config["MAX_THREADS"]
 
+ONTOLOGY = config["ontology"]
+
 
 rule genes_go_2_orthogroups_go:
     input:
@@ -42,9 +44,11 @@ rule topgo_enrichment_on_feature_ranks:
 rule topgo_enrichment_on_som_clusters:
     input:
         som_clusters = rules.self_organising_map.output.som_clusters,
-        go_universe = rules.genes_go_2_orthogroups_go.output.orthogroups_go_universe
+        go_universe = rules.genes_go_2_orthogroups_go.output.orthogroups_go_universe,
+        ontology = ONTOLOGY
     output:
-        som_clusters_go = 'output/go_enrichment_analysis/som_clusters_go.tsv'
+        som_clusters_go = 'output/go_enrichment_analysis/som_clusters_go.tsv',
+        som_clusters_go_dag = 'output/go_enrichment_analysis/som_clusters_go_DAG.pdf'
     threads: MAX_THREADS
     resources:
         mem_mb = MAX_MEMORY,

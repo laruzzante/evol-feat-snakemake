@@ -1,34 +1,69 @@
 library(topGO)
+library(Rgraphviz)
 
 go_universe <- snakemake@input[['go_universe']]
 som_clusters <- snakemake@input[['som_clusters']]
+ontology <- snakemake@input[['ontology']]
+
+output_table <- snakemake@output[['som_clusters_go']]
+output_pdf <- snakemake@output[['som_clusters_go_dag']]
 
 orthogroups2go <- readMappings(file = go_universe)
 orthogroupsUniverse <- names(orthogroups2go)
 
+str(head(orthogroups2go))
+
 orthogroups_of_interest <- read.table(som_clusters)
 
-som_clusters_go <- c()
-for(cluster in unique(sort(orthogroups_of_interest$V2))){
-  orthogroups_per_cluster <- as.character(orthogroups_of_interest[orthogroups_of_interest$V2==cluster,'V1'])
-  print(paste0('Cluster ', cluster))
-  print(orthogroups_per_cluster)
-
-  ogList <- factor(as.integer(orthogroupsUniverse %in% orthogroups_per_cluster))
-  names(ogList) <- orthogroupsUniverse
-
-  myGOdata <- new("topGOdata", description="Evol-Feat SOM cell", ontology="BP", allGenes=ogList, annot=annFUN.gene2GO, gene2GO=orthogroups2go)
-  sg <- sigGenes(myGOdata)
-  str(sg)
-  numSigGenes(myGOdata)
-
-  resultFisher <- runTest(myGOdata, algorithm="weight01", statistic="fisher")
-  print(resultFisher)
-  allRes <- GenTable(myGOdata, classicFisher=resultFisher, orderBy="resultFisher", ranksOf="classicFisher", topNodes=10)
-  print(allRes)
-  som_clusters_go <- c(som_clusters_go, allRes)
-
-  print(length(usedGO(myGOdata)))
+function <- check_and_delete(appended_output_file){
+  if (file.exists(appended_output_file)) {
+    #Delete file if it exists
+    file.remove(appended_output_file)
+  }
 }
 
-write.table(som_clusters_go, snakemake@output[['som_clusters_go']], quote = F, row.names = F, col.names = F, sep='\t')
+check_and_delete(output_table)
+check_and_delete(output_pdf)
+
+
+pdf(output_pdf)
+
+for(cluster in unique(sort(orthogroups_of_interest$V2))){
+
+  myInterestingOGs <- as.character(orthogroups_of_interest[orthogroups_of_interest$V2==cluster,'V1'])
+
+  print(paste0('Cluster ', cluster))
+  print(myInterestingOGs)
+
+  ogList <- factor(as.integer(orthogroupsUniverse %in% myInterestingOGs))
+  names(ogList) <- orthogroupsUniverse
+  str(ogList)
+
+  GOdata <- new("topGOdata", ontology = ontology, allGenes = ogList,
+                annot = annFUN.gene2GO, gene2GO = orthogroups2go)
+
+
+  # In this scenario, when only a list of interesting genes is
+  # provided, the user can use only tests statistics that are based on gene counts, like Fisher's exact test, Z score
+  # and alike.
+
+
+  resultFisher <- runTest(GOdata, algorithm = "classic", statistic = "fisher")
+  print(resultFisher)
+
+  resultFisher.weight01 <- runTest(GOdata, algorithm = "weight01", statistic = "fisher")
+  print(resultFisher.weight01)
+
+  allRes <- GenTable(GOdata, classicFisher = resultFisher, weight01Fisher = resultFisher.weight01,
+                     orderBy =  "weight01Fisher", ranksOf = "classicFisher", topNodes = 30)
+  print(allRes)
+
+
+  cat(paste0("Cluster ",cluster,"\n"), file = output_table, append = T)
+  write.table(allRes, file=output_table, quote = F, sep='\t', col.names = T, row.names = F, append=T)
+
+  showSigOfNodes(GOdata, score(resultFisher.weight01), firstSigNodes = 10, useInfo = 'all')
+
+}
+
+dev.off()
