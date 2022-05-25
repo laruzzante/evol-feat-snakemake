@@ -15,7 +15,7 @@ str(head(orthogroups2go))
 
 orthogroups_of_interest <- read.table(som_clusters)
 
-function <- check_and_delete(appended_output_file){
+check_and_delete <- function(appended_output_file){
   if (file.exists(appended_output_file)) {
     #Delete file if it exists
     file.remove(appended_output_file)
