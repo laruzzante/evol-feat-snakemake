@@ -2,8 +2,6 @@ MAX_MEMORY = config["MAX_MEMORY"]
 MAX_RUNTIME = config["MAX_RUNTIME"] # in seconds
 MAX_THREADS = config["MAX_THREADS"]
 
-ONTOLOGY = config["ontology"]
-
 
 rule genes_go_2_orthogroups_go:
     input:
@@ -30,7 +28,7 @@ rule topgo_enrichment_on_feature_ranks:
     output:
         feature_ranks_go = 'output/go_enrichment_analysis/feature_ranks_go.tsv'
     params:
-        ontology = ONTOLOGY
+        ontology = config["ontology"]
     threads: MAX_THREADS
     resources:
         mem_mb = MAX_MEMORY,
