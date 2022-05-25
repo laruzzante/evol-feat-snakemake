@@ -22,6 +22,7 @@ with open(genes_go_universe) as f, open(log_file, 'w') as logf:
     for line in f:
         gene = line.strip().split('\t')[0]
         go_term = line.strip().split('\t')[1]
+        orthogroups = []
         if gene in genes.keys():
             # checking if all genes are covered in the go_universe file
             matching_genes[gene] = ''
