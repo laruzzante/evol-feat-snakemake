@@ -44,8 +44,8 @@ rule topgo_enrichment_on_som_clusters:
         clusters = rules.self_organising_map.output.som_clusters,
         go_universe = rules.genes_go_2_orthogroups_go.output.orthogroups_go_universe,
     output:
-        som_clusters_go = 'output/go_enrichment_analysis/som_clusters_go.tsv',
-        som_clusters_go_dag = 'output/go_enrichment_analysis/som_clusters_go_DAG.pdf'
+        clusters_go = 'output/go_enrichment_analysis/som_clusters_go.tsv',
+        clusters_go_dag = 'output/go_enrichment_analysis/som_clusters_go_DAG.pdf'
     params:
         ontology = config["ontology"]
     threads: MAX_THREADS
@@ -65,8 +65,8 @@ rule topgo_enrichment_on_som_hc_superclusters:
         clusters = rules.self_organising_map.output.som_hc_superclusters,
         go_universe = rules.genes_go_2_orthogroups_go.output.orthogroups_go_universe
     output:
-        som_clusters_go = 'output/go_enrichment_analysis/som_hc_superclusters_go.tsv',
-        som_clusters_go_dag = 'output/go_enrichment_analysis/som_hc_superclusters_go_DAG.pdf'
+        clusters_go = 'output/go_enrichment_analysis/som_hc_superclusters_go.tsv',
+        clusters_go_dag = 'output/go_enrichment_analysis/som_hc_superclusters_go_DAG.pdf'
     params:
         ontology = config["ontology"]
     threads: MAX_THREADS

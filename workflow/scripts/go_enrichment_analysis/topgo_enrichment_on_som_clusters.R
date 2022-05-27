@@ -2,20 +2,20 @@ library(topGO, quietly = T)
 library(Rgraphviz, quietly = T)
 
 go_universe <- snakemake@input[['go_universe']]
-som_clusters <- snakemake@input[['clusters']]
+clusters <- snakemake@input[['clusters']]
 ontology <- snakemake@params[['ontology']]
 
 print(ontology)
 
-output_table <- snakemake@output[['som_clusters_go']]
-output_pdf <- snakemake@output[['som_clusters_go_dag']]
+output_table <- snakemake@output[['clusters_go']]
+output_pdf <- snakemake@output[['clusters_go_dag']]
 
 orthogroups2go <- readMappings(file = go_universe)
 orthogroupsUniverse <- names(orthogroups2go)
 
 str(head(orthogroups2go))
 
-orthogroups_of_interest <- read.table(som_clusters)
+orthogroups_of_interest <- read.table(clusters)
 
 check_and_delete <- function(appended_output_file){
   if (file.exists(appended_output_file)) {
