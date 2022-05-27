@@ -64,8 +64,7 @@ for(cluster in unique(sort(orthogroups_of_interest$V2))){
   cat(paste0("Cluster ",cluster,"\n"), file = output_table, append = T)
   write.table(allRes, file=output_table, quote = F, sep='\t', col.names = T, row.names = F, append=T)
 
-  showSigOfNodes(GOdata, score(resultFisher.weight01), firstSigNodes = 5, useInfo = 'all')
-
+  tryCatch(showSigOfNodes(GOdata1, score(resultFisher.weight01), firstSigNodes = 5, useInfo = 'all'), error= function(e) plot(0,main=paste0("Error at cluster ", cluster)))
 }
 
 dev.off()
