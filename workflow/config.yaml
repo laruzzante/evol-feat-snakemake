@@ -46,8 +46,8 @@ cafe_results: input/arthropoda_Base_asr.tre
 gff: input/allspecies.gff
 
 # GO universe
-go_universe: input/crowdgo_mf.05.formatted.tab
-ontology: MF # specify the topGO available ontology: BP, CC or MF
+go_universe: input/crowdgo_BP.05.formatted.tab
+ontology: BP # specify the topGO available ontology: BP, CC or MF
 
 # Metrics from the default_orthogroup_features that will be included in the computation process
 # Comment the ones you wish to not compute.
