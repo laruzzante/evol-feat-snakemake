@@ -1,4 +1,4 @@
-import  pandas as pd
+import pandas as pd
 
 ## Ristrutturare, prendere un file excel con column headers i nomi delle liste,
 ## ed i geni a scendere.
