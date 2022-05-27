@@ -2,7 +2,7 @@ library(topGO, quietly = T)
 library(Rgraphviz, quietly = T)
 
 go_universe <- snakemake@input[['go_universe']]
-som_clusters <- snakemake@input[['som_clusters']]
+som_clusters <- snakemake@input[['clusters']]
 ontology <- snakemake@params[['ontology']]
 
 print(ontology)

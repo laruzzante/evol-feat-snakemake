@@ -41,7 +41,7 @@ rule topgo_enrichment_on_feature_ranks:
 
 rule topgo_enrichment_on_som_clusters:
     input:
-        som_clusters = rules.self_organising_map.output.som_clusters,
+        clusters = rules.self_organising_map.output.som_clusters,
         go_universe = rules.genes_go_2_orthogroups_go.output.orthogroups_go_universe,
     output:
         som_clusters_go = 'output/go_enrichment_analysis/som_clusters_go.tsv',
@@ -62,7 +62,7 @@ rule topgo_enrichment_on_som_clusters:
 
 rule topgo_enrichment_on_som_hc_superclusters:
     input:
-        som_hc_superclusters = rules.self_organising_map.output.som_hc_superclusters,
+        clusters = rules.self_organising_map.output.som_hc_superclusters,
         go_universe = rules.genes_go_2_orthogroups_go.output.orthogroups_go_universe
     output:
         som_clusters_go = 'output/go_enrichment_analysis/som_hc_superclusters_go.tsv',
