@@ -13,7 +13,7 @@ orthology_table: input/arthropoda_odb10v1_OG2genes.tab
 # File containing lists of genes for clustering.
 # First column must contain set name, followed by all of its gene names separated
 # by tab (or in separeted cells in an Excel file saved as txt)
-gene_sets: input/dmel_immune_superfamilies.csv
+gene_sets: input/orthodb_input_moult
 
 # Add species codes to generate specific evolutionary features files
 focus_species:
@@ -21,7 +21,7 @@ focus_species:
   - Apis_mellifera
 
 focus_gene_list_files:
-  #- input/hymenoptera/genelists.txt # ADD COLUMNS WITH OTHER LISTS
+  - input/hymenoptera/genelists.txt # ADD COLUMNS WITH OTHER LISTS
 
 # user orhtogroup features: any file of user-defined orthogroup features
 # Columns: orthogroup \t feat1 \t feat2 ...
@@ -34,7 +34,7 @@ user_orthogroup_features_files:
 # separated by ':'. E.g.:
 # species_code:geneid
 user_gene_features_files:
-  #- input/hymenoptera/amell_hym_gene_features.txt
+  - input/hymenoptera/amell_hym_gene_features.txt
 
 # Specie tree file
 ultrametric_species_tree: input/arthropoda_rooted_time.tree

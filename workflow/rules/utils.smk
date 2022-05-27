@@ -17,6 +17,7 @@ def get_input():
     input_list['focus_gene_list_files'] = []
     input_list['gene_sets'] = []
     input_list['go_universe'] = []
+    input_list['ontology'] = []
     USER_ORTHOGROUP_FEATURES = []
     USER_GENE_FEATURES = []
 
@@ -32,7 +33,7 @@ def get_input():
             with open(input_file) as infile:
                 USER_GENE_FEATURES = infile.readline()[:-1].split('\t')[1:]
             input_list['user_gene_features_files'].append(input_file)
-            input_list['user_gene_features'].append(USER_GENE_FEATURES)
+            input_list['user_gene_features'].appendgo_universe(USER_GENE_FEATURES)
 
     if config['default_orthogroup_features']:
         SELECTED_ORTHOGROUP_FEATURES = config['selected_orthogroup_features']
@@ -72,5 +73,8 @@ def get_input():
 
     if config['go_universe']:
         input_list['go_universe'] = config['go_universe']
+
+    if config['ontology']:
+        input_list['ontology'] = config['ontology']
 
     return input_list

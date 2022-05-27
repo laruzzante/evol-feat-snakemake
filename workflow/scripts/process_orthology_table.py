@@ -48,7 +48,7 @@ with open(input_file) as f:
             genes[gene]["orthogroups"].append(orthogroup)
             genes[gene]["species"].append(spec)
 
-            with open(snakemake.log.log, "a") as logfile:
+            with open(snakemake.log[0], "a") as logfile:
                 logfile.write(f'WARNING: gene {gene} already associated to orthogroup \
 {genes[gene]["orthogroups"]}. \n')
             # genes[gene]["orthogroup"].append(orthogroup)
