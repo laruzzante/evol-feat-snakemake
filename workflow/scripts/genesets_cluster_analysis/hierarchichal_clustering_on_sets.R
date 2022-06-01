@@ -6,9 +6,9 @@ cat('\nCounts table of orthogroups per set:\n')
 print(table(input_features$set))
 cat('\n')
 
-scaled_features <- scale_features(input_features)
-mean_matrix <- try(format_features_matrix(scaled_features, aggregator_function='mean'))
-median_matrix <- try(format_features_matrix(scaled_features, aggregator_function='median'))
+# scaled_features <- scale_features(input_features)
+mean_matrix <- try(scale(format_features_matrix(input_features, aggregator_function='mean')))
+median_matrix <- try(scale(format_features_matrix(input_features, aggregator_function='median')))
 
 n_bootstraps <- 10000
 
