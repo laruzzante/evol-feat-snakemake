@@ -34,7 +34,7 @@ def get_input():
             with open(input_file) as infile:
                 USER_GENE_FEATURES = infile.readline()[:-1].split('\t')[1:]
             input_list['user_gene_features_files'].append(input_file)
-            input_list['user_gene_features'].appendgo_universe(USER_GENE_FEATURES)
+            input_list['user_gene_features'].append(USER_GENE_FEATURES)
 
     if config['default_orthogroup_features']:
         SELECTED_ORTHOGROUP_FEATURES = config['selected_orthogroup_features']
