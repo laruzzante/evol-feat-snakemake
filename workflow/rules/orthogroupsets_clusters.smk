@@ -15,7 +15,7 @@ rule format_og_sets:
 
 rule get_og_sets_features:
     input:
-        ogsets = rules.format_orthogroupsets.output[0],
+        ogsets = rules.format_og_sets.output[0],
         features = rules.merge_orthogroup_features.output[0]
     output:
         'output/genesets_cluster_analysis/orthogroup_sets_features.tsv'
