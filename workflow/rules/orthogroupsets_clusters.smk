@@ -18,7 +18,7 @@ rule get_og_sets_features:
         ogsets = rules.format_og_sets.output[0],
         features = rules.merge_orthogroup_features.output[0]
     output:
-        'output/genesets_cluster_analysis/orthogroup_sets_features.tsv'
+        'output/orthogroupsets_cluster_analysis/orthogroup_sets_features.tsv'
     log:
         'log/get_og_sets_features.log'
     conda:
