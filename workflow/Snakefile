@@ -20,6 +20,7 @@ include: 'rules/merge_orthogroup_features.smk'
 include: 'rules/merge_gene_features.smk'
 include: 'rules/postprocess_features.smk'
 include: 'rules/genesets_clusters.smk'
+include: 'rules/orthogroupsets_clusters.smk'
 include: 'rules/cluster_features.smk'
 include: 'rules/go_enrichment_analysis.smk'
 
@@ -30,6 +31,7 @@ rule all:
         rules.get_orthogroup_features_by_gene.output,
         rules.all_focus_species.output,
         rules.genesets_clusters.output,
+        rules.orthogroupsets_clusters.output,
         rules.cluster_features.output,
         rules.genes_go_2_orthogroups_go.output,
         rules.topgo_enrichment_on_som_clusters.output,
