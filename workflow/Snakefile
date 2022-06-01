@@ -34,6 +34,6 @@ rule all:
         rules.orthogroupsets_clusters.output,
         rules.cluster_features.output,
         rules.genes_go_2_orthogroups_go.output,
-        rules.topgo_enrichment_on_som_clusters.output,
-        rules.topgo_enrichment_on_som_hc_superclusters.output
+        # rules.topgo_enrichment_on_som_clusters.output,
+        # rules.topgo_enrichment_on_som_hc_superclusters.output,
         # rules.extract_gene_lists_features.output
