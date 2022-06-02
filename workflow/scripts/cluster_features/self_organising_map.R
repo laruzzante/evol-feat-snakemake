@@ -23,7 +23,7 @@ som_model <- supersom(data_train_matrix,
 
 ## SOM plot
 
-pdf(file=snakemake@output[['plot']], paper = "a4r")
+pdf(file=snakemake@output[['plot']])
 
 plot(som_model, type="changes") # Plotting training process convergence
 plot(table(som_model$unit.classif), xlab='SOM cell', ylab='mapped orthogroups')
@@ -64,7 +64,7 @@ som.supercl.colours <- inner_join(supercl, colours)
 
 plot(som_model, type="codes", shape="straight", palette.name = rainbow, main = "SOM components", bgcol=som.supercl.colours$colour)
 add.cluster.boundaries(som_model, supercl$set, lwd=2, col='black')
-legend(x=-1.5, y = 8, legend = colours$set, fill = colours$colour, title = 'super_cl')
+legend(x=-1.2, y = 8, legend = colours$set, fill = colours$colour, title = 'supercl')
 
 
 dev.off()
