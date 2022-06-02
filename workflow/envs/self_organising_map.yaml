@@ -5,3 +5,5 @@ dependencies:
   - python=3.10.0
   - r-base=4.1.2
   - r-kohonen=3.0.10
+  - r-dplyr=1.0.9
+  - r-rcolorbrewer=1.1_3
