@@ -23,7 +23,7 @@ som_model <- supersom(data_train_matrix,
 
 ## SOM plot
 
-pdf(file=snakemake@output[['plot']])
+pdf(file=snakemake@output[['plot']], paper = "a4r")
 
 plot(som_model, type="changes") # Plotting training process convergence
 plot(table(som_model$unit.classif), xlab='SOM cell', ylab='mapped orthogroups')
@@ -36,16 +36,17 @@ plot(som_model, type="mapping", shape="straight", palette.name = rainbow, main =
 ## use hierarchical clustering to cluster the codebook vectors
 # som.hc <- cutree(hclust(pearson(object.distances(som_model, "codes")), method='average'), n_supercl)
 # som.hc <- cutree(hclust(object.distances(som_model, "codes"), method='ward.D2'), n_supercl)
+
+## Cluster with Kmneans on Distance matrix
 # som.kmeans <- kmeans(object.distances(som_model, "codes"), centers = n_supercl)
 
 # library(dbscan)
 # som.dbscan <- dbscan(object.distances(som_model, "codes"), eps = 0.15, minPts = 2)
 # som.hdbscan <- hdbscan(object.distances(som_model, "codes"), minPts = 2)
 
+## Finally clustering with kmeans on actual SOM cell codebook vectors, gives more heterogenous partitioning of superclusters compared to other methods
 codes <- do.call(rbind.data.frame, som_model$codes)
 som.kmeans <- kmeans(codes, centers = n_supercl)
-
-## COMPUTING
 
 
 library(RColorBrewer)
