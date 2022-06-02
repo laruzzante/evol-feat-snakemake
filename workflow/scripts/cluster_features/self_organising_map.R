@@ -83,7 +83,7 @@ write.table(memberships, snakemake@output[['som_clusters']], quote = F, row.name
 superclusters_ids <- c()
 for(i in 1:nrow(memberships)){
   cluster_id <- as.integer(memberships[i, 'cluster_ids'])
-  superclusters_ids <- c(superclusters_ids, supercl[cluster_id])
+  superclusters_ids <- c(superclusters_ids, supercl$set[cluster_id])
 }
 
 supermemberships <- cbind(orthogroups, superclusters_ids)
