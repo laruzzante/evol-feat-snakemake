@@ -32,8 +32,7 @@ rule all:
         rules.all_focus_species.output,
         rules.genesets_clusters.output,
         rules.orthogroupsets_clusters.output,
-        rules.hierarchichal_clustering_on_og_sets.output,
         rules.cluster_features.output,
-        rules.topgo_enrichment_on_som_clusters.output,
-        rules.topgo_enrichment_on_som_superclusters.output,
+        # rules.topgo_enrichment_on_som_clusters.output,
+        # rules.topgo_enrichment_on_som_superclusters.output,
         # rules.extract_gene_lists_features.output
