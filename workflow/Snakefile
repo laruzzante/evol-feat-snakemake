@@ -33,6 +33,6 @@ rule all:
         rules.genesets_clusters.output,
         rules.orthogroupsets_clusters.output,
         rules.cluster_features.output,
-        # rules.topgo_enrichment_on_som_clusters.output,
+        rules.topgo_enrichment_on_som_clusters.output,
         # rules.topgo_enrichment_on_som_superclusters.output,
         # rules.extract_gene_lists_features.output

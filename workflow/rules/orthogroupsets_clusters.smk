@@ -82,8 +82,8 @@ rule dimensionality_reductions_on_og_sets:
 rule orthogroupsets_clusters:
     input:
         rules.hierarchichal_clustering_on_og_sets.output,
-        rules.pca_on_og_sets.output,
-        rules.pairwise_comparisons_on_og_sets.output,
-        rules.dimensionality_reductions_on_og_sets.output
+        # rules.pca_on_og_sets.output,
+        # rules.pairwise_comparisons_on_og_sets.output,
+        # rules.dimensionality_reductions_on_og_sets.output
     output:
         touch('output/orthogroupsets_cluster_analysis/.done')
