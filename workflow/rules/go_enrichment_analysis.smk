@@ -60,13 +60,13 @@ rule topgo_enrichment_on_som_clusters:
         '../scripts/go_enrichment_analysis/topgo_enrichment_on_som_clusters.R'
 
 
-rule topgo_enrichment_on_som_hc_superclusters:
+rule topgo_enrichment_on_som_superclusters:
     input:
-        clusters = rules.self_organising_map.output.som_hc_superclusters,
+        clusters = rules.self_organising_map.output.som_superclusters,
         go_universe = rules.genes_go_2_orthogroups_go.output.orthogroups_go_universe
     output:
-        clusters_go = 'output/go_enrichment_analysis/som_hc_superclusters_go.tsv',
-        clusters_go_dag = 'output/go_enrichment_analysis/som_hc_superclusters_go_DAG.pdf'
+        clusters_go = 'output/go_enrichment_analysis/som_superclusters_go.tsv',
+        clusters_go_dag = 'output/go_enrichment_analysis/som_superclusters_go_DAG.pdf'
     params:
         ontology = config["ontology"]
     threads: MAX_THREADS
@@ -74,7 +74,7 @@ rule topgo_enrichment_on_som_hc_superclusters:
         mem_mb = MAX_MEMORY,
         runtime_s = MAX_RUNTIME
     log:
-        'log/topgo_enrichment_on_som_hc_superclusters.log'
+        'log/topgo_enrichment_on_som_superclusters.log'
     conda:
         '../envs/go_enrichment_analysis.yaml'
     script:
