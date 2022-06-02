@@ -34,16 +34,16 @@ plot(som_model, type="mapping", shape="straight", palette.name = rainbow, main =
 
 
 ## use hierarchical clustering to cluster the codebook vectors
-# som.hc <- cutree(hclust(pearson(object.distances(som_model, "codes")), method='average'), n_clust)
-# som.hc <- cutree(hclust(object.distances(som_model, "codes"), method='ward.D2'), n_clust)
-# som.kmeans <- kmeans(object.distances(som_model, "codes"), centers = n_clust)
+# som.hc <- cutree(hclust(pearson(object.distances(som_model, "codes")), method='average'), n_supercl)
+# som.hc <- cutree(hclust(object.distances(som_model, "codes"), method='ward.D2'), n_supercl)
+# som.kmeans <- kmeans(object.distances(som_model, "codes"), centers = n_supercl)
 
 # library(dbscan)
 # som.dbscan <- dbscan(object.distances(som_model, "codes"), eps = 0.15, minPts = 2)
 # som.hdbscan <- hdbscan(object.distances(som_model, "codes"), minPts = 2)
 
 codes <- do.call(rbind.data.frame, som_model$codes)
-som.kmeans <- kmeans(codes, centers = n_clust)
+som.kmeans <- kmeans(codes, centers = n_supercl)
 
 ## COMPUTING
 
@@ -52,8 +52,8 @@ library(RColorBrewer)
 # display.brewer.all() ## Decomment to show all available palettes.
 supercl <- som.kmeans$cluster
 
-colours <- brewer.pal(n_clust, 'Paired') ## Sticking to Paired palette as its the one with the most distintive colours (12)
-colours <- cbind(as.character(1:n_clust), colours)
+colours <- brewer.pal(n_supercl, 'Paired') ## Sticking to Paired palette as its the one with the most distintive colours (12)
+colours <- cbind(as.character(1:n_supercl), colours)
 colnames(colours) <- c('set', 'colour')
 colours <- data.frame(colours)
 supercl <- data.frame(set = as.character(supercl))
