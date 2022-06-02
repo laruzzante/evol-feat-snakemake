@@ -35,5 +35,5 @@ rule all:
         rules.hierarchichal_clustering_on_og_sets.output,
         rules.cluster_features.output,
         # rules.topgo_enrichment_on_som_clusters.output,
-        # rules.topgo_enrichment_on_som_hc_superclusters.output,
+        rules.topgo_enrichment_on_som_superclusters.output,
         # rules.extract_gene_lists_features.output
