@@ -62,7 +62,7 @@ library(dplyr)
 som.supercl.colours <- inner_join(supercl, colours)
 
 plot(som_model, type="codes", shape="straight", palette.name = rainbow, main = "SOM components", bgcol=som.supercl.colours$colour)
-add.cluster.boundaries(som_model, supercl, lwd=2, col='black')
+add.cluster.boundaries(som_model, supercl$set, lwd=2, col='black')
 legend(x=-1.5, y = 8, legend = colours$set, fill = colours$colour, title = 'super_cl')
 
 
