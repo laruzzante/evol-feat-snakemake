@@ -31,7 +31,7 @@ rule all:
         rules.get_orthogroup_features_by_gene.output,
         rules.all_focus_species.output,
         rules.genesets_clusters.output,
-        rules.orthogroupsets_clusters.output,
+        # rules.orthogroupsets_clusters.output,
         rules.cluster_features.output,
         rules.topgo_enrichment_on_som_clusters.output,
         # rules.topgo_enrichment_on_som_superclusters.output,

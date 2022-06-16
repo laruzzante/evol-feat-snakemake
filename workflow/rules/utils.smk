@@ -51,34 +51,34 @@ def get_input():
     input_list['all_orthogroup_features'] = input_list['user_orthogroup_features'] + input_list['orthogroup_features_to_compute']
     input_list['all_gene_features'] = input_list['user_gene_features'] + input_list['gene_features_to_compute']
 
-    if config['orthology_table']:
+    if 'orthology_table' in config.keys():
         input_list['orthology_table'] = config['orthology_table']
 
-    if config['ultrametric_species_tree']:
+    if 'ultrametric_species_tree' in config.keys():
         input_list['ultrametric_species_tree'] = config['ultrametric_species_tree']
 
-    if config['gff']:
+    if 'gff' in config.keys():
         input_list['gff'] = config['gff']
 
-    if config['cafe_results']:
+    if 'cafe_results' in config.keys():
         input_list['cafe_results'] = config['cafe_results']
 
-    if config['focus_species']:
+    if 'focus_species' in config.keys():
         input_list['focus_species'] = config['focus_species']
 
-    if config['focus_gene_list_files']:
+    if 'focus_gene_list_files' in config.keys():
         input_list['focus_gene_list_files'] = config['focus_gene_list_files']
 
-    if config['gene_sets']:
+    if 'gene_sets' in config.keys():
         input_list['gene_sets'] = config['gene_sets']
 
-    if config['orthogroup_sets']:
+    if 'orthogroup_sets' in config.keys():
         input_list['orthogroup_sets'] = config['orthogroup_sets']
 
-    if config['go_universe']:
+    if 'go_universe' in config.keys():
         input_list['go_universe'] = config['go_universe']
 
-    if config['ontology']:
+    if 'ontology' in config.keys():
         input_list['ontology'] = config['ontology']
 
     return input_list

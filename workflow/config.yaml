@@ -13,8 +13,8 @@ orthology_table: input/arthropoda_odb10v1_OG2genes.tab
 # File containing lists of genes for clustering.
 # First column must contain set name, followed by all of its gene names separated
 # by tab (or in separeted cells in an Excel file saved as txt)
-gene_sets: input/dmel_immune_superfamilies.csv
-orthogroup_sets: input/som_superclusters.tsv
+gene_sets: input/dmel_immune_families.csv
+# orthogroup_sets: input/som_superclusters.tsv
 
 # Add species codes to generate specific evolutionary features files
 focus_species:

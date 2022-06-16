@@ -3,8 +3,8 @@ library(kohonen)
 set.seed(12345)
 
 THREADS <- snakemake@config[['MAX_THREADS']]
-n_x = 10
-n_y = 10
+n_x = 30
+n_y = 30
 n_supercl = 12 # For distinct colours visualisation purpose, we will not compute more than 12 superclusters
 
 merged_orthogroup_features <- read.delim(snakemake@input[['features']])
@@ -17,7 +17,7 @@ data_train_matrix <- as.matrix(pc$scores[,1:10])
 som_grid <- somgrid(xdim = n_x, ydim = n_y, topo="hexagonal", toroidal=FALSE)
 som_model <- supersom(data_train_matrix,
                       grid=som_grid,
-                      rlen=300,
+                      rlen=500,
                       alpha=c(0.05,0.01),
                       keep.data = TRUE, cores=THREADS)
 
