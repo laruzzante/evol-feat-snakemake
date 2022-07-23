@@ -1,3 +1,7 @@
+MAX_MEMORY = config["MAX_MEMORY"]
+MAX_RUNTIME = config["MAX_RUNTIME"] # in seconds
+MAX_THREADS = config["MAX_THREADS"]
+
 
 rule format_og_sets:
     input:
@@ -5,6 +9,10 @@ rule format_og_sets:
         orthogroups = rules.process_orthology_table.output.orthogroups
     output:
         'output/orthogroupsets_cluster_analysis/orthogroup_sets.tsv'
+    threads: MAX_THREADS
+    resources:
+        mem_mb = MAX_MEMORY,
+        runtime_s = MAX_RUNTIME
     log:
         'log/format_og_sets.log'
     conda:
@@ -19,6 +27,10 @@ rule get_og_sets_features:
         features = rules.merge_orthogroup_features.output[0]
     output:
         'output/orthogroupsets_cluster_analysis/orthogroup_sets_features.tsv'
+    threads: MAX_THREADS
+    resources:
+        mem_mb = MAX_MEMORY,
+        runtime_s = MAX_RUNTIME
     log:
         'log/get_og_sets_features.log'
     conda:
@@ -32,6 +44,10 @@ rule hierarchichal_clustering_on_og_sets:
         rules.get_og_sets_features.output[0]
     output:
         'output/orthogroupsets_cluster_analysis/hierarchical_clusters_of_orthogroup_sets.pdf'
+    threads: MAX_THREADS
+    resources:
+        mem_mb = MAX_MEMORY,
+        runtime_s = MAX_RUNTIME
     log:
         'log/hierarchichal_clustering_on_og_sets.log'
     conda:
@@ -45,6 +61,10 @@ rule pca_on_og_sets:
         rules.get_og_sets_features.output[0]
     output:
         'output/orthogroupsets_cluster_analysis/pca_of_orthogroup_sets.pdf'
+    threads: MAX_THREADS
+    resources:
+        mem_mb = MAX_MEMORY,
+        runtime_s = MAX_RUNTIME
     log:
         'log/pca_on_og_sets.log'
     conda:
@@ -58,6 +78,10 @@ rule pairwise_comparisons_on_og_sets:
         rules.get_og_sets_features.output[0]
     output:
         'output/orthogroupsets_cluster_analysis/pairwise_comparisons_of_orthogroup_sets.pdf'
+    threads: MAX_THREADS
+    resources:
+        mem_mb = MAX_MEMORY,
+        runtime_s = MAX_RUNTIME
     log:
         'log/pairwise_comparisons_on_og_sets.log'
     conda:
@@ -73,6 +97,10 @@ rule dimensionality_reductions_on_og_sets:
         'output/orthogroupsets_cluster_analysis/dimensionality_reductions_of_orthogroup_sets.pdf'
     log:
         'log/dimensionality_reductions_on_og_sets.log'
+    threads: MAX_THREADS
+    resources:
+        mem_mb = MAX_MEMORY,
+        runtime_s = MAX_RUNTIME
     conda:
         '../envs/cluster_analysis.yaml'
     script:

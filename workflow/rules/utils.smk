@@ -16,6 +16,8 @@ def get_input():
     input_list['focus_species'] = []
     input_list['focus_gene_list_files'] = []
     input_list['gene_sets'] = []
+    input_list['som_size_x'] = ''
+    input_list['som_size_y'] = ''
     input_list['orthogroup_sets'] = []
     input_list['go_universe'] = []
     input_list['ontology'] = []
@@ -71,6 +73,12 @@ def get_input():
 
     if 'gene_sets' in config.keys():
         input_list['gene_sets'] = config['gene_sets']
+
+    if 'som_size_x' in config.keys():
+        input_list['som_size_x'] = config['som_size_x']
+
+    if 'som_size_y' in config.keys():
+        input_list['som_size_y'] = config['som_size_y']
 
     if 'orthogroup_sets' in config.keys():
         input_list['orthogroup_sets'] = config['orthogroup_sets']

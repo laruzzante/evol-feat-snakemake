@@ -2,7 +2,7 @@
     Script which converts gene-specific go terms to orthogroup-specific go terms.
     Orthogroups go terms are assigned by merging together all of the orthgroup's gene
     go terms. Alternative ways can be implemented, such as considering only go terms
-    which appear in e.g. at least 2/3 of the orthogroup's genes.
+    which appear e.g. at least two times across the orthogroup's genes list.
 '''
 
 import pickle
@@ -57,5 +57,7 @@ if missing_genes_counts > 0:
 
 with open(output_file, 'w') as f:
     for orthogroup in sorted(orthogroups_go_dict.keys()):
-        line = orthogroup + '\t' + ', '.join(orthogroups_go_dict[orthogroup]) + '\n'
+        # Only keeping GO terms which appear at least 1 time across the orthogroup's genes list
+        filtered_go_terms_list = [x for x in orthogroups_go_dict[orthogroup] if orthogroups_go_dict[orthogroup].count(x) > 1]
+        line = orthogroup + '\t' + ', '.join(filtered_go_terms_list) + '\n'
         f.write(line)

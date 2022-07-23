@@ -1,6 +1,7 @@
 MAX_MEMORY: 128000 # in MB
-MAX_RUNTIME: 21600 # in seconds
+MAX_RUNTIME: 86400 # in seconds
 MAX_THREADS: 8
+
 
 # OrthoDB orthology table:
 # if directly coming from OrthoDB v10 or lower, a script will automatically format it.
@@ -10,24 +11,36 @@ MAX_THREADS: 8
 # One way to make gene ids unique is to simply attach the species name to it.
 orthology_table: input/arthropoda_odb10v1_OG2genes.tab
 
+
+# Self-Organising Map dimensions:
+som_size_x: 30
+som_size_y: 30
+
+
 # File containing lists of genes for clustering.
 # First column must contain set name, followed by all of its gene names separated
 # by tab (or in separeted cells in an Excel file saved as txt)
-gene_sets: input/dmel_immune_families.csv
-# orthogroup_sets: input/som_superclusters.tsv
+gene_sets: input/dmel_immune_superfamilies.csv
+orthogroup_sets: input/som_superclusters.tsv
+
 
 # Add species codes to generate specific evolutionary features files
 focus_species:
   - Tribolium_castaneum
   - Apis_mellifera
+  - Drosophila_melanogaster
+  - Anopheles_gambiae
+
 
 focus_gene_list_files:
   - input/hymenoptera/genelists.txt # ADD COLUMNS WITH OTHER LISTS
+
 
 # user orhtogroup features: any file of user-defined orthogroup features
 # Columns: orthogroup \t feat1 \t feat2 ...
 user_orthogroup_features_files:
   - input/arthropoda_evolrates_odb10v1.tab
+
 
 # user gene features: any file of user-defined gene features
 # Columns: gene \t feat1 \t feat2 ...
@@ -37,18 +50,23 @@ user_orthogroup_features_files:
 user_gene_features_files:
   - input/hymenoptera/amell_hym_gene_features.txt
 
+
 # Specie tree file
 ultrametric_species_tree: input/arthropoda_rooted_time.tree
+
 
 # CAFE5 Base_change.tab results
 cafe_results: input/arthropoda_Base_asr.tre
 
+
 # Concatenated GFF file
 gff: input/allspecies.gff
+
 
 # GO universe
 go_universe: input/crowdgo_bp.05.formatted.tab
 ontology: BP # specify the topGO available ontology: BP, CC or MF
+
 
 # Metrics from the default_orthogroup_features that will be included in the computation process
 # Comment the ones you wish to not compute.
@@ -69,6 +87,7 @@ selected_orthogroup_features:
   - RSY
   - MSY
 
+
 default_orthogroup_features:
   - UNI
   - DUP
@@ -86,6 +105,7 @@ default_orthogroup_features:
   - RSY
   - MSY
 
+
 selected_gene_features:
   - UNI
   - DUP
@@ -102,6 +122,7 @@ selected_gene_features:
   - SYN
   - RSY
   - MSY
+
 
 default_gene_features:
   - UNI

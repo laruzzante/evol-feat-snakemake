@@ -1,7 +1,7 @@
 import pickle
 
 genes = pickle.load(open(snakemake.input.genes, 'rb'))
-concatenated_gff_file = snakemake.input.gff[0]
+concatenated_gff_file = snakemake.input.gff
 output_ordered_gff_genes = open(snakemake.output.ordered_gff_genes, 'w')
 
 num_lines = sum(1 for line in open(concatenated_gff_file))

@@ -133,7 +133,6 @@ rule dbscan:
         '../scripts/cluster_features/dbscan.R'
 
 
-# Not using dimension reductions because I want to see the features contributions
 rule self_organising_map:
     input:
         features = rules.merge_orthogroup_features.output[0]

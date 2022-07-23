@@ -3,9 +3,9 @@ library(kohonen)
 set.seed(12345)
 
 THREADS <- snakemake@config[['MAX_THREADS']]
-n_x = 30
-n_y = 30
-n_supercl = 12 # For distinct colours visualisation purpose, we will not compute more than 12 superclusters
+n_x <- as.numeric(snakemake@config['som_size_x'])
+n_y <- as.numeric(snakemake@config['som_size_y'])
+n_supercl = 60 # For distinct colours visualisation purpose, we will not compute more than 12 superclusters
 
 merged_orthogroup_features <- read.delim(snakemake@input[['features']])
 df <- na.omit(merged_orthogroup_features[,-1])
@@ -53,22 +53,43 @@ library(RColorBrewer)
 # display.brewer.all() ## Decomment to show all available palettes.
 supercl <- som.kmeans$cluster
 
-colours <- brewer.pal(n_supercl, 'Paired') ## Sticking to Paired palette as its the one with the most distintive colours (12)
-colours <- cbind(as.character(1:n_supercl), colours)
-colnames(colours) <- c('set', 'colour')
-colours <- data.frame(colours)
-supercl <- data.frame(set = as.character(supercl))
+if(n_supercl<=12){
+ colours <- brewer.pal(n_supercl, 'Paired') ## Sticking to Paired palette as its the one with the most distintive colours (12)
+ colours <- cbind(as.character(1:n_supercl), colours)
+ colnames(colours) <- c('set', 'colour')
+ colours <- data.frame(colours)
+ supercl <- data.frame(set = as.character(supercl))
 
-library(dplyr)
-som.supercl.colours <- inner_join(supercl, colours)
+ library(dplyr)
+ som.supercl.colours <- inner_join(supercl, colours)
 
-plot(som_model, type="codes", shape="straight", palette.name = rainbow, main = "SOM components", bgcol=som.supercl.colours$colour)
-add.cluster.boundaries(som_model, supercl$set, lwd=2, col='black')
-legend(x=-1.2, y = 8, legend = colours$set, fill = colours$colour, title = 'supercl')
+ plot(som_model, type="codes", shape="straight", palette.name = rainbow, main = "SOM components", bgcol=som.supercl.colours$colour)
+ add.cluster.boundaries(som_model, supercl$set, lwd=2, col='black')
+ legend(x=-1.2, y = 8, legend = colours$set, fill = colours$colour, title = 'supercl')
 
 
-dev.off()
+ dev.off()
 
+} else {
+ qual_col_pals = brewer.pal.info[brewer.pal.info$category == 'qual',]
+ col_vector = unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
+ colours <- sample(col_vector, n_supercl)
+ # pie(rep(1,n_supercl), col=colours)
+ colours <- cbind(as.character(1:n_supercl), colours)
+ colnames(colours) <- c('set', 'colour')
+ colours <- data.frame(colours)
+ supercl <- data.frame(set = as.character(supercl))
+
+ library(dplyr)
+ som.cl.colours <- inner_join(supercl, colours)
+
+ plot(som_model, type="codes", shape="straight", palette.name = rainbow, main = "SOM components", bgcol=som.cl.colours$colour, codeRendering = 'segments')
+ add.cluster.boundaries(som_model, supercl$set, lwd=2, col='black')
+ legend(x=-1.2, y = 8, legend = colours$set, fill = colours$colour, title = 'supercl')
+
+ dev.off()
+
+}
 
 ## SOM cell memberships
 
