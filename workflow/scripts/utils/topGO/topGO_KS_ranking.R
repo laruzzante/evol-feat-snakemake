@@ -19,7 +19,10 @@ orthogroups2go <- readMappings(file = go_universe)
 orthogroupsUniverse <- names(orthogroups2go)
 str(head(orthogroups2go))
 
-for(sel in c('topQuantile', 'bottomQuantile')){
+selections <- c('topQuantile', 'bottomQuantile')
+
+
+for(sel in selections){
   print(sel)
   
   for(metric in colnames(df)){
@@ -47,7 +50,7 @@ for(sel in c('topQuantile', 'bottomQuantile')){
     if(sel == "topQuantile" | sel == "max"){
       scoreOrder <- "decreasing"
     } else if(sel =="bottomQuantile" | sel == "min"){
-      scoreOrder <- "inreasing"
+      scoreOrder <- "increasing"
     }
     
     resKSweight01 <- runTest(GOdata, algorithm = "weight01", statistic = "ks", scoreOrder = scoreOrder)
