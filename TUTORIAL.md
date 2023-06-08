@@ -16,7 +16,8 @@ Evol-Feat tutorial:
 ```bash
 		python3 get_species_ids_from_odbOG2genes.py apoidea_odb11v0_OG2genes.tab
 ```
-	b. Save the species id list into a text file (one id per row), and use it as input file for the Orthophile phylogenetic tree building workflow.
+
+b. Save the species id list into a text file (one id per row), and use it as input file for the Orthophile phylogenetic tree building workflow.
 	c. Orthophile also works with NCBItaxid alone, but its easier to read a tree with the corresponding species names. You can thus edit your species list file by adding the species names before the taxid, separated by a comma. E.g. "103933_0, Bombus_bifarius". It is important to have underscores '_' instead of spaces in the species names between genus and species. If you instead have too many species and want to automate this step, run the script in "script/utils" named "get_NCBI_taxname.py". Note that this script accesses the NCBI Taxonomy database, and any "_X" after the taxid as formatted by OrthoDB must be removed. The command runs as follow:
 ```bash
 		python3 get_NCBI_taxname.py taxid1 taxid2 taxid3 ...
