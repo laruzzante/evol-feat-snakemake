@@ -14,11 +14,11 @@ for taxid in sys.argv[1:]:
         int(taxid)
         taxids.append(taxid)
     except Exception: print(str(taxid)+InputErrMessage)
-        
+
 try:
     taxnames = ncbi.get_taxid_translator(taxids)
 except Exception: print(str(taxid)+InputErrMessage)
 
 for taxid in taxids:
-    try: print(taxid+',',taxnames[int(taxid)])
+    try: print(taxid+',', taxnames[int(taxid)].replace(' ', '_')) ## Additionally replacing any space in species names with an underscore, as some bioinfo tools prefer it.
     except KeyError: print(str(taxid)+KeyErrMessage)
