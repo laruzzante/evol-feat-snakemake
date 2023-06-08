@@ -1,5 +1,13 @@
 # Evol-Feat Tutorial
 
+## Project Description
+
+The **evol-feat** pipeline computes and provides evolutionary features scores for orthologous groups and their corresponding genes starting from an orthology delineation table and a species phylogeny. Evol-feat's scores aim at capturing properties across the evolutionary histories of gene families, including gene family age, copy-numbers, lineage specificity, taxonomic span/universality.
+
+With additional input files, further features can be computed, such as micro-synteny conservation scores, potentials for gene duplications and losses, and family-average sequence evolutionary rates.
+
+An extension to the evol-feat pipeline is activated by including a gene ontology annotation file, and enables the putative functional prediction of clusters of gene families defined by their combination of evolutionary feature scores, using a Self-Organising Map algorithm combined with *topGO*, *CrowdGO* and *GOFigure!* bioinformatics software.
+
 **Evol-Feat** uses at minimum two input files: an **orthology delineation table** (i.e.: gene identifies associated with orthologous group identifiers), and an **ultrametric species tree** (where ultrametric usually means a *time tree*, with all leaves, usually extant species, at an equal total distance from the tree's root).
 
 ## Orthology Table
