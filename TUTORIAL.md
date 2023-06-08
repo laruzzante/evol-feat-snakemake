@@ -1,4 +1,6 @@
-### Evol-Feat tutorial:
+# Evol-Feat Tutorial
+
+**Evol-Feat** uses at minimum two input files: an **orthology delineation table** (i.e.: gene identifies associated with orthologous group identifiers), and an **ultrametric species tree** (where ultrametric usually means a *time tree*, with all leaves, usually extant species, with an equal total distance from the tree's last common ancestor node).
 
 ## Orthology Table
 
